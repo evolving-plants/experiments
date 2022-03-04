@@ -10,6 +10,7 @@ class Generation {
     for(let i = 0; i < this.nPlants; i++) {
       let xpos = (width*(i+1)/this.nPlants - width/6) + random(-20, 20)
       let newPlant = new Plant(xpos, height)
+      newPlant.init()
       this.plants.push(newPlant) 
     }
   }

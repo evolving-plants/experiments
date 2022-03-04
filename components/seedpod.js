@@ -33,19 +33,6 @@ class SeedPod {
   }
 
   show() {
-    push()
-    translate(this.pos.x, this.pos.y) 
-    // circle(0, 0, 20)
-    // this.seeds.forEach((seed, i) => {
-    //   translate(0, -i*10)
-    //   stroke(30, 240, 10);
-    //   strokeWeight(2);
-    //   fill(50, 220, 20)
-    //   ellipse(0, 0, seed.r*4, seed.r*8)
-    // })
-
-    pop()
-
     this.seeds.forEach((seed, i) => {
       seed.showPod()
     })
@@ -65,9 +52,11 @@ class SeedPod {
         this.seeds.push(seed)
       }
       sx = sx + sep * 1/(i+2) * this.dir
-      sy = sy - sep *(0.5 - 1/(i+2))
+      sy = sy - sep *(0.5 - 1/(i+2)) 
       let pos = createVector(sx, sy)
       pos = p5.Vector.add(this.pos, pos)
+      pos.y -= 10
+      pos.x -= 5 * this.dir
       seed.update(pos)
     }
   }

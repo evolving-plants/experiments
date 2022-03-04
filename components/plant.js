@@ -1,7 +1,7 @@
 class Plant {
   constructor(x, y) {
     this.pos = createVector(x, y)
-    this.maxHeight = height*2/3
+    this.maxHeight = random(height*1/2, height*4/5)
     this.currHeight = 20
     this.stems = []
     this.selected = false
@@ -9,7 +9,10 @@ class Plant {
 
     this.heightR = random(10, 20)
     this.growthRate = 0.1
-    this.t = floor(millis() )
+    this.inserting = false
+    this.timer = 0
+    this.beat = 150
+    this.interStemDist = random(100, 150)
 
     this.genes = {
       geneLeafLength: 0,
@@ -25,8 +28,7 @@ class Plant {
   }
 
   show() {
-    this.t = floor(millis() )
-
+    
     if(this.selected) {
       stroke('red')
       strokeWeight(3)
@@ -64,16 +66,14 @@ class Plant {
 
     // growth
     this.currHeight += this.heightR*this.growthRate
-    if(this.t % 80 == 0) {
-      // console.log(this.t)
+    this.timer += 1
+    this.beat = (this.beat - 0.5) < 40 ? this.beat : this.beat - 0.5
+    this.inserting = (floor(this.timer) % floor(this.beat) == 0)
+    if(this.inserting == true) {
       let last = this.stems[this.stems.length-1]
       let dir = (this.stems.length % 2 == 0) ? -1 : 1
-      this.stems.push(new Stem(
-        this.pos.x, 
-        (height - this.currHeight),
-        dir, 
-        this
-      ))
+      let ny = (height - this.currHeight) 
+      this.stems.push(new Stem(this.pos.x, ny, dir, this))
     }
      
   }
@@ -87,7 +87,11 @@ class Plant {
   dropSeeds() {
     this.stems.forEach(stem => {
       let seeds = stem.seedpod.seeds
-      seeds.forEach(seed => seed.dropping = true)
+      seeds.forEach(seed => {
+        seed.dropping = true
+        if(seed.dropVector != null) return
+        seed.dropVector = p5.Vector.sub(seed.dropPoint, seed.pos).normalize().mult(10)
+      })
     })
   }
 

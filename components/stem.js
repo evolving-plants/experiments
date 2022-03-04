@@ -17,6 +17,7 @@ class Stem {
       this.plant
     )
     this.bud = new Bud(this.pos.x, this.pos.y, this.angle*this.dir, 8, 4)
+    this.budIsOpening = true
     this.flower = new Flower(this.pos.x, this.pos.y, this.angle*this.dir)
 
     // randomness 
@@ -32,12 +33,17 @@ class Stem {
     this.len += (this.len < this.pos.y*0.15) ? 10*this.growthRate : 0.0
     this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.growthRate : 0.0
     if(abs(this.pos0.y-this.pos.y) < this.distR) {
+      
       this.pos.y -= this.growthRate * this.heightR
+      if(this.pos.y < (height - this.plant.currHeight + 5)) {
+        this.pos.y = height - this.plant.currHeight + 5
+      }
     } else {
 
       this.growing = false
     }
 
+    
    
 
     // update seedpod
@@ -54,17 +60,17 @@ class Stem {
     this.leaf.update(pos, angle)
     this.leaf.grow()
 
+    // angle = angle + 30 * this.dir
     // update bud
     this.bud.update(pos, angle)
-    this.bud.grow()
     
     // update flower
-    angle = angle + 30 * this.dir
     this.flower.update(pos, angle)
     
   }
   
   show() {
+
     stroke(30, 240, 10);
     strokeWeight(2);
     fill(50, 220, 20)
@@ -90,16 +96,29 @@ class Stem {
 
   showPod() {
     if(this.growing == false) {
-      this.seedpod.grow()
-      this.seedpod.show()
-      this.flower.grow()
-      this.flower.show()
-     
-      // this.bud.open()
-    } else {
-      this.bud.show()
+      
 
+      if(this.bud.opening == true) {
+        this.seedpod.grow()
+        this.seedpod.show()
+        this.flower.grow()
+        this.flower.show()
+        this.bud.open()
+        
+      } else {
+        this.bud.grow()
+      }
+
+      this.bud.show()
+    } 
+    else {
+      this.bud.show()
     }
+    // if(this.budIsOpening == true) {
+    //   this.bud.open()
+    //   this.bud.show()
+    // }
+    
   }
 
   showLeaf() {

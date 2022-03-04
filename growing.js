@@ -2,6 +2,12 @@ let h = 20
 let n = 2
 let prevh = h
 let stems 
+let back = new Background()
+
+function preload() {
+  back.load()
+}
+
 
 function setup() {
   createCanvas(800, 800)

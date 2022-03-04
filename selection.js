@@ -5,6 +5,12 @@ let circles = []
 let newSeasonButton
 let isDropping = false
 
+let back = new Back()
+
+function preload() {
+  back.load()
+}
+
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight)
   angleMode(DEGREES)
@@ -15,12 +21,13 @@ function setup() {
   })
 
   gen0.init()
-
+  back.init()
 }
 
 function draw() {
+  // back.draw()
   background(85,110,200)
-  randomSeed(2)
+  // randomSeed(10)
 
   gen0.grow()
   circles.forEach(c => {

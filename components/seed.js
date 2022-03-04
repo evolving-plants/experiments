@@ -7,9 +7,13 @@ class Seed {
     this.r = 0.25
     this.dropping = false
 
-    this.dropVector = createVector(
-      random(-2, 2),
-      random(0, 10)  
+    // this.dropVector = createVector(
+    //   random(-5, 5),
+    //   random(0, 10)  
+    // )
+    this.dropPoint = createVector(
+      random(0, width),
+      height
     )
   }
 
@@ -35,6 +39,8 @@ class Seed {
     fill(250, 220, 20)
     circle(0, 0, this.r*2)
     pop()
+
+    
   }
 
   showPod() {
