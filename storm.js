@@ -45,6 +45,7 @@ function setup() {
   lightning[i] = new Lightning(lightx, lighty, lightw); 
   }
 }
+
 function draw() {
   background(120,130,190);
   let m = millis();
@@ -134,6 +135,7 @@ class Cloud {
     ellipse(this.x, this.y, this.r);
   }
 }
+
 class Rain {
   constructor() {
     this.x = random(0, width);
@@ -158,6 +160,7 @@ class Rain {
     }
 }
 }
+
 class Lightning {
   constructor(x, y, w) {
     this.x = x;
