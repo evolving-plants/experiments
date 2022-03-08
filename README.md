@@ -11,6 +11,7 @@ leaving other plants to produce seeds for the next generation.
   - [✓] fix: stems growing away from stalk
   - [✓] Add backgrounds
   - [✓] Drop the seeds to a point just above the ground
+  - [✓] Adjust the seedpod sizes
   
   - [ ] streamline the organisation 
   - [ ] can we make a clock function that keeps increasing time and is used to set the flow?
