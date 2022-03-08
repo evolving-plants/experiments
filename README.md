@@ -12,6 +12,7 @@ leaving other plants to produce seeds for the next generation.
   - [✓] Add backgrounds
   - [✓] Drop the seeds to a point just above the ground
   - [✓] Adjust the seedpod sizes
+  - [✓] Make the seedpod appear when the seedpod opens, as the flower grows
   
   - [ ] streamline the organisation 
   - [ ] can we make a clock function that keeps increasing time and is used to set the flow?
@@ -36,7 +37,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] BUDS: some buds are not opening - order is off
 
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows
-  - [✓] Make the seedpod appear when the seedpod opens, as the flower grows
+  - [ ] SEADPOD: draw a green line connecting the seed positions to make a better seedpod
 
   - [ ] SEASON: When season is clicked before all seeds have fallen, the new plants grow from above ground
   - [ ] SEASON: do not let seeds fall before the plant is fully grown
