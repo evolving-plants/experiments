@@ -10,6 +10,7 @@ leaving other plants to produce seeds for the next generation.
 ## TODO
   - [✓] fix: stems growing away from stalk
   - [✓] Add backgrounds
+  - [✓] Drop the seeds to a point just above the ground
   
   - [ ] streamline the organisation 
   - [ ] can we make a clock function that keeps increasing time and is used to set the flow?
