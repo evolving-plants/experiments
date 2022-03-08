@@ -25,6 +25,7 @@ leaving other plants to produce seeds for the next generation.
   - [✓] Make the seedpod appear when the seedpod opens, as the flower grows
 
   - [ ] SEASON: When season is clicked before all seeds have fallen, the new plants grow from above ground
+  - [ ] SEASON: do not let seeds fall before the plant is fully grown
   - [ ] SEASON: If no plants were selected before pressing new season, select all plants and drop all seeds
   - [ ] SEASON: Do not let new season be clicked until all seeds have fallen to the ground
   - [ ] Make a timer mechanism to generate new seasons without the users (for natural selection)
