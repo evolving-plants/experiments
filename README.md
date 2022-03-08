@@ -35,6 +35,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] SELECTION: Make the number of leaves a selection variable
   - [ ] SELECTION: Make the number of seeds in all seedpods on a plant a selection variable
   - [ ] SELECTION: Make the final seed size (seediam) a selection variable
+  - [ ] SELECTION: Why are red circles being drawn at different heights?
 
   - [ ] BUD: put a tiny bud at the top of the growing stalk
 
