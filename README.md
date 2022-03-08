@@ -10,6 +10,18 @@ leaving other plants to produce seeds for the next generation.
 ## TODO
   - [✓] fix: stems growing away from stalk
   - [✓] Add backgrounds
+  
+  - [ ] streamline the organisation 
+  - [ ] can we make a clock function that keeps increasing time and is used to set the flow?
+  - [ ] Eventually make a slider to speed up and slow down time
+
+  - [ ] SELECTION: Make the number of seedpods a selection variable
+  - [ ] SELECTION: Adjust parameters for leaf width and length in new generation
+  - [ ] SELECTION: Adjust colours and make new generation inherit colours 
+  - [ ] SELECTION: Make the number of leaves a selection variable
+  - [ ] SELECTION: Make the number of seeds in the seedpods a selection variable
+  - [ ] SELECTION: Make the final seed size (seediam) a selection variable
+  - [ ] SELECTION: Why are red circles being drawn at different heights?
 
   - [ ] LEAVES: Initial leaf sizes are not being set properly - all leaves on one plant should be similar
   - [ ] LEAVES: some leaves are turing into buds
@@ -30,18 +42,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] SEASON: Do not let new season be clicked until all seeds have fallen to the ground
   - [ ] Make a timer mechanism to generate new seasons without the users (for natural selection)
 
-  - [ ] SELECTION: Adjust parameters for leaf width and length in new generation
-  - [ ] SELECTION: Adjust colours and make new generation inherit colours 
-  - [ ] SELECTION: Make the number of leaves a selection variable
-  - [ ] SELECTION: Make the number of seeds in all seedpods on a plant a selection variable
-  - [ ] SELECTION: Make the final seed size (seediam) a selection variable
-  - [ ] SELECTION: Why are red circles being drawn at different heights?
-
   - [ ] BUD: put a tiny bud at the top of the growing stalk
-
-  - [ ] streamline the organisation 
-  - [ ] can we make a clock function that keeps increasing time and is used to set the flow?
-  - [ ] Eventually make a slider to speed up and slow down time
   
   - [ ] Adjust distances between stems and make multiple buds at the top of the growing stalk
   - [ ] FLOWER: Make flower petals dry up and fall off as the seedpod grows
