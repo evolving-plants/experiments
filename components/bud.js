@@ -5,6 +5,7 @@ class Bud{
   constructor(x, y, angle, budlength, budwidth){
     this.x = x;
     this.y = y;
+    this.pos = createVector(x, y)
     this.by = 400;
     this.angle = angle
     this.finlen =  budlength;
@@ -14,11 +15,14 @@ class Bud{
     this.bx = 0;
     this.opening = false
 
+    this.r = 10
+
   }
 // The bud is at the end of the stem, at the same angle as the stem
   update(pos, angle) {
     this.x = pos.x
     this.y = pos.y
+    this.pos = pos
     this.angle = angle
   }
 
@@ -40,11 +44,15 @@ class Bud{
     strokeWeight(1);
 
     push()    
-      translate(this.x, this.y)
-      rotate(this.angle)
-      let wid = this.blen;
-      bezier(0, 0,    wid+1.2, -10,   wid*2, -20,   -this.bx*5, -this.blen*5.5)
-      bezier(0, 0,   -wid+1.2, -10,  -wid*2, -20,    this.bx*5, -this.blen*5.5)
+    translate(this.pos.x, this.pos.y)
+    rotate(this.angle)
+    let wid = this.blen;
+    bezier(0, 0,  wid+1.2, -10,  wid*2, -20, -this.bx*5, -wid*5.5)
+    bezier(0, 0, -wid+1.2, -10, -wid*2, -20,  this.bx*5, -wid*5.5)
+    // stroke('pink')
+    // circle(wid, -10, 10)
+    // circle(b)
+    // rect(0, 0, this.r*2, this.r*2)
     pop()
   }
 

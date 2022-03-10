@@ -21,9 +21,7 @@ class Generation {
     // Directs the growing and dropping of seeds of each plant
     for(let i = 0; i < this.plants.length; i++) {
       let p = this.plants[i]
-      if(p.growing == true) {
-        p.grow()
-      }
+      p.grow()
       if(p.selected == true) {
         p.dropSeeds()
       }
@@ -37,7 +35,9 @@ class Generation {
     this.plants.forEach(plant => {
       if (plant.selected == true)
       plant.stems.forEach(stem => {
-        stem.seedpod.seeds.forEach(seed => droppedSeeds.push(seed))
+        if(stem.seedpod != null) {
+          stem.seedpod.seeds.forEach(seed => droppedSeeds.push(seed))
+        }
       })
     })
 
@@ -50,46 +50,33 @@ class Generation {
       this.newSeasonPlants.push(newPlant) 
     }
 
-    circles = []
-    droppedSeeds.sort((a, b) => {
-      let dist1 = Math.abs(a.pos.x - this.newSeasonPlants[0].pos.x) - Math.abs(b.pos.x - this.newSeasonPlants[0].pos.x)
-      return dist1
+    this.newSeasonPlants.forEach(newPlant => {
+      this.setPositionNewPlant(droppedSeeds, newPlant)
     })
-    let seed1 = droppedSeeds[0]
-    let plant1 = seed1.plant
-    this.newSeasonPlants[0].pos = seed1.pos
-    this.setGenes(plant1, this.newSeasonPlants[0])
-
-    droppedSeeds.sort((a, b) => {
-      let dist2 = Math.abs(a.pos.x - this.newSeasonPlants[1].pos.x) - Math.abs(b.pos.x - this.newSeasonPlants[1].pos.x) 
-      return dist2
-    })
-    let seed2 = droppedSeeds[0]
-    let plant2 = seed2.plant
-    this.newSeasonPlants[1].pos = seed2.pos
-    this.setGenes(plant2, this.newSeasonPlants[1])
-    
-
-    droppedSeeds.sort((a, b) => {
-      let dist3 = Math.abs(a.pos.x - this.newSeasonPlants[2].pos.x) - Math.abs(b.pos.x - this.newSeasonPlants[2].pos.x) 
-      return dist3
-    })
-    let seed3 = droppedSeeds[0]
-    let plant3 = seed3.plant
-    this.newSeasonPlants[2].pos = seed3.pos
-    this.setGenes(plant3, this.newSeasonPlants[2])
 
     this.plants = this.newSeasonPlants
     this.plants.forEach(plant => plant.init())
 
   }
 
-  // Not understanding ?????
+  setPositionNewPlant(droppedSeeds, newPlant) {
+    droppedSeeds.sort((a, b) => {
+      let dist = Math.abs(a.pos.x - newPlant.pos.x) - Math.abs(b.pos.x - newPlant.pos.x)
+      return dist
+    })
+    let seed = droppedSeeds[0]
+    let plant = seed.plant
+    newPlant.pos = seed.pos
+    this.setGenes(plant, newPlant)
+  }
+
   setGenes(oldPlant, newPlant) {
     let avgLength = 0, avgWidth = 0
     oldPlant.stems.forEach(stem => {
-      avgLength += stem.leaf.finLength
-      avgWidth += stem.leaf.finWidth
+      if(stem.leaf != null) {
+        avgLength += stem.leaf.finLength
+        avgWidth += stem.leaf.finWidth
+      }
     })
     avgLength /= oldPlant.stems.length
     avgWidth /= oldPlant.stems.length

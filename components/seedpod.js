@@ -12,6 +12,8 @@ class SeedPod {
       // Define the initial separation distance between seeds
     this.seedSeparation = .001
       // this.scale = createVector(0.5, 0.3)   // delete????
+    this.scale = createVector(0.5, 0.3)
+    this.growing = true
 
     for(let i = 0; i < this.nSeeds; i++) {
       this.seeds.push(new Seed(0, 0, this.plant,10))
@@ -24,16 +26,21 @@ class SeedPod {
     // makes separation between seeds
     this.pos = pos
     this.angle = angle
+  }
+
+  grow() {
     this.seedSeparation += (this.seedSeparation < 40) ? 0.06 : 0.0
     // this.nSeeds += (floor(this.seedSeparation) % 35 == 0) ? 1 : 0
     this.updateSeedPositions()
-  }
 
-  // grow() {
-// ???? This doesn't seem to be doing anything - so I commented it out
-    // this.scale.x += (this.scale.x < 1.0) ? 0.001 : 0.0
-    // this.scale.y += (this.scale.y < 1.0) ? 0.001 : 0.0
-  // }
+    if(this.growing == true) {
+      this.scale.x += 0.001
+      this.scale.y += 0.001
+    }
+    if (this.scale.x >= 1.0 || this.scale.y >= 1.0) {
+      this.growing = false
+    }
+  }
 
   show() {
     // Shows the seedpod with seeds 
