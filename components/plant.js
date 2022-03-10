@@ -7,18 +7,21 @@ class Plant {
     this.selected = false
     this.growing = true
 
-    this.heightR = random(10, 20)
+    this.heightR = 10
     this.growthRate = 0.1
     this.inserting = false
     this.timer = 0
     this.beat = 150
-    this.interStemDist = random(100, 150)
-
+    
+    // adjust this to adjust initial leaf sizes
     this.genes = {
-      geneLeafLength: 0,
-      geneLeafWidth: 0
+      geneLeafLength: random(10, 20),
+      geneLeafWidth: random(5, 10), 
+      interNodeDist: 50, 
+      numLeaves: 5
     }
-
+    
+    this.thresh = this.genes.interNodeDist * this.genes.numLeaves
   }
 
   init() {
@@ -33,7 +36,7 @@ class Plant {
       stroke('red')
       strokeWeight(3)
       noFill()
-      circle(this.pos.x, this.maxHeight*0.5, 200)
+      circle(this.pos.x, height-this.currHeight, 200)
     }
 
     stroke(30, 240, 10);
@@ -43,21 +46,15 @@ class Plant {
   
     for(let i = 0; i < this.stems.length; i++) {
       let b = this.stems[i]
-      b.grow()
       b.show()
-
-      if((height-b.pos.y) < (this.maxHeight*1/3)) {
-        b.showLeaf()
-      }
-      else {
-        b.showPod()
-      }
     }
-
 
   }
 
   grow() {
+    // if(this.growing == true) {
+      this.stems.forEach(stem => stem.grow())
+    // }
     
     if(this.currHeight > this.maxHeight) {
       this.growing = false
@@ -68,14 +65,24 @@ class Plant {
     this.currHeight += this.heightR*this.growthRate
     this.timer += 1
     this.beat = (this.beat - 0.5) < 40 ? this.beat : this.beat - 0.5
-    this.inserting = (floor(this.timer) % floor(this.beat) == 0)
-    if(this.inserting == true) {
-      let last = this.stems[this.stems.length-1]
-      let dir = (this.stems.length % 2 == 0) ? -1 : 1
-      let ny = (height - this.currHeight) 
-      this.stems.push(new Stem(this.pos.x, ny, dir, this))
+    if((height-this.pos.y) < this.thresh) {
+      this.inserting = (this.timer % this.genes.interNodeDist == 0)
+      if(this.inserting == true) {
+        let last = this.stems[this.stems.length-1]
+        let dir = (this.stems.length % 2 == 0) ? -1 : 1
+        let ny = last.pos.y - this.genes.interNodeDist
+        this.stems.push(new Stem(this.pos.x, ny, dir, this))
+      }
+    } else {
+      this.inserting = (floor(this.timer) % floor(this.beat) == 0)
+      if(this.inserting == true) {
+        let last = this.stems[this.stems.length-1]
+        let dir = (this.stems.length % 2 == 0) ? -1 : 1
+        let ny = (height - this.currHeight) 
+        this.stems.push(new Stem(this.pos.x, ny, dir, this))
+      }
     }
-     
+ 
   }
 
   select() {
@@ -86,12 +93,14 @@ class Plant {
 
   dropSeeds() {
     this.stems.forEach(stem => {
-      let seeds = stem.seedpod.seeds
-      seeds.forEach(seed => {
-        seed.dropping = true
-        if(seed.dropVector != null) return
-        seed.dropVector = p5.Vector.sub(seed.dropPoint, seed.pos).normalize().mult(10)
-      })
+      if(stem.seedpod != null) {
+        let seeds = stem.seedpod.seeds
+        seeds.forEach(seed => {
+          seed.dropping = true
+          if(seed.dropVector != null) return
+          seed.dropVector = p5.Vector.sub(seed.dropPoint, seed.pos).normalize().mult(10)
+        })
+      }
     })
   }
 

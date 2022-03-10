@@ -10,6 +10,7 @@ class SeedPod {
     this.angle = this.dir * angle
     this.scale = createVector(0.5, 0.3)
     this.seedSeparation = 2
+    this.growing = true
 
     for(let i = 0; i < this.nSeeds; i++) {
       this.seeds.push(new Seed(0, 0, this.plant))
@@ -20,16 +21,20 @@ class SeedPod {
   update(pos, angle) {
     this.pos = pos
     this.angle = angle
-    this.seedSeparation += (this.seedSeparation < 40) ? 0.1 : 0.0
-    // this.nSeeds += (floor(this.seedSeparation) % 35 == 0) ? 1 : 0
-    this.updateSeedPositions()
   }
 
   grow() {
+    this.seedSeparation += (this.seedSeparation < 40) ? 0.1 : 0.0
+    // this.nSeeds += (floor(this.seedSeparation) % 35 == 0) ? 1 : 0
+    this.updateSeedPositions()
 
-    this.scale.x += (this.scale.x < 1.0) ? 0.001 : 0.0
-    this.scale.y += (this.scale.y < 1.0) ? 0.001 : 0.0
-    
+    if(this.growing == true) {
+      this.scale.x += 0.001
+      this.scale.y += 0.001
+    }
+    if (this.scale.x >= 1.0 || this.scale.y >= 1.0) {
+      this.growing = false
+    }
   }
 
   show() {

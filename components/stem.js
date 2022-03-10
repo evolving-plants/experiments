@@ -7,46 +7,61 @@ class Stem {
     this.dir = dir
     this.angle = 10
     this.growing = true
-    this.seedpod = new SeedPod(this.pos.x, this.pos.y, this.dir, this.angle, this.plant)
-    this.leaf = new Leaf(
-      this.pos.x + cos(this.angle*this.dir) * this.len, 
-      this.pos.y + sin(this.angle*this.dir) * this.len, 
-      this.angle*this.dir,
-      abs(this.plant.genes.geneLeafLength)*3 + random(-8, 8),
-      abs(this.plant.genes.geneLeafWidth)*3 + random(-20, 20),
-      this.plant
-    )
-    this.bud = new Bud(this.pos.x, this.pos.y, this.angle*this.dir, 8, 4)
-    this.budIsOpening = true
-    this.flower = new Flower(this.pos.x, this.pos.y, this.angle*this.dir)
+    
 
     // randomness 
     // this.lenr = random(0, )
     this.growthRate = 0.2
-    this.distR = random(20, 60)
+    this.distR = 20
     this.maxAngleR = random(40, 60)
     this.angleR = random(40, 60)
     this.heightR = random(0, 5)
+
+    this.init()
+  }
+
+  init() {
+    if((height-this.pos.y) < this.plant.thresh) {
+      this.leaf = new Leaf(
+        this.pos.x + cos(this.angle*this.dir) * this.len, 
+        this.pos.y + sin(this.angle*this.dir) * this.len, 
+        this.angle*this.dir,
+        abs(this.plant.genes.geneLeafLength) + random(-8, 8),
+        abs(this.plant.genes.geneLeafWidth) + random(-20, 20),
+        this.plant
+      )
+    } else {
+      this.seedpod = new SeedPod(this.pos.x, this.pos.y, this.dir, this.angle, this.plant)
+      this.bud = new Bud(this.pos.x, this.pos.y, this.angle*this.dir, 8, 4)
+      this.flower = new Flower(this.pos.x, this.pos.y, this.angle*this.dir)
+    }
   }
   
   grow() {
-    this.len += (this.len < this.pos.y*0.15) ? 10*this.growthRate : 0.0
+    if(this.leaf != null) {
+      if(this.len < 100) {
+        this.len += 10*this.growthRate
+      } else {
+        this.growing = false
+      }
+      
+    } else {
+      if(this.len < this.pos.y*0.15) {
+        this.len += 10*this.growthRate
+      } else {
+        this.growing = false
+      }
+      
+    }
     this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.growthRate : 0.0
     if(abs(this.pos0.y-this.pos.y) < this.distR) {
       
       this.pos.y -= this.growthRate * this.heightR
       if(this.pos.y < (height - this.plant.currHeight + 5)) {
         this.pos.y = height - this.plant.currHeight + 5
-      }
-    } else {
-
-      this.growing = false
+      } 
     }
 
-    
-   
-
-    // update seedpod
     let dx  = cos((90-this.angle)) * this.dir*this.len
     let dy = sin((90-this.angle)) * -1*this.len
     let pos = createVector(
@@ -54,19 +69,26 @@ class Stem {
       this.pos.y + dy
     )
     let angle = this.angle*this.dir
-    this.seedpod.update(pos, angle)
 
-    // update leaf
-    this.leaf.update(pos, angle)
-    this.leaf.grow()
+    if(this.leaf != null) {
+      this.leaf.update(pos, angle)
+      this.leaf.grow()
+    } else {
+      this.seedpod.update(pos, angle)
+      this.bud.update(pos, angle)      
+      this.flower.update(pos, angle)
 
-    // angle = angle + 30 * this.dir
-    // update bud
-    this.bud.update(pos, angle)
-    
-    // update flower
-    this.flower.update(pos, angle)
-    
+      if(this.growing == false || this.bud.opening == true) {
+        this.seedpod.grow()
+        if(this.seedpod.growing == true) {
+          this.flower.grow()
+        }
+        this.bud.open()
+      } else {
+        this.bud.grow()
+      }
+      
+    }
   }
   
   show() {
@@ -79,45 +101,25 @@ class Stem {
     rotate(this.angle*this.dir)
     line(0, 0, 0, -this.len)
     pop()
+
+    if(this.leaf != null) {
+      this.showLeaf()
+    }
+    else {
+      this.showPod()
+    }
     
   }
 
-  showBud() {
-    this.bud.show()
-  }
-
-  showFlower() {
-    this.flower.show()
-  }
-   
-  showSeedPod() {
-    this.seedpod.show()
-  }
-
   showPod() {
-    if(this.growing == false) {
-      
-
-      if(this.bud.opening == true) {
-        this.seedpod.grow()
-        this.seedpod.show()
-        this.flower.grow()
+    if(this.bud.opening == true) {
+      this.seedpod.show()
+      if(this.seedpod.growing == true) {
         this.flower.show()
-        this.bud.open()
-        
-      } else {
-        this.bud.grow()
       }
-
-      this.bud.show()
-    } 
-    else {
-      this.bud.show()
     }
-    // if(this.budIsOpening == true) {
-    //   this.bud.open()
-    //   this.bud.show()
-    // }
+    this.bud.show()
+    
     
   }
 
