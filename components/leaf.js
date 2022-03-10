@@ -3,10 +3,11 @@ class Leaf {
     this.plant
     this.pos = createVector(x, y)
     this.angle = angle
-    this.length = 10
-    this.width = 10
     this.finLength = finLength
     this.finWidth = finWidth
+    this.length = 60
+    this.width = 60
+      // Set the growth rate
     this.growthRate = 3
   }
 

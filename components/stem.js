@@ -1,21 +1,43 @@
 class Stem {
-  constructor(x, y, dir, plant) {
+// Makes a stem for a leaf (petiole) or a bud that becomes a flower & seedpod
+// and also direct the creation of a new leaf 
+// The initial position of the stem is at this.pos0
+// The stem begins growing when the stalk is at this.pos0 
+// The stem position grows with this.pos (as the stalk grows).
+// The final stem length depends on its position on the stalk.
+// The stems of leaves (petioles) will all have final lengths of leafstemlen
+// The angle between stem and stalk is this.angle, 
+// which begins at 0 and ends at this.maxAngleR
+// The number of leaves on the plant is nleaves - a selection variable
+  constructor(x, y, dir, plant, nleaves, droppetals) {
     this.plant = plant
+    this.nleaves = nleaves
+    // Create vectors for the initial and present position of each stem on the stalk:
     this.pos0 = createVector(x, y)
     this.pos = createVector(x, y)
+    // Start growing the stem from a length of 0
     this.len = 0
+    // Whether the stem is on the right or left is determined by this.dir
     this.dir = dir
-    this.angle = 10
+     // Start growing the stem from an angle of 0.1
+    this.angle = 0.1
+    // Count the number of stems with numstem
+    this.numstem = 0
+    // Set the final stem length for all leaves
+    this.leafstemlen = 50
     this.growing = true
+    // Create a new seedpod
     this.seedpod = new SeedPod(this.pos.x, this.pos.y, this.dir, this.angle, this.plant)
+    // Create a new leaf, based on the characteristics of the parent plant
     this.leaf = new Leaf(
       this.pos.x + cos(this.angle*this.dir) * this.len, 
       this.pos.y + sin(this.angle*this.dir) * this.len, 
       this.angle*this.dir,
-      abs(this.plant.genes.geneLeafLength)*3 + random(-8, 8),
-      abs(this.plant.genes.geneLeafWidth)*3 + random(-20, 20),
+      abs(this.plant.genes.geneLeafLength)*1 + random(-22, 22),
+      abs(this.plant.genes.geneLeafWidth)*1 + random(-8, 8),
       this.plant
     )
+    // Create a new bud
     this.bud = new Bud(this.pos.x, this.pos.y, this.angle*this.dir, 8, 4)
     this.budIsOpening = true
     this.flower = new Flower(this.pos.x, this.pos.y, this.angle*this.dir)
@@ -29,8 +51,16 @@ class Stem {
     this.heightR = random(0, 5)
   }
   
+  // The stem keeps growing until it reaches finalstemlength
+  // This will make the final stem lengths shorter towards the top of the plant
+  // But leaves will all have the same final stem length (this.leafstemlen)
   grow() {
-    this.len += (this.len < this.pos.y*0.15) ? 10*this.growthRate : 0.0
+    let finalstemlength = this.pos.y*.15
+    if (this.numstem <= 4) {
+      this.numstem += 1
+      finalstemlength = this.leafstemlen
+    }
+    this.len += (this.len < finalstemlength) ? 10*this.growthRate : 0.0
     this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.growthRate : 0.0
     if(abs(this.pos0.y-this.pos.y) < this.distR) {
       
@@ -43,10 +73,7 @@ class Stem {
       this.growing = false
     }
 
-    
-   
-
-    // update seedpod
+    // update position of seedpod on the stalk
     let dx  = cos((90-this.angle)) * this.dir*this.len
     let dy = sin((90-this.angle)) * -1*this.len
     let pos = createVector(
@@ -56,7 +83,7 @@ class Stem {
     let angle = this.angle*this.dir
     this.seedpod.update(pos, angle)
 
-    // update leaf
+    // update position of leaf
     this.leaf.update(pos, angle)
     this.leaf.grow()
 
@@ -64,15 +91,15 @@ class Stem {
     // update bud
     this.bud.update(pos, angle)
     
-    // update flower
+    // update position of flower
     this.flower.update(pos, angle)
     
   }
   
   show() {
-
+    // Draw the stem
     stroke(30, 240, 10);
-    strokeWeight(2);
+    strokeWeight(4);
     fill(50, 220, 20)
     push()
     translate(this.pos.x, this.pos.y)
@@ -87,7 +114,7 @@ class Stem {
   }
 
   showFlower() {
-    this.flower.show()
+      this.flower.show()    
   }
    
   showSeedPod() {
@@ -99,10 +126,15 @@ class Stem {
       
 
       if(this.bud.opening == true) {
-        this.seedpod.grow()
-        this.seedpod.show()
+        // this.seedpod.grow()
+        // this.seedpod.show()
         this.flower.grow()
         this.flower.show()
+        // Make the petals wither away after the seeds have reached maximum diameter ????
+
+        // ???? I commented out seedpod.grow because it was not doing anything
+        // this.seedpod.grow()
+        this.seedpod.show()
         this.bud.open()
         
       } else {
@@ -121,6 +153,7 @@ class Stem {
     
   }
 
+  // Confusion ?????
   showLeaf() {
     this.leaf.show()
   }
@@ -152,6 +185,7 @@ class Stem {
   
   }
   
+  // delete ????
   oldShowSeedPod() {
     let startp = createVector(0, -this.len*1/4)
     let endp = createVector(

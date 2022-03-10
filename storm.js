@@ -25,7 +25,7 @@ function setup() {
     let x = random(-40,+60);
     let y = random(-20,20);
     let r = random(10, 100);
-    cloud[i] = new Cloud(x, y, r);
+    cloud[i] = new Cloudy(x, y, r);
   }
   // Define rain
     for(let i = 0; i < 300; i++) {
@@ -36,7 +36,7 @@ function setup() {
     let x = random(width);
     let y = random(-20, 150);
     let r = random(10, 120);
-    cloudysky[i] = new Cloud(x, y, r);
+    cloudysky[i] = new Cloudy(x, y, r);
   }
   // Define a bolt of lightning
   for (let i = 0; i < 10; i++) {
@@ -62,7 +62,7 @@ function draw() {
     }
   } else {
     // Getting stormy
-    if(m > 5000) {
+    if(m > 6000) {
       // background changes
       changeR -= .2;
       changeG -= .3;
@@ -108,7 +108,7 @@ function draw() {
   }
 }
 
-class Cloud {
+class Cloudy {
   constructor(x, y, r) {
     this.x = x;
     this.y = y;

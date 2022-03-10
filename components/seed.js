@@ -1,16 +1,20 @@
 class Seed {
-  constructor(x, y, plant) {
+  // Makes a seed at the given position determined in seedpod
+  // Makes the seed grow to a max of seediam
+  // Draws a seedpod
+  // Drops the seed
+  constructor(x, y, plant, seediam) {
+    this.seediam = seediam
     this.plant = plant
     this.pos0 = createVector(x, y)
     this.pos = createVector(x, y)
     this.podPos = createVector(x, y)
-    this.r = 0.25
+    this.r = 0.01
     this.dropping = false
+    this.diam = 2
 
-    // this.dropVector = createVector(
-    //   random(-5, 5),
-    //   random(0, 10)  
-    // )
+    // Create the random points on the ground to drop the seeds to
+    // ????? What is height doing ????
     this.dropPoint = createVector(
       random(0, width),
       height
@@ -26,35 +30,35 @@ class Seed {
     this.pos = pos
     this.podPos = pos
 
-
-    this.r += (this.r < 5) ? 0.03 : 0.0
+    this.r += (this.r < this.seediam) ? 0.01 : 0.0
     
   }
 
   show() {
+    // Draw a seed
     push()
     translate(this.pos.x, this.pos.y)
     stroke(210, 140, 10)
     strokeWeight(2)
     fill(250, 220, 20)
-    circle(0, 0, this.r*2)
+    circle(0, 0, this.r)
     pop()
-
-    
   }
 
   showPod() {
+    // Draw a seedpod
     push()
     translate(this.podPos.x, this.podPos.y)
     stroke(30, 240, 10);
     strokeWeight(2);
-    fill(50, 220, 20)
-    ellipse(0, 0, this.r*3.5, this.r*3.5)
+    fill(30, 240, 10)
+    ellipse(0, 0, this.r*2.5, this.r*2.5)
     pop()
   }
 
+  // Drop the seeds to a point just above the ground
   drop() {
-    if(this.pos.y < height) {
+    if(this.pos.y < height-10) {
       this.pos.add(this.dropVector)
     }
   }

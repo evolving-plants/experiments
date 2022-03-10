@@ -17,6 +17,9 @@ function setup() {
 
   newSeasonButton = createButton('new season')
   newSeasonButton.mousePressed(() => {
+    // Check to make sure all the seeds have fallen to the ground ????
+
+
     gen0.newSeason()
   })
 
@@ -42,6 +45,11 @@ function draw() {
 
 
 function mousePressed() {
+    // Do not allow selection if DROP SEEDS has already been pressed
+    // if (seeddroppressed == false) {
+
+  // Allow any number of plants to be selected
+  // Select plant i if the mouse is pressed near plant i
   for(let i = 0; i < gen0.plants.length; i++) {
     let p = gen0.plants[i]
     let leftLimit = p.pos.x - 200
@@ -49,7 +57,9 @@ function mousePressed() {
     if(mouseX > leftLimit && mouseX < rightLimit && 
       mouseY > 10 && mouseY < height-10) 
     {
-      // as soon as plant is selected
+      // as soon as plant is selected ???? or when new season is pressed????
+    // but only if the seedpods are all fully developed   ?????
+
       let currPlant = p.select()
       gen0.selectedPlants.push(currPlant)      
     }
