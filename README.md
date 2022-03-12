@@ -13,6 +13,7 @@ leaving other plants to produce seeds for the next generation.
   - [✓] Drop the seeds to a point just above the ground
   - [✓] Adjust the seedpod sizes
   - [✓] Make the seedpod appear when the seedpod opens, as the flower grows
+  - [✓] Make seedpod grow in between front and back petals
   
   - [ ] streamline the organisation 
   - [ ] can we make a clock function that keeps increasing time and is used to set the flow?
@@ -34,7 +35,7 @@ leaving other plants to produce seeds for the next generation.
   
   - [ ] STEMS: Give all the leaves on a plant the same final stemlength
 
-  - [ ] BUDS: some buds are not opening - order is off
+  - [✓] BUDS: some buds are not opening - order is off
 
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows
   - [ ] SEADPOD: draw a green line connecting the seed positions to make a better seedpod
@@ -48,7 +49,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] BUD: put a tiny bud at the top of the growing stalk
   
   - [ ] Adjust distances between stems and make multiple buds at the top of the growing stalk
-  - [ ] FLOWER: Make flower petals dry up and fall off as the seedpod grows
+  - [✓] FLOWER: Make flower petals dry up and fall off as the seedpod grows
   - [ ] FLOWER: add stamen
   - [ ] Make old plants whither away
   - [ ] Make plants bend over
