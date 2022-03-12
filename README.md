@@ -51,6 +51,7 @@ leaving other plants to produce seeds for the next generation.
   
   - [ ] Adjust distances between stems and make multiple buds at the top of the growing stalk
   - [✓] FLOWER: Make flower petals dry up and fall off as the seedpod grows
+  - [✓] FLOWER: Make petal fly away faster and flutteringly
   - [ ] FLOWER: add stamen
   - [ ] Make old plants whither away
   - [ ] Make plants bend over
