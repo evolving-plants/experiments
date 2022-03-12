@@ -15,7 +15,7 @@ leaving other plants to produce seeds for the next generation.
   - [✓] Make the seedpod appear when the seedpod opens, as the flower grows
   - [✓] Make seedpod grow in between front and back petals
   - 
-  - [ ] Fix: the leaves on plants in new seson are not coming like the parent plant
+  - [ ] Fix: the leaves on plants in new season are not coming like the parent plant
   - [ ] streamline the organisation 
   - [ ] can we make a clock function that keeps increasing time and is used to set the flow?
   - [ ] Eventually make a slider to speed up and slow down time
