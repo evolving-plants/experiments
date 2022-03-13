@@ -37,6 +37,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] STEMS: Give all the leaves on a plant the same final stemlength
 
   - [✓] BUDS: some buds are not opening - order is off
+  - [✓] BUD: put a tiny bud at the top of the growing stalk
 
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows
   - [ ] SEADPOD: draw a green line connecting the seed positions to make a better seedpod
@@ -46,8 +47,6 @@ leaving other plants to produce seeds for the next generation.
   - [ ] SEASON: If no plants were selected before pressing new season, select all plants and drop all seeds
   - [ ] SEASON: Do not let new season be clicked until all seeds have fallen to the ground
   - [ ] Make a timer mechanism to generate new seasons without the users (for natural selection)
-
-  - [ ] BUD: put a tiny bud at the top of the growing stalk
   
   - [ ] Adjust distances between stems and make multiple buds at the top of the growing stalk
   - [✓] FLOWER: Make flower petals dry up and fall off as the seedpod grows
