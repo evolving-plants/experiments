@@ -32,6 +32,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] LEAVES: some leaves are turing into buds
   - [ ] LEAVES: Make all the leaves on a plant rather similar to each other
   - [ ] LEAVES: In the initial population, make the leaves on each plant quite different from those on other plants
+  - [✓] LEAF: Improved the leaf shape a little
   - [ ] LEAF: Make a new, improved leaf
   
   - [ ] STEMS: Give all the leaves on a plant the same final stemlength
@@ -57,5 +58,5 @@ leaving other plants to produce seeds for the next generation.
 
   - [ ] User testing
   - [ ] figure out the legal aspect
-  - [ ] test version on itch  - [ ]
+  - [ ] test version on itch  
   - [ ] Make multiple bolts of lightning
