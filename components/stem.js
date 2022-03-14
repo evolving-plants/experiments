@@ -40,13 +40,14 @@ class Stem {
   }
 
   init() {
+    // decide whether to put leaf or seedpod on stem
     if((height-this.pos.y) < this.plant.thresh) {
       this.leaf = new Leaf(
         this.pos.x + cos(this.angle*this.dir) * this.len, 
         this.pos.y + sin(this.angle*this.dir) * this.len, 
         this.angle*this.dir,
-        abs(this.plant.genes.geneLeafLength) + random(-8, 8),
-        abs(this.plant.genes.geneLeafWidth) + random(-20, 20),
+        abs(this.plant.genes.leafLength) + random(-6, 6),
+        abs(this.plant.genes.leafWidth) + random(-8, 8),
         this.plant
       )
     } else {

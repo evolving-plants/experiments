@@ -32,8 +32,9 @@ class Generation {
 
   newSeason() {
     let droppedSeeds = []
-    this.plants.forEach(plant => {
-      if (plant.selected == true)
+    let selectedPlants = this.plants.filter(plant => plant.selected == true)
+    if(selectedPlants.length == 0) selectedPlants = this.plants
+    selectedPlants.forEach(plant => {
       plant.stems.forEach(stem => {
         if(stem.seedpod != null) {
           stem.seedpod.seeds.forEach(seed => droppedSeeds.push(seed))
@@ -61,27 +62,51 @@ class Generation {
 
   setPositionNewPlant(droppedSeeds, newPlant) {
     droppedSeeds.sort((a, b) => {
-      let dist = Math.abs(a.pos.x - newPlant.pos.x) - Math.abs(b.pos.x - newPlant.pos.x)
+      let dist = Math.abs(a.dropPoint.x - newPlant.pos.x) - Math.abs(b.dropPoint.x - newPlant.pos.x)
       return dist
     })
     let seed = droppedSeeds[0]
     let plant = seed.plant
-    newPlant.pos = seed.pos
+    newPlant.pos = seed.dropPoint
     this.setGenes(plant, newPlant)
   }
 
   setGenes(oldPlant, newPlant) {
-    let avgLength = 0, avgWidth = 0
+    // console.log(newPlant.genes)
+
+    // making new leaf length width genes
+    let avgLeafLength = 0, avgLeafWidth = 0
     oldPlant.stems.forEach(stem => {
       if(stem.leaf != null) {
-        avgLength += stem.leaf.finLength
-        avgWidth += stem.leaf.finWidth
+        avgLeafLength += stem.leaf.finLength
+        avgLeafWidth += stem.leaf.finWidth
       }
     })
-    avgLength /= oldPlant.stems.length
-    avgWidth /= oldPlant.stems.length
-    newPlant.genes.geneLeafLength = avgLength
-    newPlant.genes.geneLeafWidth = avgWidth
+    const numLeaves = oldPlant.stems.filter(stem => stem.leaf != null).length
+    avgLeafLength /= numLeaves
+    avgLeafWidth /= numLeaves
+    avgLeafLength += random(-10, 10)
+    avgLeafWidth += random(-10, 10)
+
+    // making new internodedist genes
+    let newInterNodeDist = oldPlant.genes.interNodeDist + random(-10, 10)
+    newInterNodeDist = floor(newInterNodeDist)
+    
+    // making new numLeaves genes
+    let newNumLeaves = oldPlant.genes.numLeaves + floor(random(-1, 2))
+    if(newNumLeaves < 1) newNumLeaves = 1
+    
+    if(newInterNodeDist*newNumLeaves > height*4/5) {
+      newNumLeaves -= 1
+    }
+
+    newPlant.genes = {
+      leafLength: abs(avgLeafLength), 
+      leafWidth: abs(avgLeafWidth),
+      interNodeDist: abs(newInterNodeDist), 
+      numLeaves: abs(newNumLeaves)
+    }
+    // console.log(newPlant.genes)
   }
 
 

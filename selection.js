@@ -28,8 +28,8 @@ function setup() {
 }
 
 function draw() {
-  // back.draw()
-  background(85,110,200)
+  back.draw()
+  // background(85,110,200)
   // randomSeed(10)
 
   gen0.grow()

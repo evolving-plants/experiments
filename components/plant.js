@@ -7,7 +7,6 @@ class Plant {
     this.pos = createVector(x, y)
       // Define the maximum height of the plant, relative to the canvas height
       // This could become a selection variable instead
-    this.maxHeight = random(height*1/2, height*4/5)
     this.currHeight = 20
       // Create the s array for making new stem 
     this.stems = []
@@ -20,26 +19,23 @@ class Plant {
     this.growthRate = 0.08
     this.inserting = false
     this.timer = 0
-    this.beat = 150
-    // interStemDist is not used anywhere ???? delete ????
-    // this.interStemDist = random(100, 150)
+    this.beat = 20
 
     this.genes = {
       // Set the initial leaf sizes for each plant
-      geneLeafLength: random(0, 150),
-      geneLeafWidth: random(0, 100), 
+      leafLength: random(-50, 50),
+      leafWidth: random(-50, 50), 
       // Set the internode distance
-      interNodeDist: 100, 
+      interNodeDist: floor(random(80, 120)), 
       // Set the average number of leaves for each plant
-      numLeaves: 3
+      numLeaves: floor(random(2, 4))
     }
-    
-    this.thresh = this.genes.interNodeDist * this.genes.numLeaves
+
   }
 
   init() {
-    // this.genes[geneLeafLength] = geneLeafLength
-    // this.genes[geneLeafWidth] = geneLeafWidth
+    this.thresh = this.genes.interNodeDist * this.genes.numLeaves
+    this.maxHeight = this.thresh + 200
     this.stems.push(new Stem(this.pos.x, this.pos.y, -1, this, this.nleaves))
   }
 
@@ -86,22 +82,26 @@ class Plant {
     // Not sure if this is the best way to do this because we want internode distance to be a selection variable ????
     this.currHeight += this.heightR*this.growthRate
     this.timer += 1
-    this.beat = (this.beat - 0.5) < 40 ? this.beat : this.beat - 0.5
-    if((height-this.pos.y) < this.thresh) {
+    
+    if((this.currHeight) < this.thresh) {
       this.inserting = (this.timer % this.genes.interNodeDist == 0)
       if(this.inserting == true) {
+        // console.log('hello')
         let last = this.stems[this.stems.length-1]
         let dir = (this.stems.length % 2 == 0) ? -1 : 1
         let ny = last.pos.y - this.genes.interNodeDist
         this.stems.push(new Stem(this.pos.x, ny, dir, this))
       }
     } else {
-      this.inserting = (floor(this.timer) % floor(this.beat) == 0)
+      // this.inserting = (this.timer % this.beat == 0 && this.beat != 0)
+      this.inserting = (this.timer % floor(this.genes.interNodeDist/2) == 0)
       if(this.inserting == true) {
+        // console.log('pods')
         let last = this.stems[this.stems.length-1]
         let dir = (this.stems.length % 2 == 0) ? -1 : 1
         let ny = (height - this.currHeight) 
         this.stems.push(new Stem(this.pos.x, ny, dir, this))
+        // this.beat -= 
       }
     }
  
