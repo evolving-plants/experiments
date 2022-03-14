@@ -26,7 +26,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] SELECTION: Make the number of leaves a selection variable
   - [ ] SELECTION: Make the number of seeds in the seedpods a selection variable
   - [ ] SELECTION: Make the final seed size (seediam) a selection variable
-  - [ ] SELECTION: Why are red circles being drawn at different heights?
+  - [✓] SELECTION: Red circles' heights 
 
   - [✓] LEAVES: some leaves are turning into buds
   - [ ] LEAVES: Initial leaf sizes are not being set properly - all leaves on one plant should be similar
@@ -35,12 +35,12 @@ leaving other plants to produce seeds for the next generation.
   - [ ] LEAF: Make a new, improved leaf
   
   - [ ] STEMS: Give all the leaves on a plant the same final stemlength
-
-  - [✓] BUDS: some buds are not opening - order is off
+st 
   - [✓] BUD: put a tiny bud at the top of the growing stalk
 
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows
   - [ ] SEADPOD: draw a green line connecting the seed positions to make a better seedpod
+  - [ ] SEADPOD: Seeds and seedpods stop growing if selected before final size
 
   - [✓] SEASON: When season is clicked before all seeds have fallen, the new plants grow from above ground
   - [ ] SEASON: The characteristics of the parent are not being passed properly to the offspring
