@@ -1,24 +1,37 @@
 class Plant {
+  // Makes plant: draws the stalk, calls stem
+  // Drops seeds
+  // Generation tells plant what to do
   constructor(x, y) {
+      // Create vector for the initial position on the stalk
     this.pos = createVector(x, y)
+      // Define the maximum height of the plant, relative to the canvas height
+      // This could become a selection variable instead
     this.maxHeight = random(height*1/2, height*4/5)
     this.currHeight = 20
+      // Create the s array for making new stem 
     this.stems = []
     this.selected = false
     this.growing = true
+    this.numstem = 0
+    this.nleaves = 3
 
-    this.heightR = 10
-    this.growthRate = 0.1
+    this.heightR = random(10, 20)
+    this.growthRate = 0.08
     this.inserting = false
     this.timer = 0
     this.beat = 150
-    
-    // adjust this to adjust initial leaf sizes
+    // interStemDist is not used anywhere ???? delete ????
+    // this.interStemDist = random(100, 150)
+
     this.genes = {
-      geneLeafLength: random(10, 20),
-      geneLeafWidth: random(5, 10), 
-      interNodeDist: 50, 
-      numLeaves: 5
+      // Set the initial leaf sizes for each plant
+      geneLeafLength: random(0, 150),
+      geneLeafWidth: random(0, 100), 
+      // Set the internode distance
+      interNodeDist: 100, 
+      // Set the average number of leaves for each plant
+      numLeaves: 3
     }
     
     this.thresh = this.genes.interNodeDist * this.genes.numLeaves
@@ -27,23 +40,31 @@ class Plant {
   init() {
     // this.genes[geneLeafLength] = geneLeafLength
     // this.genes[geneLeafWidth] = geneLeafWidth
-    this.stems.push(new Stem(this.pos.x, this.pos.y, -1, this))
+    this.stems.push(new Stem(this.pos.x, this.pos.y, -1, this, this.nleaves))
   }
 
   show() {
-    
+    // Draw a circle to show that the plant is selected
     if(this.selected) {
       stroke('red')
       strokeWeight(3)
       noFill()
       circle(this.pos.x, height-this.currHeight, 200)
     }
-
+    // Draw the stalk
     stroke(30, 240, 10);
-    strokeWeight(4);
+    strokeWeight(9);
     fill(50, 220, 20)
     line(this.pos.x, this.pos.y, this.pos.x, this.pos.y-this.currHeight)
+    let cx = this.pos.x
+    let cy = this.pos.y-this.currHeight
+    // Draw a little bud at the top of the growing stalk
+    strokeWeight(2)
+    fill(30, 240, 10)
+    bezier(cx,cy, cx+7,cy-5, cx+8,cy-12, cx,cy-20 )
+    bezier(cx,cy, cx-7,cy-5, cx-8,cy-12, cx,cy-20 )
   
+    // ??? I wish I understood the reason for the existence of b .....????
     for(let i = 0; i < this.stems.length; i++) {
       let b = this.stems[i]
       b.show()
@@ -62,6 +83,7 @@ class Plant {
     }
 
     // growth
+    // Not sure if this is the best way to do this because we want internode distance to be a selection variable ????
     this.currHeight += this.heightR*this.growthRate
     this.timer += 1
     this.beat = (this.beat - 0.5) < 40 ? this.beat : this.beat - 0.5

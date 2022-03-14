@@ -1,4 +1,5 @@
 class Generation {
+  // Makes population of plants - tells plant to drop seeds
   constructor(nPlants = 3) {
     this.nPlants = nPlants
     this.plants = []
@@ -7,6 +8,7 @@ class Generation {
   }
 
   init() {
+    // Sets the initial position of each plant on the ground
     for(let i = 0; i < this.nPlants; i++) {
       let xpos = (width*(i+1)/this.nPlants - width/6) + random(-20, 20)
       let newPlant = new Plant(xpos, height)
@@ -16,6 +18,7 @@ class Generation {
   }
 
   grow() {
+    // Directs the growing and dropping of seeds of each plant
     for(let i = 0; i < this.plants.length; i++) {
       let p = this.plants[i]
       p.grow()
@@ -40,6 +43,7 @@ class Generation {
 
     // make new season
     this.newSeasonPlants = []
+    // Define plant positions in the new season
     for(let i = 0; i < this.nPlants; i++) {
       let xpos = (width*(i+1)/this.nPlants - width/6) + random(-20, 20)
       let newPlant = new Plant(xpos, height)
