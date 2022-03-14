@@ -28,9 +28,8 @@ leaving other plants to produce seeds for the next generation.
   - [ ] SELECTION: Make the final seed size (seediam) a selection variable
   - [ ] SELECTION: Why are red circles being drawn at different heights?
 
+  - [✓] LEAVES: some leaves are turning into buds
   - [ ] LEAVES: Initial leaf sizes are not being set properly - all leaves on one plant should be similar
-  - [ ] LEAVES: some leaves are turing into buds
-  - [ ] LEAVES: Make all the leaves on a plant rather similar to each other
   - [ ] LEAVES: In the initial population, make the leaves on each plant quite different from those on other plants
   - [✓] LEAF: Improved the leaf shape a little
   - [ ] LEAF: Make a new, improved leaf
@@ -43,7 +42,8 @@ leaving other plants to produce seeds for the next generation.
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows
   - [ ] SEADPOD: draw a green line connecting the seed positions to make a better seedpod
 
-  - [ ] SEASON: When season is clicked before all seeds have fallen, the new plants grow from above ground
+  - [✓] SEASON: When season is clicked before all seeds have fallen, the new plants grow from above ground
+  - [ ] SEASON: The characteristics of the parent are not being passed properly to the offspring
   - [ ] SEASON: do not let seeds fall before the plant is fully grown
   - [ ] SEASON: If no plants were selected before pressing new season, select all plants and drop all seeds
   - [ ] SEASON: Do not let new season be clicked until all seeds have fallen to the ground
@@ -52,7 +52,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] Adjust distances between stems and make multiple buds at the top of the growing stalk
   - [✓] FLOWER: Make flower petals dry up and fall off as the seedpod grows
   - [✓] FLOWER: Make petal fly away faster and flutteringly
-  - [ ] FLOWER: add stamen
+  - [✓] FLOWER: add stamen
   - [ ] Make old plants whither away
   - [ ] Make plants bend over
 
