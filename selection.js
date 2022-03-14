@@ -1,5 +1,5 @@
 // 
-const gen0 = new Generation(2)
+const gen0 = new Generation(3)
 let circles = []
 
 let newSeasonButton

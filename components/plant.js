@@ -3,7 +3,7 @@ class Plant {
   // Drops seeds
   // Generation tells plant what to do
   constructor(x, y) {
-      // Create vector for the initial position of each  on the stalk
+      // Create vector for the initial position on the stalk
     this.pos = createVector(x, y)
       // Define the maximum height of the plant, relative to the canvas height
       // This could become a selection variable instead
@@ -25,10 +25,13 @@ class Plant {
     // this.interStemDist = random(100, 150)
 
     this.genes = {
-      geneLeafLength: random(10, 20),
-      geneLeafWidth: random(5, 10), 
-      interNodeDist: 50, 
-      numLeaves: 5
+      // Set the initial leaf sizes for each plant
+      geneLeafLength: random(0, 150),
+      geneLeafWidth: random(0, 100), 
+      // Set the internode distance
+      interNodeDist: 100, 
+      // Set the average number of leaves for each plant
+      numLeaves: 3
     }
     
     this.thresh = this.genes.interNodeDist * this.genes.numLeaves
@@ -37,7 +40,6 @@ class Plant {
   init() {
     // this.genes[geneLeafLength] = geneLeafLength
     // this.genes[geneLeafWidth] = geneLeafWidth
-    // ??? I do not understand the use of push here ???
     this.stems.push(new Stem(this.pos.x, this.pos.y, -1, this, this.nleaves))
   }
 
@@ -51,11 +53,18 @@ class Plant {
     }
     // Draw the stalk
     stroke(30, 240, 10);
-    strokeWeight(8);
+    strokeWeight(9);
     fill(50, 220, 20)
     line(this.pos.x, this.pos.y, this.pos.x, this.pos.y-this.currHeight)
+    let cx = this.pos.x
+    let cy = this.pos.y-this.currHeight
+    // Draw a little bud at the top of the growing stalk
+    strokeWeight(2)
+    fill(30, 240, 10)
+    bezier(cx,cy, cx+7,cy-5, cx+8,cy-12, cx,cy-20 )
+    bezier(cx,cy, cx-7,cy-5, cx-8,cy-12, cx,cy-20 )
   
-    // ??? I wish I understood the reason for the existence of b .....???
+    // ??? I wish I understood the reason for the existence of b .....????
     for(let i = 0; i < this.stems.length; i++) {
       let b = this.stems[i]
       b.show()

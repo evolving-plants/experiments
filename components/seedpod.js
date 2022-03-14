@@ -1,10 +1,10 @@
 class SeedPod {
   // Makes the seedpod, calls seed to add the seeds
   // Sets the distances between the seeds in the seedpod and the curvature of the seedpod
-  constructor(x, y, dir, angle, plant) {
+  constructor(pos, dir, angle, plant) {
     this.plant = plant
     this.seeds = []
-    this.pos = createVector(x, y)
+    this.pos = pos
     this.dir = dir
     this.angle = this.dir * angle
       // Define the number of seeds in a seedpod (this.nSeeds)
@@ -44,7 +44,6 @@ class SeedPod {
 
   show() {
     // Shows the seedpod with seeds 
-    // ??? Why does showPod have to be in seed???
     this.seeds.forEach((seed, i) => {
       seed.showPod()
     })
