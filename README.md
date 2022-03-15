@@ -14,23 +14,23 @@ leaving other plants to produce seeds for the next generation.
   - [✓] Adjust the seedpod sizes
   - [✓] Make the seedpod appear when the seedpod opens, as the flower grows
   - [✓] Make seedpod grow in between front and back petals
+  - [✓] Fix: the leaves on plants in new season are not coming like the parent plant
   - 
-  - [ ] Fix: the leaves on plants in new season are not coming like the parent plant
   - [ ] streamline the organisation 
   - [ ] can we make a clock function that keeps increasing time and is used to set the flow?
   - [ ] Eventually make a slider to speed up and slow down time
 
   - [ ] SELECTION: Make the number of seedpods a selection variable
-  - [ ] SELECTION: Adjust parameters for leaf width and length in new generation
+  - [✓] SELECTION: Adjust parameters for leaf width and length in new generation
   - [ ] SELECTION: Adjust colours and make new generation inherit colours 
-  - [ ] SELECTION: Make the number of leaves a selection variable
+  - [✓] SELECTION: Make the number of leaves a selection variable
   - [ ] SELECTION: Make the number of seeds in the seedpods a selection variable
   - [ ] SELECTION: Make the final seed size (seediam) a selection variable
   - [✓] SELECTION: Red circles' heights 
 
   - [✓] LEAVES: some leaves are turning into buds
-  - [ ] LEAVES: Initial leaf sizes are not being set properly - all leaves on one plant should be similar
-  - [ ] LEAVES: In the initial population, make the leaves on each plant quite different from those on other plants
+  - [✓] LEAVES: Initial leaf sizes are not being set properly - all leaves on one plant should be similar
+  - [✓] LEAVES: In the initial population, make the leaves on each plant quite different from those on other plants
   - [✓] LEAF: Improved the leaf shape a little
   - [ ] LEAF: Make a new, improved leaf
   
@@ -43,7 +43,7 @@ st
   - [ ] SEADPOD: Seeds and seedpods stop growing if selected before final size
 
   - [✓] SEASON: When season is clicked before all seeds have fallen, the new plants grow from above ground
-  - [ ] SEASON: The characteristics of the parent are not being passed properly to the offspring
+  - [✓] SEASON: The characteristics of the parent are not being passed properly to the offspring
   - [ ] SEASON: do not let seeds fall before the plant is fully grown
   - [ ] SEASON: If no plants were selected before pressing new season, select all plants and drop all seeds
   - [ ] SEASON: Do not let new season be clicked until all seeds have fallen to the ground
