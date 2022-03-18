@@ -85,8 +85,8 @@ class Generation {
     const numLeaves = oldPlant.stems.filter(stem => stem.leaf != null).length
     avgLeafLength /= numLeaves
     avgLeafWidth /= numLeaves
-    avgLeafLength += random(-10, 10)
-    avgLeafWidth += random(-10, 10)
+    avgLeafLength += random(-28, 28)
+    avgLeafWidth += random(-22, 22)
 
     // making new internodedist genes
     let newInterNodeDist = oldPlant.genes.interNodeDist + random(-10, 10)

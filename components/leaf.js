@@ -16,8 +16,9 @@ class Leaf {
   }
 
   grow() {
-    this.length += (this.length < this.finLength) ? this.growthRate*3 : 0.
-    this.width += (this.width < this.finWidth)  ? this.growthRate*2 : 0.
+    // Adjust the growth rate of the leaves here
+    this.length += (this.length < this.finLength) ? this.growthRate*.035 : 0.
+    this.width += (this.width < this.finWidth)  ? this.growthRate*.025 : 0.
   }
 
 

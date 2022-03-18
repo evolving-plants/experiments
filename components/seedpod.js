@@ -11,7 +11,6 @@ class SeedPod {
     this.nSeeds = 7
       // Define the initial separation distance between seeds
     this.seedSeparation = .001
-      // this.scale = createVector(0.5, 0.3)   // delete????
     this.scale = createVector(0.5, 0.3)
     this.growing = true
 
