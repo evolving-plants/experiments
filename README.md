@@ -20,10 +20,10 @@ leaving other plants to produce seeds for the next generation.
   - [ ] can we make a clock function that keeps increasing time and is used to set the flow?
   - [ ] Eventually make a slider to speed up and slow down time
 
-  - [ ] SELECTION: Make the number of seedpods a selection variable
   - [✓] SELECTION: Adjust parameters for leaf width and length in new generation
   - [ ] SELECTION: Adjust colours and make new generation inherit colours 
   - [✓] SELECTION: Make the number of leaves a selection variable
+  - [ ] SELECTION: Make the number of seedpods a selection variable
   - [ ] SELECTION: Make the number of seeds in the seedpods a selection variable
   - [ ] SELECTION: Make the final seed size (seediam) a selection variable
   - [✓] SELECTION: Red circles' heights 
@@ -34,8 +34,7 @@ leaving other plants to produce seeds for the next generation.
   - [✓] LEAF: Improved the leaf shape a little
   - [ ] LEAF: Make a new, improved leaf
   
-  - [ ] STEMS: Give all the leaves on a plant the same final stemlength
-st 
+  - [✓] STEMS: Give all the leaves on a plant the same final stemlength 
   - [✓] BUD: put a tiny bud at the top of the growing stalk
 
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows
