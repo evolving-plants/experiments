@@ -34,10 +34,12 @@ leaving other plants to produce seeds for the next generation.
   - [✓] LEAVES: Initial leaf sizes are not being set properly - all leaves on one plant should be similar
   - [✓] LEAVES: In the initial population, make the leaves on each plant quite different from those on other plants
   - [✓] LEAF: Improved the leaf shape a little
+  - [ ] LEAVES: Randomly choose right or left side for first leaf
   - [ ] LEAF: Make a new, improved leaf
   
-  - [✓] STEMS: Give all the leaves on a plant the same final stemlength 
+  - [✓] STEMS: Give all the leaves on a plant the same final stemlength
   - [✓] BUD: put a tiny bud at the top of the growing stalk
+  - [ ] BUD: make the top 2-3 buds have smaller final angles and stemlengths
 
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows
   - [ ] SEADPOD: draw a green line connecting the seed positions to make a better seedpod
