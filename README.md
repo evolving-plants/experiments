@@ -34,6 +34,7 @@ leaving other plants to produce seeds for the next generation.
   - [✓] LEAVES: Initial leaf sizes are not being set properly - all leaves on one plant should be similar
   - [✓] LEAVES: In the initial population, make the leaves on each plant quite different from those on other plants
   - [✓] LEAF: Improved the leaf shape a little
+  - [ ] LEAVES: Sometimes a leaf jumps out beforehand
   - [ ] LEAVES: Randomly choose right or left side for first leaf
   - [ ] LEAF: Make a new, improved leaf
   
