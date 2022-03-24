@@ -69,6 +69,6 @@ class SeedPod {
       pos.y -= 10
       pos.x -= 5 * this.dir
       seed.update(pos)
-    }
+    } 
   }
 }

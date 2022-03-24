@@ -54,7 +54,7 @@ class Stem {
       )
     } else {
       this.seedpod = new SeedPod(this.pos, this.dir, this.angle, this.plant)
-      this.bud = new Bud(this.pos, this.angle*this.dir, 8, 4)
+      this.bud = new Bud(this.pos, this.angle*this.dir, 8)
       this.flower = new Flower(this.pos, this.angle*this.dir)
     }
   }
@@ -70,7 +70,8 @@ class Stem {
     // }
     // this.len += (this.len < finalstemlength) ? 10*this.growthRate : 0.0
     if(this.leaf != null) {
-      if(this.len < 80) {
+      // The final stem length for all leaves is set here
+      if(this.len < 70) {
         this.len += 10*this.growthRate
       } else {
         this.growing = false
@@ -142,19 +143,13 @@ class Stem {
     else {
       this.showPod()
     }
-    
   }
 
   showPod() {
     if(this.bud.opening == true) {
-      // console.log('showing')
       this.flower.showBack()
-      // this.seedpod.show()
-      // if(this.seedpod.growing == true) {
-      // }
     }
     this.seedpod.show()
-    // this.flower.showStamen()
     this.flower.showFront()
     this.bud.show()
   }

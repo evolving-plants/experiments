@@ -9,8 +9,11 @@ class Generation {
 
   init() {
     // Sets the initial position of each plant on the ground
+    let sep = width / (this.nPlants * 2)
     for(let i = 0; i < this.nPlants; i++) {
-      let xpos = (width*(i+1)/this.nPlants - width/6) + random(-20, 20)
+      let xpos = sep * (((i+1)*2)-1)
+      xpos = xpos + random(-sep/2, sep/2)
+      // let xpos = (width*(i+1)/this.nPlants - width/6) + random(-20, 20)
       let newPlant = new Plant(xpos, height)
       newPlant.init()
       this.plants.push(newPlant) 
@@ -45,8 +48,12 @@ class Generation {
     // make new season
     this.newSeasonPlants = []
     // Define plant positions in the new season
+        // This is not being used ?????
+        let sep = width / (this.nPlants * 2)
     for(let i = 0; i < this.nPlants; i++) {
-      let xpos = (width*(i+1)/this.nPlants - width/6) + random(-20, 20)
+      let xpos = sep * (((i+1)*2)-1)
+      xpos = xpos + random(-sep/2, sep/2)
+      // let xpos = (width*(i+1)/this.nPlants - width/6) + random(-20, 20)
       let newPlant = new Plant(xpos, height)
       this.newSeasonPlants.push(newPlant) 
     }
@@ -61,6 +68,7 @@ class Generation {
   }
 
   setPositionNewPlant(droppedSeeds, newPlant) {
+    // This is being used instead of the above ????
     droppedSeeds.sort((a, b) => {
       let dist = Math.abs(a.dropPoint.x - newPlant.pos.x) - Math.abs(b.dropPoint.x - newPlant.pos.x)
       return dist
@@ -74,7 +82,7 @@ class Generation {
   setGenes(oldPlant, newPlant) {
     // console.log(newPlant.genes)
 
-    // making new leaf length width genes
+    // making new leaf length and width genes
     let avgLeafLength = 0, avgLeafWidth = 0
     oldPlant.stems.forEach(stem => {
       if(stem.leaf != null) {
@@ -85,10 +93,10 @@ class Generation {
     const numLeaves = oldPlant.stems.filter(stem => stem.leaf != null).length
     avgLeafLength /= numLeaves
     avgLeafWidth /= numLeaves
-    avgLeafLength += random(-28, 28)
-    avgLeafWidth += random(-22, 22)
+    avgLeafLength += random(-29, 29)
+    avgLeafWidth += random(-23, 23)
 
-    // making new internodedist genes
+    // making new internodedist genes (for both leaves and buds)
     let newInterNodeDist = oldPlant.genes.interNodeDist + random(-10, 10)
     newInterNodeDist = floor(newInterNodeDist)
     
@@ -106,7 +114,7 @@ class Generation {
       interNodeDist: abs(newInterNodeDist), 
       numLeaves: abs(newNumLeaves)
     }
-    // console.log(newPlant.genes)
+    // console.log(newPlant.genes) 
   }
 
 

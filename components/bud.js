@@ -2,15 +2,16 @@ class Bud{
   // Making a bud at (x,y) with given angle from the stem & opening it
   // The initial (tiny) bud length and width is 4 and 2  
   // The bud grows to final length budlength 
+  // The bud width is half of the bud length
 
-  constructor(pos, angle, budlength, budwidth){
+  constructor(pos, angle, budlength){
     this.pos = pos
     // Is the following line needed???? Are the above lines needed????
     this.angle = angle
     this.finlen =  budlength;
     // The bud grows in size by incrementing blen and bwid
     this.blen = 4
-    this.bwid = 2
+    this.bwid = this.blen/2
     // The bud opens by incrementing bx & blen, moving the tip in a semicircle
     // When this.bx = 0, the bud does not open
     this.bx = 0;

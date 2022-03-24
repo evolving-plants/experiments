@@ -1,5 +1,5 @@
-// 
-const gen0 = new Generation(3)
+// Change nPlants here to set the number of plants in the population
+const gen0 = new Generation(4) 
 let circles = []
 
 let newSeasonButton
@@ -8,7 +8,8 @@ let isDropping = false
 let back = new Back()
 
 function preload() {
-  back.load()
+  back.load() 
+
 }
 
 function setup() {
@@ -52,10 +53,10 @@ function mousePressed() {
   // Select plant i if the mouse is pressed near plant i
   for(let i = 0; i < gen0.plants.length; i++) {
     let p = gen0.plants[i]
-    let leftLimit = p.pos.x - 200
-    let rightLimit = p.pos.x + 200
+    let leftLimit = p.pos.x - width / (gen0.plants.length * 4)
+    let rightLimit = p.pos.x + width / (gen0.plants.length * 4)
     if(mouseX > leftLimit && mouseX < rightLimit && 
-      mouseY > 10 && mouseY < height-10) 
+      mouseY > 10 && mouseY < height-10)
     {
       // as soon as plant is selected ???? or when new season is pressed????
     // but only if the seedpods are all fully developed   ?????
