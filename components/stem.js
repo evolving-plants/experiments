@@ -41,18 +41,20 @@ class Stem {
 
   init() {
     // decide whether to put leaf or seedpod on stem
+    // All stems below thresh will have leaves, above will have buds
     if((height-this.pos.y) < this.plant.thresh) {
       this.leaf = new Leaf(
         this.pos.x + cos(this.angle*this.dir) * this.len, 
         this.pos.y + sin(this.angle*this.dir) * this.len, 
         this.angle*this.dir,
+        // Find the random effect of the genes on the leaf size
         abs(this.plant.genes.leafLength) + random(-6, 6),
         abs(this.plant.genes.leafWidth) + random(-8, 8),
         this.plant
       )
     } else {
       this.seedpod = new SeedPod(this.pos, this.dir, this.angle, this.plant)
-      this.bud = new Bud(this.pos, this.angle*this.dir, 8, 4)
+      this.bud = new Bud(this.pos, this.angle*this.dir, 8)
       this.flower = new Flower(this.pos, this.angle*this.dir)
     }
   }
@@ -68,7 +70,8 @@ class Stem {
     // }
     // this.len += (this.len < finalstemlength) ? 10*this.growthRate : 0.0
     if(this.leaf != null) {
-      if(this.len < 100) {
+      // The final stem length for all leaves is set here
+      if(this.len < 70) {
         this.len += 10*this.growthRate
       } else {
         this.growing = false
@@ -140,19 +143,13 @@ class Stem {
     else {
       this.showPod()
     }
-    
   }
 
   showPod() {
     if(this.bud.opening == true) {
-      // console.log('showing')
       this.flower.showBack()
-      // this.seedpod.show()
-      // if(this.seedpod.growing == true) {
-      // }
     }
     this.seedpod.show()
-    // this.flower.showStamen()
     this.flower.showFront()
     this.bud.show()
   }

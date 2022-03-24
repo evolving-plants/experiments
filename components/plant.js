@@ -8,7 +8,7 @@ class Plant {
       // Define the maximum height of the plant, relative to the canvas height
       // This could become a selection variable instead
     this.currHeight = 20
-      // Create the s array for making new stem 
+      // Create the stems array for making new stems 
     this.stems = []
     this.selected = false
     this.growing = true
@@ -23,8 +23,8 @@ class Plant {
 
     this.genes = {
       // Set the initial leaf sizes for each plant
-      leafLength: random(-50, 50),
-      leafWidth: random(-50, 50), 
+      leafLength: random(-40, 70),
+      leafWidth: random(-40, 70), 
       // Set the internode distance
       interNodeDist: floor(random(80, 120)), 
       // Set the average number of leaves for each plant
@@ -36,6 +36,7 @@ class Plant {
   init() {
     this.thresh = this.genes.interNodeDist * this.genes.numLeaves
     this.maxHeight = this.thresh + 200
+    // Create the stems using stem class
     this.stems.push(new Stem(this.pos.x, this.pos.y, -1, this, this.nleaves))
   }
 
@@ -54,18 +55,18 @@ class Plant {
     line(this.pos.x, this.pos.y, this.pos.x, this.pos.y-this.currHeight)
     let cx = this.pos.x
     let cy = this.pos.y-this.currHeight
+
     // Draw a little bud at the top of the growing stalk
     strokeWeight(2)
     fill(30, 240, 10)
     bezier(cx,cy, cx+7,cy-5, cx+8,cy-12, cx,cy-20 )
     bezier(cx,cy, cx-7,cy-5, cx-8,cy-12, cx,cy-20 )
   
-    // ??? I wish I understood the reason for the existence of b .....????
+    // Draw the stems
     for(let i = 0; i < this.stems.length; i++) {
       let b = this.stems[i]
       b.show()
     }
-
   }
 
   grow() {
@@ -78,8 +79,7 @@ class Plant {
       return
     }
 
-    // growth
-    // Not sure if this is the best way to do this because we want internode distance to be a selection variable ????
+    // growth of plant
     this.currHeight += this.heightR*this.growthRate
     this.timer += 1
     
@@ -113,6 +113,7 @@ class Plant {
     return this
   }
 
+  // Dropping seeds after the plant is selected
   dropSeeds() {
     this.stems.forEach(stem => {
       if(stem.seedpod != null) {
@@ -120,7 +121,7 @@ class Plant {
         seeds.forEach(seed => {
           seed.dropping = true
           if(seed.dropVector != null) return
-          seed.dropVector = p5.Vector.sub(seed.dropPoint, seed.pos).normalize().mult(10)
+          seed.dropVector = p5.Vector.sub(seed.dropPoint, seed.pos).normalize().mult(10) 
         })
       }
     })

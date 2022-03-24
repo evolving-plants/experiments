@@ -6,12 +6,14 @@ class Seed {
   constructor(x, y, plant, seediam) {
     this.seediam = seediam
     this.plant = plant
+    // Do we need pos0 here????
     this.pos0 = createVector(x, y)
     this.pos = createVector(x, y)
     this.podPos = createVector(x, y)
+    // The seed diameter is incremented by this.r
     this.r = 0.01
     this.dropping = false
-    this.diam = 2
+    // this.diam = 2
 
     // Create the random points on the ground to drop the seeds to
     // ????? What is height doing ????
@@ -46,9 +48,8 @@ class Seed {
   }
 
   showPod() {
-    // Draw a seedpod
+    // Draw a seedpod 
     push()
-    // Why is this not this.pos.x, this.pos.y ????
     translate(this.podPos.x, this.podPos.y)
     stroke(30, 240, 10);
     strokeWeight(2);
