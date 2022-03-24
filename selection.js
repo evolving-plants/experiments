@@ -8,7 +8,7 @@ let isDropping = false
 let back = new Back()
 
 function preload() {
-  back.load() 
+  // back.load() 
 
 }
 
@@ -17,6 +17,7 @@ function setup() {
   angleMode(DEGREES)
 
   newSeasonButton = createButton('new season')
+  newSeasonButton.position(width-160, 10)
   newSeasonButton.mousePressed(() => {
     // Check to make sure all the seeds have fallen to the ground ????
 
@@ -25,7 +26,7 @@ function setup() {
   })
 
   gen0.init()
-  back.init()
+  // back.init()
 }
 
 function draw() {
