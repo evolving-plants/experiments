@@ -14,7 +14,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] Make old plants whither away
   - [ ] Make plants bend over in wind or flood
 ## Easier
-  - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows
+  - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows - improved by slowing down rate
   - [ ] SEADPOD: Seeds and seedpods stop growing if selected before final size
   - [ ] LEAVES: Sometimes a leaf jumps out beforehand
   - [ ] SELECTION: Make the number of seedpods a selection variable
@@ -23,13 +23,13 @@ leaving other plants to produce seeds for the next generation.
   - [ ] SELECTION: Adjust colours and make new generation inherit colours 
   - [ ] LEAVES: Randomly choose right or left side for first leaf
   - [ ] SEADPOD: draw a green line connecting the seeds and pointed end
-  - [ ] LEAF: Make a new, improved leaf
   - [ ] Adjust distances between stems and make multiple buds at the top of the growing stalk
   - [ ] SEASON: do not let seeds fall before the plant is fully grown 
   - [ ] figure out the legal aspect
-  - [ ] User testing
+  - [ ] User testing - some done
 
 ## DONE
+  - [✓] LEAF: Make a new, improved leaf
   - [✓] fix: stems growing away from stalk
   - [✓] Add backgrounds
   - [✓] Drop the seeds to a point just above the ground
