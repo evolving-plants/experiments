@@ -13,6 +13,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] Make a timer mechanism to generate new seasons without the users (for natural selection)
   - [ ] Make old plants whither away
   - [ ] Make plants bend over in wind or flood
+  - [ ] Become a github expert
 ## Easier
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows - improved by slowing down rate
   - [ ] SEADPOD: Seeds and seedpods stop growing if selected before final size
