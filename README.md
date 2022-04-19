@@ -26,7 +26,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] Adjust distances between stems and make multiple buds at the top of the growing stalk
   - [ ] SEASON: do not let seeds fall before the plant is fully grown 
   - [ ] figure out the legal aspect
-  - [ ] User testing - some done
+  - [ ] User testing - some done 
 
 ## DONE
   - [✓] LEAF: Make a new, improved leaf
