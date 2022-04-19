@@ -17,7 +17,7 @@ leaving other plants to produce seeds for the next generation.
 ## Easier
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows - improved by slowing down rate
   - [ ] SEADPOD: Seeds and seedpods stop growing if selected before final size
-  - [ ] LEAVES: Sometimes a leaf jumps out beforehand
+  - [ ] LEAVES: Sometimes a leaf jumps out beforehand (see seed.show ????)
   - [ ] SELECTION: Make the number of seedpods a selection variable
   - [ ] SELECTION: Make the number of seeds in the seedpods a selection variable
   - [ ] SELECTION: Make the final seed size (seediam) a selection variable
