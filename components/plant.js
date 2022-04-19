@@ -8,7 +8,7 @@ class Plant {
       // Define the maximum height of the plant, relative to the canvas height
       // This could become a selection variable instead
     this.currHeight = 20
-      // Create the stems array for making new stems 
+      // Create the stems array for making new stems
     this.stems = []
     this.selected = false
     this.growing = true
@@ -22,20 +22,22 @@ class Plant {
     this.beat = 20
 
     this.genes = {
-      // Set the initial leaf sizes for each plant
-      leafLength: random(-40, 70),
-      leafWidth: random(-40, 70), 
-      // Set the internode distance
-      interNodeDist: floor(random(80, 120)), 
-      // Set the average number of leaves for each plant
-      numLeaves: floor(random(2, 4))
-    }
+      // Set the initial leaf sizes for each plant 
+      leafLength: random(180, 260),
+      leafWid1: random(-50, 50),
+      leafWid2: random(30, 90), 
+      leafWid3: random(30, 90), 
+      // Set the initial (ave) internode distance for each plant - was (80,120)
+      interNodeDist: floor(random(50, 130)),
+      // Set the average number of leaves for each plant 
+      numLeaves: floor(random(3, 6)) // was (2,4)
+    } 
 
   }
 
   init() {
     this.thresh = this.genes.interNodeDist * this.genes.numLeaves
-    this.maxHeight = this.thresh + 200
+    this.maxHeight = this.thresh + 120        // was this.thresh + 200
     // Create the stems using stem class
     this.stems.push(new Stem(this.pos.x, this.pos.y, -1, this, this.nleaves))
   }
@@ -48,6 +50,12 @@ class Plant {
       noFill()
       circle(this.pos.x, height-this.currHeight, 200)
     }
+       // Draw the stems
+       for(let i = 0; i < this.stems.length; i++) {
+        let b = this.stems[i] 
+        b.show()
+      }
+
     // Draw the stalk
     stroke(30, 240, 10);
     strokeWeight(9);
@@ -62,11 +70,6 @@ class Plant {
     bezier(cx,cy, cx+7,cy-5, cx+8,cy-12, cx,cy-20 )
     bezier(cx,cy, cx-7,cy-5, cx-8,cy-12, cx,cy-20 )
   
-    // Draw the stems
-    for(let i = 0; i < this.stems.length; i++) {
-      let b = this.stems[i]
-      b.show()
-    }
   }
 
   grow() {
@@ -94,7 +97,8 @@ class Plant {
       }
     } else {
       // this.inserting = (this.timer % this.beat == 0 && this.beat != 0)
-      this.inserting = (this.timer % floor(this.genes.interNodeDist/2) == 0)
+      // changed from /2 to /3
+      this.inserting = (this.timer % floor(this.genes.interNodeDist/3) == 0)
       if(this.inserting == true) {
         // console.log('pods')
         let last = this.stems[this.stems.length-1]

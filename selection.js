@@ -17,7 +17,7 @@ function setup() {
   angleMode(DEGREES)
 
   newSeasonButton = createButton('new season')
-  newSeasonButton.mousePressed(() => {
+  newSeasonButton.mousePressed(() => { 
     // Check to make sure all the seeds have fallen to the ground ????
 
 

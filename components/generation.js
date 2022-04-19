@@ -83,38 +83,52 @@ class Generation {
     // console.log(newPlant.genes)
 
     // making new leaf length and width genes
-    let avgLeafLength = 0, avgLeafWidth = 0
+    let avgLeafLength = 0, avgLeafWid1 = 0, avgLeafWid2 = 0, avgLeafWid3 = 0
     oldPlant.stems.forEach(stem => {
-      if(stem.leaf != null) {
-        avgLeafLength += stem.leaf.finLength
-        avgLeafWidth += stem.leaf.finWidth
+      if(stem.leaf2 != null) {
+        avgLeafLength += stem.leaf2.finLength
+        // avgLeafWidth += stem.leaf.finWidth
+        avgLeafWid1 += stem.leaf2.finWid1
+        avgLeafWid2 += stem.leaf2.finWid2
+        avgLeafWid3 += stem.leaf2.finWid3
       }
     })
-    const numLeaves = oldPlant.stems.filter(stem => stem.leaf != null).length
+    // Adjust differences between leaves on different plants from the same parent
+    const numLeaves = oldPlant.stems.filter(stem => stem.leaf2 != null).length
     avgLeafLength /= numLeaves
-    avgLeafWidth /= numLeaves
-    avgLeafLength += random(-29, 29)
-    avgLeafWidth += random(-23, 23)
+    avgLeafWid1 /= numLeaves
+    avgLeafWid2 /= numLeaves
+    avgLeafWid3 /= numLeaves
+    avgLeafLength += random(-40, 40) // originally 29
+    avgLeafWid1 += random(-26, 26)   // rest originally 23
+    avgLeafWid2 += random(-26, 26)
+    avgLeafWid3 += random(-26, 26)
+    if (avgLeafWid3 > avgLeafWid2*1.2) { avgLeafWid3 = avgLeafWid3*.9 }
+    if (avgLeafWid3 < avgLeafWid2*1.2) { avgLeafWid3 = avgLeafWid3*1.1 }
+    // The above adjusts relations between wid2 and wid3 ??????
 
     // making new internodedist genes (for both leaves and buds)
-    let newInterNodeDist = oldPlant.genes.interNodeDist + random(-10, 10)
+    let newInterNodeDist = oldPlant.genes.interNodeDist + random(-7, 7)
     newInterNodeDist = floor(newInterNodeDist)
     
     // making new numLeaves genes
     let newNumLeaves = oldPlant.genes.numLeaves + floor(random(-1, 2))
-    if(newNumLeaves < 1) newNumLeaves = 1
+    if(newNumLeaves < 1) newNumLeaves = 1 
     
+    // the following was changed from 4/5 to 3/5, but the expected did not happen ?????
     if(newInterNodeDist*newNumLeaves > height*4/5) {
       newNumLeaves -= 1
     }
 
     newPlant.genes = {
       leafLength: abs(avgLeafLength), 
-      leafWidth: abs(avgLeafWidth),
+      leafWid1: abs(avgLeafWid1),
+      leafWid2: abs(avgLeafWid2),
+      leafWid3: abs(avgLeafWid3),
       interNodeDist: abs(newInterNodeDist), 
       numLeaves: abs(newNumLeaves)
     }
-    // console.log(newPlant.genes) 
+    // console.log(newPlant.genes)
   }
 
 

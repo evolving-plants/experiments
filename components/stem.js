@@ -17,20 +17,20 @@ class Stem {
     this.pos = createVector(x, y)
     // Start growing the stem from a length of 0
     this.len = 0
-    // Whether the stem is on the right or left is determined by this.dir
+    // Whether the stem is on the right or left is determined by this.dir 
     this.dir = dir
      // Start growing the stem from an angle of 0.1
     this.angle = 0.1
     // Count the number of stems with numstem
     this.numstem = 0
-    // Set the final stem length for all leaves
-    this.leafstemlen = 1
+    // Set the final stem length for all leaves - not working?????
+    this.leafstemlen = .5
     this.growing = true
     
 
     // randomness 
     // this.lenr = random(0, )
-    this.growthRate = 0.2
+    this.growthRate = 0.1
     this.distR = 20
     this.maxAngleR = random(40, 60)
     this.angleR = random(40, 60)
@@ -40,16 +40,20 @@ class Stem {
   }
 
   init() {
-    // decide whether to put leaf or seedpod on stem
+    // decide whether to put leaf or bud & seedpod on stem
     // All stems below thresh will have leaves, above will have buds
     if((height-this.pos.y) < this.plant.thresh) {
-      this.leaf = new Leaf(
+      this.leaf2 = new Leaf2(
         this.pos.x + cos(this.angle*this.dir) * this.len, 
         this.pos.y + sin(this.angle*this.dir) * this.len, 
         this.angle*this.dir,
-        // Find the random effect of the genes on the leaf size
-        abs(this.plant.genes.leafLength) + random(-6, 6),
-        abs(this.plant.genes.leafWidth) + random(-8, 8),
+        // Find the random different sizes of leaves on this plant
+        // leaf length was + random(-6,6)
+        abs(this.plant.genes.leafLength) + random(-8, 8),
+        abs(this.plant.genes.leafWid1) + random(-8, 8),
+        abs(this.plant.genes.leafWid2) + random(-8, 8),
+        abs(this.plant.genes.leafWid3) + random(-8, 8),
+        // Adjust the above ???????
         this.plant
       )
     } else {
@@ -59,26 +63,26 @@ class Stem {
     }
   }
   
+  grow() {
   // The stem keeps growing until it reaches finalstemlength
   // This will make the final stem lengths shorter towards the top of the plant
-  // But leaves will all have the same final stem length (this.leafstemlen)
-  grow() {
+  // But leaves will all have the same final stem length (50)
     // let finalstemlength = this.pos.y*.15
     // if (this.numstem <= 4) {
     //   this.numstem += 1
     //   finalstemlength = this.leafstemlen
     // }
     // this.len += (this.len < finalstemlength) ? 10*this.growthRate : 0.0
-    if(this.leaf != null) {
+    if(this.leaf2 != null) {
       // The final stem length for all leaves is set here
-      if(this.len < 70) {
+      if(this.len < 50) {
         this.len += 10*this.growthRate
       } else {
         this.growing = false
       }
-      
+      // The following is for the stems of buds (was .15))
     } else {
-      if(this.len < this.pos.y*0.15) {
+      if(this.len < 80 + this.pos.y*0.1) {
         this.len += 10*this.growthRate
       } else {
         this.growing = false
@@ -88,7 +92,7 @@ class Stem {
     this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.growthRate : 0.0
     if(abs(this.pos0.y-this.pos.y) < this.distR) {
       
-      this.pos.y -= this.growthRate * this.heightR
+      this.pos.y -= this.growthRate * this.heightR 
       if(this.pos.y < (height - this.plant.currHeight + 5)) {
         this.pos.y = height - this.plant.currHeight + 5
       } 
@@ -103,9 +107,9 @@ class Stem {
     )
     let angle = this.angle*this.dir
 
-    if(this.leaf != null) {
-      this.leaf.update(pos, angle)
-      this.leaf.grow()
+    if(this.leaf2 != null) {
+      this.leaf2.update(pos, angle)
+      this.leaf2.grow()
     } else {
       this.seedpod.update(pos, angle)
       this.bud.update(pos, angle)      
@@ -122,7 +126,6 @@ class Stem {
       } else {
         this.bud.grow()
       }
-      
     }
   }
   
@@ -137,8 +140,8 @@ class Stem {
     line(0, 0, 0, -this.len)
     pop()
 
-    if(this.leaf != null) {
-      this.showLeaf()
+    if(this.leaf2 != null) {
+      this.showLeaf2()
     }
     else {
       this.showPod()
@@ -155,92 +158,7 @@ class Stem {
   }
 
   // Confusion ?????
-  showLeaf() {
-    this.leaf.show()
+  showLeaf2() {
+    this.leaf2.show()
   }
-
-  // oldShowLeaf() {
-  //   push()
-  //   translate(this.pos.x, this.pos.y)
-  //   rotate(this.angle*this.dir)
-  //   translate(0, -this.len)
-  //   scale(1, 1)
-  //   // circle(0, 0, 10)
-  //   // circle(0, -this.length, 10)
-  //   stroke(30, 240, 10);
-  //   strokeWeight(2);
-  //   fill(50, 220, 20)
-  //   bezier(
-  //     0, 0, 
-  //     30, -15,
-  //     30, -15,
-  //     0, -this.len
-  //   )
-  //   bezier(
-  //     0, 0, 
-  //     -30, -15,
-  //     -30, -15,
-  //     0, -this.len
-  //   )
-  //   pop()
-  
-  // }
-  
-  // delete ????
-  // oldShowSeedPod() {
-  //   let startp = createVector(0, -this.len*1/4)
-  //   let endp = createVector(
-  //     0, -this.len
-  //   )
-  //   let n = 5
-  //   let m = map(this.pos.y, 0, height, 
-  //               2, 10)
-  //   strokeWeight(2)
-  //   beginShape()
-  //   curveVertex(0, 0)
-  //   // curveVertex(0, 0)
-  //   for(let i = 0; i < n; i++) {
-      
-  //     let t = i/n
-  //     let p = p5.Vector.lerp(startp, endp, t)
-  //     let mid = p5.Vector.lerp(startp, endp, t-(1/n*0.5))
-  //     let tan = p.copy()
-  //     tan.setMag(m)
-  //     tan.rotate(-90)
-  //     let p3 = mid.copy().add(tan)
-  //     tan.setMag(m*0.5)
-  //     let p4 = p.copy().add(tan)
-  //     // push()
-  //     // translate(p3.x, p3.y)
-  //     // circle(0, 0, 10)
-  //     // pop()
-  //     curveVertex(p3.x, p3.y)
-  //     curveVertex(p4.x, p4.y)
-      
-  //   }
-  //   // curveVertex(0, -this.len)
-  //   for(let i = 0; i < n; i++) {
-  //     let t = i/n
-  //     let p = p5.Vector.lerp(endp, startp, t)
-  //     let mid = p5.Vector.lerp(endp, startp, t+(1/n*0.5))
-  //     let tan = p.copy()
-  //     tan.setMag(m)
-  //     tan.rotate(90)
-  //     let p3 = mid.copy().add(tan)
-  //     tan.setMag(m*0.5)
-  //     let p4 = p.copy().add(tan)
-      
-  //     //  push()
-  //     // translate(p3.x, p3.y)
-  //     // circle(0, 0, 10)
-  //     // pop()
-  //     curveVertex(p4.x, p4.y)
-  //     curveVertex(p3.x, p3.y)
-      
-  //   }
-    
-  //   // curveVertex(0, 0)
-  //   // curveVertex(0, 0)
-  //   endShape(CLOSE)
-  // }
 }

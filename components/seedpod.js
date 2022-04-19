@@ -21,13 +21,13 @@ class SeedPod {
     
   }
   update(pos, angle) {
-    // Positions the seedpod at the end of the stem and
-    // makes separation between seeds
+    // Positions the seedpod at the end of the stem
     this.pos = pos
     this.angle = angle
   }
 
   grow() {
+    // makes separation between seeds
     this.seedSeparation += (this.seedSeparation < 40) ? 0.06 : 0.0
     // this.nSeeds += (floor(this.seedSeparation) % 35 == 0) ? 1 : 0
     this.updateSeedPositions()

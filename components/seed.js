@@ -48,7 +48,7 @@ class Seed {
   }
 
   showPod() {
-    // Draw a seedpod 
+    // Draw a seedpod
     push()
     translate(this.podPos.x, this.podPos.y)
     stroke(30, 240, 10);

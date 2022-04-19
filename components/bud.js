@@ -6,7 +6,6 @@ class Bud{
 
   constructor(pos, angle, budlength){
     this.pos = pos
-    // Is the following line needed???? Are the above lines needed????
     this.angle = angle
     this.finlen =  budlength;
     // The bud grows in size by incrementing blen and bwid
