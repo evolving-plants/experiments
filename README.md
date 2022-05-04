@@ -10,26 +10,31 @@ leaving other plants to produce seeds for the next generation.
 ## TODO
 ## Difficult
   - [ ] Make a slider to speed up and slow down time
+  - [ ] Consider making a global timer to regulate all growth rates??
   - [ ] Make a timer mechanism to generate new seasons without the users (for natural selection)
   - [ ] Make old plants whither away
   - [ ] Make plants bend over in wind or flood
+  - [ ] Make plants' shapes noisier
   - [ ] Become a github expert
 ## Easier
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows - improved by slowing down rate
   - [ ] SEADPOD: Seeds and seedpods stop growing if selected before final size
-  - [ ] LEAVES: Sometimes a leaf jumps out beforehand (see seed.show ????)
-  - [ ] SELECTION: Make the number of seedpods a selection variable
   - [ ] SELECTION: Make the number of seeds in the seedpods a selection variable
   - [ ] SELECTION: Make the final seed size (seediam) a selection variable
   - [ ] SELECTION: Adjust colours and make new generation inherit colours 
   - [ ] LEAVES: Randomly choose right or left side for first leaf
   - [ ] SEADPOD: draw a green line connecting the seeds and pointed end
-  - [ ] Adjust distances between stems and make multiple buds at the top of the growing stalk
-  - [ ] SEASON: do not let seeds fall before the plant is fully grown 
+  - [ ] Make internode distances stretch as the plant grows (needs to be coordinated with stalk growth) 
+  - [ ] SEASON: do not let seeds fall before the plant is fully grown (after slider is working)
+  - [ ] Add backgrounds
   - [ ] figure out the legal aspect
   - [ ] User testing - some done 
 
 ## DONE
+  - [✓] Make the leaf angles greater towards the bottom
+  - [✓] SELECTION: Make the threshold (for leaves belox, seedpods above) a selection variable
+  - [✓] SELECTION: Make the number of seedpods a selection variable
+  - [✓] LEAVES: Sometimes a leaf jumps out beforehand (YEA! I finally figured it out! - in stem: if(this.pos.y < (height - this.plant.currHeight + 5)))
   - [✓] LEAF: Make a new, improved leaf
   - [✓] fix: stems growing away from stalk
   - [✓] Add backgrounds
