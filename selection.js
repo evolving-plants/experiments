@@ -1,5 +1,5 @@
 // Change nPlants here to set the number of plants in the population
-const gen0 = new Generation(1) 
+const gen0 = new Generation(4) 
 let circles = []
 
 let newSeasonButton

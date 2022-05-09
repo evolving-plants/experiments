@@ -57,6 +57,8 @@ class Seed {
     strokeWeight(3);
     fill(30, 240, 10)
     circle(0, 0, this.r*2.2)
+
+    //Show the end of the seedpod
     let nx = .2*this.posEnd.x
     let ny = this.posEnd.y
     strokeWeight(5);

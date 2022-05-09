@@ -74,6 +74,7 @@ class SeedPod {
       pos.x -= 5 * this.dir
       //The above repositions the pod on the end of the stem
 
+      // Create a vector for the position of the pod end:
       let posEnd = createVector(sx, sy)
       
       seed.update(pos, posEnd)
