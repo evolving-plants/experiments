@@ -57,8 +57,6 @@ class SeedPod {
     // The curvature of the seedpod is determined here
     let sx = 0
     let sy = 0
-    let sx1 = 0
-    let sy1 = 0
     let sep = this.seedSeparation
     for(let i = 0; i < this.nSeeds; i++) {
       let seed = this.seeds[i]

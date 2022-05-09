@@ -14,7 +14,9 @@ class Seed {
     // The seed diameter is incremented by this.r
     this.r = 0.01
     this.dropping = false
-    // this.diam = 2
+    this.plantR = 30
+    this.plantB = 240
+    this.plantG = 10
 
     // Create the random points just above the ground to drop the seeds to
     this.dropPoint = createVector(
@@ -35,7 +37,13 @@ class Seed {
     this.posEnd = posEnd
 
     this.r += (this.r < this.seediam) ? 0.01 : 0.0
-    
+ // Turn yellow at end of growth
+ if(this.r > this.seediam*.5) {
+  this.plantR += 20
+  this.plantG -= 100
+  this.plantB -= 10
+  circle (0,0,100)
+ }
   }
 
   show() {
@@ -53,9 +61,9 @@ class Seed {
     // Draw a seedpod
     push()
     translate(this.podPos.x, this.podPos.y)
-    stroke(30, 240, 10);
+    stroke(this.plantR, this.plantG, this.plantB);
     strokeWeight(3);
-    fill(30, 240, 10)
+    fill(this.plantR, this.plantG, this.plantB)
     circle(0, 0, this.r*2.2)
 
     //Show the end of the seedpod
