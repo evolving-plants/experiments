@@ -18,23 +18,23 @@ leaving other plants to produce seeds for the next generation.
   - [ ] Become a github expert
 ## Easier
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows - improved by slowing down rate
-  - [ ] SEADPOD: Seeds and seedpods stop growing if selected before final size
-  - [ ] SELECTION: Make the number of seeds in the seedpods a selection variable
   - [ ] SELECTION: Make the final seed size (seediam) a selection variable
   - [ ] SELECTION: Adjust colours and make new generation inherit colours 
   - [ ] LEAVES: Randomly choose right or left side for first leaf
-  - [ ] SEADPOD: draw a green line connecting the seeds and pointed end
   - [ ] Make internode distances stretch as the plant grows (needs to be coordinated with stalk growth) 
   - [ ] SEASON: do not let seeds fall before the plant is fully grown (after slider is working)
+  - [ ] SEADPOD: Seeds and seedpods stop growing if selected before final size - do after slider
   - [ ] Add backgrounds
   - [ ] figure out the legal aspect
   - [ ] User testing - some done 
 
 ## DONE
+  - [✓] SELECTION: Make the number of seeds in the seedpods a selection variable
+  - [✓] SEADPOD: draw a green line connecting the seeds and pointed end
   - [✓] Make the leaf angles greater towards the bottom
   - [✓] SELECTION: Make the threshold (for leaves belox, seedpods above) a selection variable
   - [✓] SELECTION: Make the number of seedpods a selection variable
-  - [✓] LEAVES: Sometimes a leaf jumps out beforehand (YEA! I finally figured it out! - in stem: if(this.pos.y < (height - this.plant.currHeight + 5)))
+  - [✓] LEAVES: Sometimes a leaf jumps out beforehand (I finally figured out why: in stem: if(this.pos.y < (height - this.plant.currHeight + 5))) - but how to keep stems below maxHeight????
   - [✓] LEAF: Make a new, improved leaf
   - [✓] fix: stems growing away from stalk
   - [✓] Add backgrounds
