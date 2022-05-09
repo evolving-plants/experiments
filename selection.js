@@ -30,7 +30,7 @@ function setup() {
 
 function draw() {
   // back.draw()
- background(85,110,200)
+ background(110,130,240)
   // randomSeed(10)
   strokeWeight(1);
   fill(10, 240, 10)

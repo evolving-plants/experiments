@@ -50,9 +50,9 @@ class Stem {
           // Find the random different sizes of leaves on this plant 
           // leaf length was + random(-6,6) 
           abs(this.plant.genes.leafLength) + random(-8, 8),
-          abs(this.plant.genes.leafWid1) + random(-8, 8),
-          abs(this.plant.genes.leafWid2) + random(-8, 8),
-          abs(this.plant.genes.leafWid3) + random(-8, 8),
+          abs(this.plant.genes.leafWid1) + random(-8, 9),
+          abs(this.plant.genes.leafWid2) + random(-8, 9),
+          abs(this.plant.genes.leafWid3) + random(-8, 9),
           this.plant 
         ) 
       } else {

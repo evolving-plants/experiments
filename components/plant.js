@@ -37,7 +37,8 @@ class Plant {
       numLeaves: floor(random(3, 6)), // was (2,4) 
       // Set the threshold height (below thresh will be leaves, above will be seedpods)
       thresh: floor(random (100, 300)),
-      numPods: floor(random (2,6)) 
+      numPods: floor(random (2,6)),
+      numSeeds: floor(random (5,7)) 
     } 
   } 
 
@@ -46,6 +47,7 @@ class Plant {
     this.thresh = this.genes.thresh
     this.numLeaves = this.genes.numLeaves
     this.numPods = this.genes.numPods
+    this.numSeeds = this.genes.numSeeds
 
     // Create the first stem on the stalk
     this.stems.push(new Stem(this.pos.x, this.pos.y, -1, this, this.isLeaf))

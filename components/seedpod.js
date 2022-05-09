@@ -9,8 +9,11 @@ class SeedPod {
     this.dir = dir
     this.angle = this.dir * angle
       // Define the number of seeds in a seedpod (this.nSeeds)
-    this.nSeeds = 7
-      // Define the initial separation distance between seeds 
+    // this.nSeeds = 7
+    this.nSeeds = this.plant.genes.numSeeds + floor(random(-1.4,1.4))
+    if (this.nSeeds < 3) {this.nSeeds = 3}
+    if (this.nSeeds > 14) {this.nSeeds = 14}
+      // Define the initial separation distance between seeds
     this.seedSeparation = .001
     this.scale = createVector(0.5, 0.3)
     this.growing = true

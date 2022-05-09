@@ -15,8 +15,8 @@ class Seed {
     this.r = 0.01
     this.dropping = false
     this.plantR = 30
-    this.plantB = 240
-    this.plantG = 10
+    this.plantG = 240
+    this.plantB = 10
 
     // Create the random points just above the ground to drop the seeds to
     this.dropPoint = createVector(
@@ -37,13 +37,13 @@ class Seed {
     this.posEnd = posEnd
 
     this.r += (this.r < this.seediam) ? 0.01 : 0.0
- // Turn yellow at end of growth
- if(this.r > this.seediam*.5) {
-  this.plantR += 20
-  this.plantG -= 100
-  this.plantB -= 10
-  circle (0,0,100)
- }
+ 
+    // Turn pale yellow at end of growth
+    if(this.r > this.seediam*.9) {
+      this.plantR += (this.plantR < 245) ? 2 :0
+      this.plantG += (this.plantG < 240) ? 1 :0
+      this.plantB -= (this.plantB > 190) ? 3 :0
+    }
   }
 
   show() {
@@ -72,7 +72,6 @@ class Seed {
     strokeWeight(5);
       bezier(0,0,  nx*1.2,ny*.05, nx*.5,ny*.5,  nx,ny)
       bezier(0,0, -nx*1.2,ny*.05, -nx*.05,ny*.5,  nx,ny)
-      // circle(nx,ny, 3)
     pop()
   }
 

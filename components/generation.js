@@ -84,6 +84,7 @@ class Generation {
     // making new leaf length and width genes
     // Find average leaf length and widths for each parent plant, 
     // then select each new average (random from a range) for new plant
+    // Note that p5 random returns a random number from the first argument up to (but not including) the second argument 
     let avgLeafLength = 0, avgLeafWid1 = 0, avgLeafWid2 = 0, avgLeafWid3 = 0
     oldPlant.stems.forEach(stem => {
       if(stem.leaf2 != null) {
@@ -99,22 +100,23 @@ class Generation {
     avgLeafWid1 /= numLeaves
     avgLeafWid2 /= numLeaves
     avgLeafWid3 /= numLeaves
-    avgLeafLength += random(-40, 40) // originally 29
-    avgLeafWid1 += random(-26, 26)   // rest originally 23
-    avgLeafWid2 += random(-26, 26)
-    avgLeafWid3 += random(-26, 26)
+    avgLeafLength += random(-40, 41) // originally 29
+    avgLeafWid1 += random(-26, 27)   // rest originally 23
+    avgLeafWid2 += random(-26, 27)
+    avgLeafWid3 += random(-26, 27)
     if (avgLeafWid3 > avgLeafWid2*1.2) { avgLeafWid3 = avgLeafWid3*.9 }
     if (avgLeafWid3 < avgLeafWid2*1.2) { avgLeafWid3 = avgLeafWid3*1.1 }
-    // The above adjusts relations between wid2 and wid3 to prevent strange shapes
+    // The above adjusts relations between wid2 and wid3 to prevent overly strange shapes
 
      // Make new plant height genes
-     let newPlantHeight = oldPlant.genes.plantHeight + floor(random(-30, 30))
+     let newPlantHeight = oldPlant.genes.plantHeight + floor(random(-30, 31))
+     // Don't let the plant be too tall
      if (newPlantHeight < 100) {
       newPlantHeight = 100 
     }
 
      // making new numLeaves genes
-     let newNumLeaves = oldPlant.genes.numLeaves + floor(random(-2, 2))
+     let newNumLeaves = oldPlant.genes.numLeaves + floor(random(-2, 3))
      if(newNumLeaves < 2) { newNumLeaves = 2 }
      if(newNumLeaves > 16) { newNumLeaves = 16 }
 
@@ -123,12 +125,12 @@ class Generation {
     // }
 
     // Make new threshold for each plant
-    let newThresh = floor(oldPlant.genes.thresh + random(-8, 8))
+    let newThresh = floor(oldPlant.genes.thresh + random(-8, 9))
     if (newThresh < 40) {
       newThresh = 40
     }
      // Make new number of seedpods for each plant
-     let newPods = oldPlant.genes.numPods + floor(random(-2, 2))
+     let newPods = oldPlant.genes.numPods + floor(random(-2, 3))
      if (newPods < 2) {
        newPods = 2
      }
@@ -136,6 +138,14 @@ class Generation {
        newPods = 10
      }
 
+      // Make new number of seeds in each pod for each plant
+      let newSeeds = oldPlant.genes.numSeeds + floor(random(-1, 2))
+      if (newSeeds < 3) {
+        newSeeds = 3
+      }
+      if (newSeeds > 14) {
+        newSeeds = 14
+      }
     // Set new internode distances (for leaves below threshold) based on thresh and numleaves
     // let newInterNodeDist = oldPlant.genes.interNodeDist + random(-7, 7)
     // let newInterNodeDist = oldPlant.genes.thresh / newNumLeaves + random(-7, 7) 
@@ -149,7 +159,8 @@ class Generation {
       leafWid3: abs(avgLeafWid3),
       numLeaves: abs(newNumLeaves),
       thresh: newThresh,
-      numPods: newPods
+      numPods: newPods,
+      numSeeds: newSeeds
     }
     // console.log(newPlant.genes) 
   }
