@@ -1,16 +1,16 @@
 // Change nPlants here to set the number of plants in the population
-const gen0 = new Generation(4) 
+const gen0 = new Generation(1) 
 let circles = []
 
 let newSeasonButton
 let isDropping = false
 
-let back = new Back()
+// let back = new Back()
 
-function preload() {
-  back.load() 
+// function preload() {
+//   back.load() 
 
-}
+// }
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight)
@@ -18,20 +18,23 @@ function setup() {
 
   newSeasonButton = createButton('new season')
   newSeasonButton.mousePressed(() => { 
-    // Check to make sure all the seeds have fallen to the ground ????
+    // Check to make sure all the seeds have fallen to the ground ????  
 
 
     gen0.newSeason()
   })
 
   gen0.init()
-  back.init()
+  // back.init()
 }
 
 function draw() {
   // back.draw()
  background(85,110,200)
   // randomSeed(10)
+  strokeWeight(1);
+  fill(10, 240, 10)
+  // text("("+mouseX+", "+mouseY+", )", mouseX, mouseY);
 
   gen0.grow()
   circles.forEach(c => {
@@ -59,7 +62,7 @@ function mousePressed() {
       mouseY > 10 && mouseY < height-10)
     {
       // as soon as plant is selected ???? or when new season is pressed????
-    // but only if the seedpods are all fully developed   ?????
+    // but only if the seedpods are all fully developed   ??
 
       let currPlant = p.select()
       gen0.selectedPlants.push(currPlant)      

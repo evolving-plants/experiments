@@ -3,11 +3,12 @@ class Seed {
   // Makes the seed grow to a max of seediam
   // Draws a seedpod
   // Drops the seed
-  constructor(x, y, plant, seediam) {
+  constructor(x, y, plant, seediam, posEnd) {
     this.seediam = seediam
     this.plant = plant
-    // Do we need pos0 here????
-    this.pos0 = createVector(x, y)
+    // The position of a seed is pos (in pod or dropping)
+    //The seed position in the seedpod is podPos (after seed dropped)
+    this.posEnd = createVector(x, y)
     this.pos = createVector(x, y)
     this.podPos = createVector(x, y)
     // The seed diameter is incremented by this.r
@@ -15,22 +16,23 @@ class Seed {
     this.dropping = false
     // this.diam = 2
 
-    // Create the random points on the ground to drop the seeds to
-    // ????? What is height doing ????
+    // Create the random points just above the ground to drop the seeds to
     this.dropPoint = createVector(
       random(0, width),
-      height
+      height-10
     )
   }
 
-  update(pos) {
+  update(pos, posEnd) {
     if(this.dropping == true) {
       this.drop()
       this.podPos = pos
+      this.posEnd = posEnd
       return
     }
     this.pos = pos
     this.podPos = pos
+    this.posEnd = posEnd
 
     this.r += (this.r < this.seediam) ? 0.01 : 0.0
     
@@ -52,13 +54,19 @@ class Seed {
     push()
     translate(this.podPos.x, this.podPos.y)
     stroke(30, 240, 10);
-    strokeWeight(2);
+    strokeWeight(3);
     fill(30, 240, 10)
-    ellipse(0, 0, this.r*2.5, this.r*2.5)
+    circle(0, 0, this.r*2.2)
+    let nx = .2*this.posEnd.x
+    let ny = this.posEnd.y
+    strokeWeight(5);
+      bezier(0,0,  nx*1.2,ny*.05, nx*.5,ny*.5,  nx,ny)
+      bezier(0,0, -nx*1.2,ny*.05, -nx*.05,ny*.5,  nx,ny)
+      // circle(nx,ny, 3)
     pop()
   }
 
-  // Drop the seeds to a point just above the ground
+  // Drop the seeds to the point just above the ground
   drop() {
     if(this.pos.y < height-10) {
       this.pos.add(this.dropVector)

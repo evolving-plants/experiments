@@ -16,8 +16,8 @@ class Bud{
     this.bx = 0;
     this.by = 400;
     this.opening = false
-
   }
+
 // The bud is at the end of the stem, at the same angle as the stem
 // The position is updated as the stem grows
   update(pos, angle) {
@@ -38,7 +38,6 @@ class Bud{
 
   show() {
   // Draw bud
-  // Why not keep colours in separate functions????
     stroke(30, 240, 10);
     fill(30, 240, 10);
     strokeWeight(1);
@@ -61,7 +60,7 @@ class Bud{
         this.bx += .15 
       } else {
         this.bx -= .15       
-      }
+      } 
     }
   }
 }

@@ -48,7 +48,7 @@ class Cloud {
         }
       // Maybe the following is not needed? 
         if (this.pos.y < -20) {
-          console.log(this.pos.y)
+          // console.log(this.pos.y)
           this.pos.y = this.pos.y + 100
         }
       } else {

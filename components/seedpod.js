@@ -1,15 +1,16 @@
 class SeedPod {
   // Makes the seedpod, calls seed to add the seeds
   // Sets the distances between the seeds in the seedpod and the curvature of the seedpod
-  constructor(pos, dir, angle, plant) {
+  constructor(pos, dir, angle, plant, posEnd) {
     this.plant = plant
     this.seeds = []
     this.pos = pos
+    this.posEnd = posEnd
     this.dir = dir
     this.angle = this.dir * angle
       // Define the number of seeds in a seedpod (this.nSeeds)
     this.nSeeds = 7
-      // Define the initial separation distance between seeds
+      // Define the initial separation distance between seeds 
     this.seedSeparation = .001
     this.scale = createVector(0.5, 0.3)
     this.growing = true
@@ -20,14 +21,15 @@ class SeedPod {
     this.updateSeedPositions()
     
   }
-  update(pos, angle) {
+  update(pos, angle, posEnd) {
     // Positions the seedpod at the end of the stem
     this.pos = pos
+    this.posEnd = posEnd
     this.angle = angle
   }
 
   grow() {
-    // makes separation between seeds
+    // makes separation between seeds increase
     this.seedSeparation += (this.seedSeparation < 40) ? 0.06 : 0.0
     // this.nSeeds += (floor(this.seedSeparation) % 35 == 0) ? 1 : 0
     this.updateSeedPositions()
@@ -55,11 +57,13 @@ class SeedPod {
     // The curvature of the seedpod is determined here
     let sx = 0
     let sy = 0
+    let sx1 = 0
+    let sy1 = 0
     let sep = this.seedSeparation
     for(let i = 0; i < this.nSeeds; i++) {
       let seed = this.seeds[i]
       if(seed == null) {
-        seed = new Seed(0, 0, this.plant, 10)
+        seed = new Seed(0, 0, this.plant, 10, posEnd)
         this.seeds.push(seed)
       }
       sx = sx + sep * 1/(i+2) * this.dir
@@ -68,7 +72,11 @@ class SeedPod {
       pos = p5.Vector.add(this.pos, pos)
       pos.y -= 10
       pos.x -= 5 * this.dir
-      seed.update(pos)
+      //The above repositions the pod on the end of the stem
+
+      let posEnd = createVector(sx, sy)
+      
+      seed.update(pos, posEnd)
     } 
   }
 }
