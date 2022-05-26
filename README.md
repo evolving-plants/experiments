@@ -18,7 +18,6 @@ leaving other plants to produce seeds for the next generation.
   - [ ] Become a github expert
 ## Easier
   - [ ] SEADPOD: the position of the seedpod is migrating slightly as it grows - improved by slowing down rate
-  - [ ] SELECTION: Make the final seed size (seediam) a selection variable
   - [ ] SELECTION: Adjust colours and make new generation inherit colours 
   - [ ] LEAVES: Randomly choose right or left side for first leaf
   - [ ] Make internode distances stretch as the plant grows (needs to be coordinated with stalk growth) 
@@ -29,6 +28,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] User testing - some done 
 
 ## DONE
+  - [✓] SELECTION: Make the final seed size (seediam) a selection variable
   - [✓] SELECTION: Make the number of seeds in the seedpods a selection variable
   - [✓] SEADPOD: draw a green line connecting the seeds and pointed end
   - [✓] Make the leaf angles greater towards the bottom
