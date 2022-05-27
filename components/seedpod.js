@@ -11,21 +11,23 @@ class SeedPod {
       // Define the number of seeds in a seedpod (this.nSeeds)
     // this.nSeeds = 7
     this.nSeeds = this.plant.genes.numSeeds + floor(random(-1.4,1.4))
+    // Check ????? - every pod on same plant should have numSeeds +- 1 seeds
     if (this.nSeeds < 3) {this.nSeeds = 3}
     if (this.nSeeds > 14) {this.nSeeds = 14}
       // Define the initial separation distance between seeds
     this.seedSeparation = .001
+    this.seediam = this.plant.genes.seediam + random(-1,1)
     this.scale = createVector(0.5, 0.3)
     this.growing = true
 
     for(let i = 0; i < this.nSeeds; i++) {
-      this.seeds.push(new Seed(0, 0, this.plant,10))
+      this.seeds.push(new Seed(0, 0, this.plant,this.seediam))
     }
     this.updateSeedPositions()
     
   }
   update(pos, angle, posEnd) {
-    // Positions the seedpod at the end of the stem
+    // Positions the seedpod at the end of the stem  
     this.pos = pos
     this.posEnd = posEnd
     this.angle = angle
@@ -33,7 +35,7 @@ class SeedPod {
 
   grow() {
     // makes separation between seeds increase
-    this.seedSeparation += (this.seedSeparation < 40) ? 0.06 : 0.0
+    this.seedSeparation += (this.seedSeparation < this.seediam*3.8) ? 0.06 : 0.0
     // this.nSeeds += (floor(this.seedSeparation) % 35 == 0) ? 1 : 0
     this.updateSeedPositions()
 
@@ -64,7 +66,7 @@ class SeedPod {
     for(let i = 0; i < this.nSeeds; i++) {
       let seed = this.seeds[i]
       if(seed == null) {
-        seed = new Seed(0, 0, this.plant, 10, posEnd)
+        seed = new Seed(0, 0, this.plant, this.seediam, posEnd)
         this.seeds.push(seed)
       }
       sx = sx + sep * 1/(i+2) * this.dir

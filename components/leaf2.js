@@ -162,4 +162,11 @@ class Leaf2 {
       }
   pop()
 }
+whither() {
+  // Make the leaf dry up and whither away 
+  this.length -= (this.length > this.finLength*0.6) ? this.growthRate*.05 : 0.
+  this.wid1 -= (this.wid1 > this.finWid1*0.9)  ? this.growthRate*.040 : 0.
+  this.wid2 -= (this.wid2 > this.finWid2*0.8)  ? this.growthRate*.032 : 0.
+  this.wid3 -= (this.wid3 > this.finWid3*0.8)  ? this.growthRate*.030 : 0.
+}
 }

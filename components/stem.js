@@ -49,10 +49,10 @@ class Stem {
           this.angle*this.dir,
           // Find the random different sizes of leaves on this plant 
           // leaf length was + random(-6,6) 
-          abs(this.plant.genes.leafLength) + random(-8, 8),
-          abs(this.plant.genes.leafWid1) + random(-8, 9),
-          abs(this.plant.genes.leafWid2) + random(-8, 9),
-          abs(this.plant.genes.leafWid3) + random(-8, 9),
+          abs(this.plant.genes.leafLength) + random(-10, 10),
+          abs(this.plant.genes.leafWid1) + random(-8, 8),
+          abs(this.plant.genes.leafWid2) + random(-8, 8),
+          abs(this.plant.genes.leafWid3) + random(-8, 8),
           this.plant 
         ) 
       } else {
@@ -158,7 +158,9 @@ class Stem {
       push()
       translate(this.pos.x, this.pos.y)
       rotate(this.angle*this.dir)
-      line(0, 0, 0, -this.len)
+      // line(0, 0, 0, -this.len)
+      // Change the following to adjust the curvature of the stems
+        bezier(0,0, 10*this.dir,0, -16*this.dir,-8,  0, -this.len) 
       pop()
 
       if(this.leaf2 != null) {

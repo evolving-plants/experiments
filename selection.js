@@ -3,7 +3,6 @@ const gen0 = new Generation(4)
 let circles = []
 
 let newSeasonButton
-let isDropping = false
 
 // let back = new Back()
 
@@ -39,8 +38,8 @@ function draw() {
   gen0.grow()
   circles.forEach(c => {
     fill(255, 0, 0)
-    stroke(255, 0, 0)
-    circle(c.x, c.y, 20)
+    stroke(255, 0, 0) 
+    circle(c.x, c.y, 20) 
 
 
   })
@@ -62,7 +61,7 @@ function mousePressed() {
       mouseY > 10 && mouseY < height-10)
     {
       // as soon as plant is selected ???? or when new season is pressed????
-    // but only if the seedpods are all fully developed   ??
+    // or only if the seedpods are all fully developed   ??
 
       let currPlant = p.select()
       gen0.selectedPlants.push(currPlant)      

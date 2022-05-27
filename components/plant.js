@@ -25,20 +25,21 @@ class Plant {
     this.isLeaf = true
 
     this.genes = {
-      // Set the initial genes for each plant at the start of thesimulation 
+      // Set the initial genes for each plant at the start of the simulation 
       // The plant height should be at least 100 more than thresh 
       plantHeight: floor(random(500,800)),
       // Initial leaf dimensions
       leafLength: random(180, 260),
       leafWid1: random(-50, 50),
-      leafWid2: random(30, 90), 
-      leafWid3: random(30, 90),
+      leafWid2: random(50, 70), 
+      leafWid3: random(50, 70),
       // Set the number of leaves for each plant
       numLeaves: floor(random(3, 6)), // was (2,4) 
       // Set the threshold height (below thresh will be leaves, above will be seedpods)
       thresh: floor(random (100, 300)),
       numPods: floor(random (2,6)),
-      numSeeds: floor(random (5,7)) 
+      numSeeds: floor(random (5,7)),
+      seediam: random (8,12) 
     } 
   } 
 
@@ -48,6 +49,8 @@ class Plant {
     this.numLeaves = this.genes.numLeaves
     this.numPods = this.genes.numPods
     this.numSeeds = this.genes.numSeeds
+    // this.seediam = this.genes.seediam
+    // ?????? to do or not to do ?????????
 
     // Create the first stem on the stalk
     this.stems.push(new Stem(this.pos.x, this.pos.y, -1, this, this.isLeaf))
@@ -69,9 +72,11 @@ class Plant {
 
     // // Draw the stalk
     stroke(30, 240, 10);
-    strokeWeight(9);
-    fill(50, 220, 20)
-    line(this.pos.x, this.pos.y, this.pos.x, this.pos.y-this.currHeight) 
+    strokeWeight(11) // was 9
+    // fill(50, 220, 20)
+    noFill()
+    // line(this.pos.x, this.pos.y, this.pos.x, noise(this.pos.y-this.currHeight)) 
+    bezier(this.pos.x, this.pos.y,   this.pos.x*1.01, this.pos.y*.98,   this.pos.x*.99, this.pos.y-this.currHeight*0.8,    this.pos.x, this.pos.y-this.currHeight) 
    
     // Draw a little bud at the top of the growing stalk  
     let cx = this.pos.x
@@ -116,8 +121,8 @@ class Plant {
       this.inserting = (this.leafTimer % this.interLeafDist == 0)
       if(this.inserting == true) {
           // console.log('plantHeight, currHeight', this.plantHeight, this.currHeight)
-          console.log('NUMLEAVES, leafTIMER, ILD, thresh', this.numLeaves, this.leafTimer, this.interLeafDist, this.thresh)
-          console.log('numPods, IPD ', this.numPods, this.interPodDist)
+          // console.log('NUMLEAVES, leafTIMER, ILD, thresh', this.numLeaves, this.leafTimer, this.interLeafDist, this.thresh)
+          // console.log('numPods, IPD ', this.numPods, this.interPodDist)
         let last = this.stems[this.stems.length-1]
         let dir = (this.stems.length % 2 == 0) ? -1 : 1 
         // ny is the position of the stem on the stalk 
@@ -187,5 +192,4 @@ class Plant {
       }
     })
   }
-
 }
