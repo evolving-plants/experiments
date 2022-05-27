@@ -28,6 +28,7 @@ leaving other plants to produce seeds for the next generation.
   - [ ] User testing - some done 
 
 ## DONE
+  - [✓] SELECTION: Make the stems curvy
   - [✓] SELECTION: Make the final seed size (seediam) a selection variable
   - [✓] SELECTION: Make the number of seeds in the seedpods a selection variable
   - [✓] SEADPOD: draw a green line connecting the seeds and pointed end
