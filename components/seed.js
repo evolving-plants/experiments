@@ -36,6 +36,7 @@ class Seed {
     this.podPos = pos
     this.posEnd = posEnd
 
+    // Increase the seed diameter until it reaches the maximum (this.seediam)
     this.r += (this.r < this.seediam) ? 0.01 : 0.0
  
     // Turn pale yellow at end of growth
