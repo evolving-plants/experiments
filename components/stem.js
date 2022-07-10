@@ -1,4 +1,4 @@
-class Stem {
+class Stem extends Growable {
   // Makes a stem for a leaf (petiole) if isLeaf is true;
  // makes a stem for a bud that becomes a flower & seedpod, if isLeaf is false; 
   // and also directs the creation of a new leaf, bud, flower, and seedpod. 
@@ -8,9 +8,10 @@ class Stem {
   // The stems of leaves (petioles) will all have final lengths of leafstemlen
   // The angle between stem and stalk is this.angle, 
   // which begins at 0 and ends at this.maxAngleR
-  constructor(x, y, dir, plant, isLeaf, droppetals) {
+  constructor(x, y, dir, plant, hasLeaf) {
+    super(100)
       this.plant = plant
-      this.isLeaf = isLeaf
+      this.hasLeaf = hasLeaf
       // Create vectors for the initial and present position of each stem on the stalk:
       this.pos0 = createVector(x, y)
       this.pos = createVector(x, y)
@@ -23,7 +24,6 @@ class Stem {
       this.angle = 0.1
       // Set the length of leaf stems here
       this.leafstemlen = 50
-      this.growing = true
       
       // randomness of the stem growth rates, angles, &heightRate on a plant
       // this.lenr = random(0, )
@@ -41,25 +41,38 @@ class Stem {
       // console.log('this.pos0.y', height-this.pos0.y)
 
       // Decide whether to put a leaf or bud/flower/seedpod on the stem 
-      if (this.isLeaf == true) {
+      if (this.hasLeaf == true) {
       // Create a leaf
-        this.leaf2 = new Leaf2(
+        this.leaf = new Leaf2(
+          createVector(
+            this.pos.x + cos(this.angle*this.dir) * this.len, 
           this.pos.x + cos(this.angle*this.dir) * this.len, 
-          this.pos.y + sin(this.angle*this.dir) * this.len, 
+            this.pos.x + cos(this.angle*this.dir) * this.len, 
+          this.pos.x + cos(this.angle*this.dir) * this.len, 
+            this.pos.x + cos(this.angle*this.dir) * this.len, 
+            this.pos.y + sin(this.angle*this.dir) * this.len
+          ), 
           this.angle*this.dir,
           // Find the random different sizes of leaves on this plant 
           // leaf length was + random(-6,6) 
-          abs(this.plant.genes.leafLength) + random(-10, 10),
-          abs(this.plant.genes.leafWid1) + random(-8, 8),
-          abs(this.plant.genes.leafWid2) + random(-8, 8),
-          abs(this.plant.genes.leafWid3) + random(-8, 8),
+          // abs(this.plant.genes.leafLength) + random(-10, 10),
+          // abs(this.plant.genes.leafWid1) + random(-8, 8),
+          // abs(this.plant.genes.leafWid2) + random(-8, 8),
+          // abs(this.plant.genes.leafWid3) + random(-8, 8),
+          100, 
+          30, 
+          30, 
+          30,
+          // 0, 0, 0, 0,
           this.plant 
         ) 
+        this.children.push(this.leaf)
       } else {
         // Create a bud/flower/seedpod
-        this.seedpod = new SeedPod(this.pos, this.dir, this.angle, this.plant, this.posEnd)
-        this.bud = new Bud(this.pos, this.angle*this.dir, 8)
-        this.flower = new Flower(this.pos, this.angle*this.dir)
+        // this.seedpod = new SeedPod(this.pos.x, this.pos.y, this.dir, this.angle, this.plant, this.posEnd)
+        this.bud = new Bud(this.pos.x, this.pos.y, this.angle*this.dir, 8, this.plant)
+        // this.flower = new Flower(this.pos.x, this.pos.y, this.angle*this.dir)
+        this.children.push(this.bud)
       }
     }
     
@@ -77,34 +90,48 @@ class Stem {
       // }
       // this.len += (this.len < finalstemlength) ? 10*this.growthRate : 0.0 
 
-      if(this.leaf2 != null) {
+      this.growMe()
+      if(this.leaf != null) {
         // The final stem length for all leaves is set here 
-        if(this.len < this.leafstemlen) {
-          this.len += 10*this.growthRate
-        } else {
-          this.growing = false 
+        this.maxAngleR = 5 + this.pos0.y*.05
+
+        if(this.time > this.timer.bp) {
+          this.growChildren()
+        } 
+        else {
+          this.len += this.timer.inc
+          // this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.growthRate : 0.0
+          this.angle += this.timer.inc/2
         }
-        // The stem length of buds is increased until a maximum that depends on theheight on the stalk (increase 0 & decrease 0.2 for more uniformity) 
+
+
       } else {
-        if(this.len < 0 + this.pos.y*0.2) {
-          this.len += 10*this.growthRate
-        } else {
-          this.growing = false
+        // The stem length of buds is increased until a maximum that depends on theheight on the stalk (increase 0 & decrease 0.2 for more uniformity) 
+        
+        if(this.time > this.timer.bp) {
+          this.growChildren()
+        } 
+        else {
+          // this.len += 10*this.growthRate
+          this.len += this.timer.inc
+          this.angle += this.timer.inc/2
+          // this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.growthRate : 0.0
+
         }
+        
+        // if(this.len < 0 + this.pos.y*0.2) {
+        // }
       }
 
-      // Increase the stem angles until maximum 
-      if(this.isLeaf == true) {
-        this.maxAngleR = 5 + this.pos0.y*.05
-      }
-      this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.growthRate : 0.0
+   
 
       // Increase the position of stem on stalk until maximum 
-      if(this.isLeaf == true) {
-        this.maxStretch = floor(((this.plant.genes.thresh - (this.plant.genes.thresh*.3))/(this.plant.genes.numLeaves-1))*.3)
+      if(this.hasLeaf == true) {
+        // this.maxStretch = floor(((this.plant.genes.thresh - (this.plant.genes.thresh*.3))/(this.plant.genes.numLeaves-1))*.3)
+        this.maxStretch = floor(0)
       } else {
-        this.maxStretch =  floor(((this.plant.genes.plantHeight - this.plant.genes.thresh - (this.plant.genes.thresh*.2)) / this.plant.genes.numPods)/5)
-        // this.maxStretch = 0
+        // this.maxStretch =  floor(((this.plant.genes.plantHeight - this.plant.genes.thresh - (this.plant.genes.thresh*.2)) / this.plant.genes.numPods)/5)
+        this.maxStretch = 0
       } 
     
       if(abs(this.pos0.y-this.pos.y) < this.maxStretch) {
@@ -126,31 +153,35 @@ class Stem {
       let angle = this.angle*this.dir
   
       // Update leaf
-      if(this.leaf2 != null) {
-        this.leaf2.update(end, angle)
-        this.leaf2.grow()
+      if(this.leaf != null) {
+        this.leaf.update(end, angle)
+        this.leaf.grow()
       } else {
       // Update bud, flower, seedpod
-        this.seedpod.update(end, angle)
+        // this.seedpod.update(end, angle)
         this.bud.update(end, angle)      
-        this.flower.update(end, angle)
+        // this.flower.update(end, angle)
+
+        this.bud.grow()
+        // this.flower.grow()
+        // this.seedpod.grow()
   
-        // Direct opening of bud, dropping of flower
-        if(this.bud.opening == true) {
-          this.seedpod.grow()
-          if(this.seedpod.growing == true) {
-            this.flower.grow()
-          } else {
-            this.flower.dropping = true
-          }
-          this.bud.open()
-        } else {
-          this.bud.grow()
-        }
+        // // Direct opening of bud, dropping of flower
+        // if(this.bud.opening == true) {
+        //   this.seedpod.grow()
+        //   if(this.seedpod.growing == true) {
+        //     this.flower.grow()
+        //   } else {
+        //     this.flower.dropping = true
+        //   }
+        //   // this.bud.open()
+        // } else {
+        //   // this.bud.grow()
+        // }
       }
     } 
     
-    show() {
+    draw() {
       // Draw the stem 
       stroke(30, 240, 10);
       strokeWeight(5);
@@ -163,24 +194,26 @@ class Stem {
         bezier(0,0, 10*this.dir,0, -16*this.dir,-8,  0, -this.len) 
       pop()
 
-      if(this.leaf2 != null) {
-        this.showLeaf2()
+      if(this.leaf != null) {
+        this.drawLeaf()
       }
       else {
-        this.showPod()
+        this.drawPod()
       }
     }
   
-    showPod() {
-      if(this.bud.opening == true) {
-        this.flower.showBack()
-      }
-      this.seedpod.show()
-      this.flower.showFront()
-      this.bud.show()
+    drawPod() {
+      // if(this.bud.opening == true) {
+      //   this.flower.showBack()
+      // }
+      // this.seedpod.show()
+      // this.flower.showFront()
+      // this.flower.draw()
+      this.bud.draw()
+      // this.seedpod.draw()
     }
   
-    showLeaf2() {
-      this.leaf2.show()
+    drawLeaf() {
+      this.leaf.draw()
     }
   }  

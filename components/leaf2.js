@@ -1,7 +1,8 @@
-class Leaf2 {
-  constructor(x, y, angle, finLength, fWid1, fWid2, fWid3, plant) {
-    this.plant
-    this.pos = createVector(x, y)
+class Leaf2 extends Growable {
+  constructor(pos, angle, finLength, fWid1, fWid2, fWid3, plant) {
+    super(finLength)
+    this.plant = plant
+    this.pos = pos
     this.angle = angle
     this.length = 10
     this.wid1 = fWid1/10
@@ -16,6 +17,11 @@ class Leaf2 {
     this.rib1 = 2
     this.rib2 = 4
     this.rib3 = 6 
+
+    this.diff1 = this.finLength-this.length
+    this.diff2 = this.finWid1-this.wid1
+    this.diff3 = this.finWid2-this.wid2
+    this.diff4 = this.finWid3-this.wid3
   }
 
   update(pos, angle) {
@@ -24,14 +30,38 @@ class Leaf2 {
   }
 
   grow() {
-    // Adjust the growth rate of the leaves here 
-    this.length += (this.length < this.finLength) ? this.growthRate*.03 : 0.
-    this.wid1 += (this.wid1 < this.finWid1)  ? this.growthRate*.035 : 0.
-    this.wid2 += (this.wid2 < this.finWid2)  ? this.growthRate*.032 : 0.
-    this.wid3 += (this.wid3 < this.finWid3)  ? this.growthRate*.030 : 0.
+    this.growMe()
+
+    if(this.time > this.timer.bp) {
+      this.growChildren()
+    }
+    else {
+      // Adjust the growth rate of the leaves here 
+      // this.length += this.diff1/this.timer.bp
+      
+      // this.wid1 += this.diff2/abs(this.timer.bp-50)
+      // this.wid2 += this.diff3/abs(this.timer.bp-50)
+      // this.wid3 += this.diff4/abs(this.timer.bp-10)
+
+      this.length += (this.length < this.finLength) ? this.growthRate*.03 * this.timer.inc : 0.
+      this.wid1 += (this.wid1 < this.finWid1)  ? this.growthRate*.035     * this.timer.inc : 0.
+      this.wid2 += (this.wid2 < this.finWid2)  ? this.growthRate*.032     * this.timer.inc : 0.
+      this.wid3 += (this.wid3 < this.finWid3)  ? this.growthRate*.030     * this.timer.inc : 0.
+
+    }
+
+    if(this.time == this.timer.bp) {
+      console.log("leaf growing end: params")
+      console.log(this.length) // 100
+      console.log(this.wid1) // 30.3
+      console.log(this.wid2) // 30.3
+      console.log(this.wid3) // 30.3
+
+    }
+    
   }
 
-  show() {
+  draw() {
     stroke(30, 240, 10);
     strokeWeight(2);
     fill(50, 200, 20)

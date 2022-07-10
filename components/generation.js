@@ -1,6 +1,7 @@
-class Generation {
+class Generation extends Growable {
   // Makes population of plants - tells plant to drop seeds
   constructor(nPlants = 3) {
+    super(0)
     this.nPlants = nPlants
     this.plants = []
     this.selectedPlants = []
@@ -16,10 +17,13 @@ class Generation {
       let newPlant = new Plant(xpos, height)
       newPlant.init() 
       this.plants.push(newPlant)
+      this.children.push(newPlant)
     }
   }
 
   grow() {
+    this.growChildren()
+
     // Directs the growing and dropping of seeds of each plant
     for(let i = 0; i < this.plants.length; i++) {
       let p = this.plants[i]
@@ -27,7 +31,7 @@ class Generation {
       if(p.selected == true) {
         p.dropSeeds()
       }
-      p.show() 
+      p.draw() 
     }
   }
   

@@ -1,5 +1,8 @@
+
+let globalTime = 0
+
 // Change nPlants here to set the number of plants in the population
-const gen0 = new Generation(4) 
+const gen0 = new Generation(1) 
 let circles = []
 
 let newSeasonButton
@@ -28,6 +31,9 @@ function setup() {
 }
 
 function draw() {
+  
+  gen0.setSpeed(1)
+  
   // back.draw()
  background(110,130,240)
   // randomSeed(10)
