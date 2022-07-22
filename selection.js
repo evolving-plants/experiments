@@ -42,6 +42,7 @@ function draw() {
   // text("("+mouseX+", "+mouseY+", )", mouseX, mouseY);
 
   gen0.grow()
+  gen0.draw()
   circles.forEach(c => {
     fill(255, 0, 0)
     stroke(255, 0, 0) 

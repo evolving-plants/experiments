@@ -37,10 +37,9 @@ class SeedPod extends Growable {
   }
 
   grow() {  
-    this.growMe()
     this.growChildren()
 
-    if(this.time > 550) {
+    if(this.time > 550){  // 550
     }
     else {
       // makes separation between seeds increase
@@ -83,10 +82,6 @@ class SeedPod extends Growable {
     let sep = this.seedSeparation
     for(let i = 0; i < this.nSeeds; i++) {
       let seed = this.seeds[i]
-      // if(seed == null) {
-      //   seed = new Seed(0, 0, this.plant, this.seediam, posEnd)
-      //   this.seeds.push(seed)
-      // }
       sx = sx + sep * 1/(i+2) * this.dir
       sy = sy - sep *(0.5 - 1/(i+2)) 
       let pos = createVector(sx, sy)
@@ -100,7 +95,7 @@ class SeedPod extends Growable {
       let posEnd = createVector(sx, sy)
       
       seed.update(pos, posEnd)
-      seed.grow()
+      // seed.grow()
     } 
   }
 }

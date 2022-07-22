@@ -55,14 +55,14 @@ class Stem extends Growable {
           this.angle*this.dir,
           // Find the random different sizes of leaves on this plant 
           // leaf length was + random(-6,6) 
-          // abs(this.plant.genes.leafLength) + random(-10, 10),
-          // abs(this.plant.genes.leafWid1) + random(-8, 8),
-          // abs(this.plant.genes.leafWid2) + random(-8, 8),
-          // abs(this.plant.genes.leafWid3) + random(-8, 8),
-          100, 
-          30, 
-          30, 
-          30,
+          abs(this.plant.genes.leafLength) + random(-10, 10),
+          abs(this.plant.genes.leafWid1) + random(-8, 8),
+          abs(this.plant.genes.leafWid2) + random(-8, 8),
+          abs(this.plant.genes.leafWid3) + random(-8, 8),
+          // 100, 
+          // 30, 
+          // 30, 
+          // 30,
           // 0, 0, 0, 0,
           this.plant 
         ) 
@@ -77,20 +77,10 @@ class Stem extends Growable {
     }
     
     grow() {
-      // circle(this.pos0.x, this.pos0.y, 20)
-      // line(10, height - this.plant.genes.thresh, 1000,height - this.plant.genes.thresh)
-      // line(10, height - this.plant.genes.plantHeight, 1000,height - this.plant.genes.plantHeight)
     // The stem keeps growing until it reaches final stem length 
     // Leaves will all have the same final stem length(leafstemlen)
     // Buds, flowers, seedpods will have shorter lengths towards the top of the stem
-      // let finalstemlength = this.pos.y*.15
-      // if (this.numstem <= 4) {
-      //   this.numstem += 1
-      //   finalstemlength = this.leafstemlen 
-      // }
-      // this.len += (this.len < finalstemlength) ? 10*this.growthRate : 0.0 
-
-      this.growMe()
+   
       if(this.leaf != null) {
         // The final stem length for all leaves is set here 
         this.maxAngleR = 5 + this.pos0.y*.05
@@ -123,8 +113,6 @@ class Stem extends Growable {
         // }
       }
 
-   
-
       // Increase the position of stem on stalk until maximum 
       if(this.hasLeaf == true) {
         // this.maxStretch = floor(((this.plant.genes.thresh - (this.plant.genes.thresh*.3))/(this.plant.genes.numLeaves-1))*.3)
@@ -152,33 +140,8 @@ class Stem extends Growable {
       )
       let angle = this.angle*this.dir
   
-      // Update leaf
-      if(this.leaf != null) {
-        this.leaf.update(end, angle)
-        this.leaf.grow()
-      } else {
-      // Update bud, flower, seedpod
-        // this.seedpod.update(end, angle)
-        this.bud.update(end, angle)      
-        // this.flower.update(end, angle)
+      this.children.forEach(child => child.update(end, angle))
 
-        this.bud.grow()
-        // this.flower.grow()
-        // this.seedpod.grow()
-  
-        // // Direct opening of bud, dropping of flower
-        // if(this.bud.opening == true) {
-        //   this.seedpod.grow()
-        //   if(this.seedpod.growing == true) {
-        //     this.flower.grow()
-        //   } else {
-        //     this.flower.dropping = true
-        //   }
-        //   // this.bud.open()
-        // } else {
-        //   // this.bud.grow()
-        // }
-      }
     } 
     
     draw() {
@@ -203,14 +166,7 @@ class Stem extends Growable {
     }
   
     drawPod() {
-      // if(this.bud.opening == true) {
-      //   this.flower.showBack()
-      // }
-      // this.seedpod.show()
-      // this.flower.showFront()
-      // this.flower.draw()
       this.bud.draw()
-      // this.seedpod.draw()
     }
   
     drawLeaf() {

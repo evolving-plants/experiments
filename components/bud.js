@@ -14,20 +14,12 @@ class Bud extends Growable {
     // When this.bx = 0, the bud does not open
     this.bx = 0;
 
-    this.seedpod = new SeedPod(
-      this.pos.x,
-      this.pos.y, 
-      this.angle < 0 ? -1 : 1,
-      abs(this.angle),
-      this.plant,
-      this.pos
-    )
     this.flower = new Flower(
       this.pos.x, 
       this.pos.y,
       this.angle
     )
-    this.children.push(this.seedpod, this.flower)
+    this.children.push(this.flower)
   }
 
 // The bud is at the end of the stem, at the same angle as the stem
@@ -36,12 +28,10 @@ class Bud extends Growable {
     this.pos = pos
     this.angle = angle
 
-    this.seedpod.update(pos, angle)
     this.flower.update(pos, angle)
   }
 
   grow() {
-    this.growMe()
     // Check if the bud has reached its final length so it will then open
     
     if(this.time > 150) {
@@ -60,18 +50,16 @@ class Bud extends Growable {
       console.log(this.blen) // -3.8268343236508966 
       console.log(this.bx) // 4.5
     }
-
-    this.seedpod.grow()
-    this.flower.grow() 
+  
   }
 
   draw() {
 
     if(this.time > 90) {
-      this.flower.drawBack()
-      this.seedpod.draw()
-      this.flower.drawFront()
-
+      // this.flower.drawBack()
+      // this.seedpod.draw()
+      // this.flower.drawFront()
+      this.flower.draw()
     }
 
     

@@ -11,7 +11,11 @@ class Growable {
   }
 
   growChildren() {
-    this.children.forEach(child => child.timer.count())
+    this.children.forEach(child => {
+      child.timer.count()
+      child.growMe()
+      child.grow()
+    })
   }
 
   setSpeed(speed) {

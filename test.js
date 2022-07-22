@@ -13,22 +13,22 @@ function setup() {
   //   null
   // )
 
-  // part = new SeedPod(
+  part = new SeedPod(
+    width/2,
+    height/2,
+    -1,
+     
+
+  )
+
+
+  // part = new Stem(
   //   width/2,
   //   height/2,
   //   1,
-  //   0, 
-  //   null
+  //   null,
+  //   true
   // )
-
-
-  part = new Stem(
-    width/2,
-    height/2,
-    1,
-    null,
-    true
-  )
 }
 
 function draw() {

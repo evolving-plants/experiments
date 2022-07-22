@@ -25,6 +25,9 @@ class Plant extends Growable {
     // If isLeaf is true, a leaf will be put on the stem, otherwise a bud/flower/seed  
     this.isLeaf = true
 
+
+    this.count = 1
+
     this.genes = {
       // Set the initial genes for each plant at the start of the simulation 
       // The plant height should be at least 100 more than thresh 
@@ -42,6 +45,8 @@ class Plant extends Growable {
       numSeeds: floor(random (5,7)),
       seediam: random (8,12) 
     }    
+
+    this.init()
   } 
 
   init() {
@@ -98,6 +103,10 @@ class Plant extends Growable {
   }
 
   draw() {
+    fill('red')
+    circle(this.pos.x, height-this.thresh, 20)
+
+
     // Draw a circle to show that the plant is selected 
     if(this.selected) {
       stroke('red')
@@ -129,15 +138,21 @@ class Plant extends Growable {
   }
 
   grow() {
-    this.growMe()
-
+  
     if (this.time <= this.plantHeight) {
+      // console.log("count :", this.count)
+
       // this.currHeight += this.heightR*this.growthRate * this.timer.inc 
       this.currHeight += 1 * this.timer.inc 
 
       if(
         this.leafPositionsIndex < this.leafPositions.length && 
-        this.time % this.leafPositions[this.leafPositionsIndex] == 0) {
+        this.time >= this.leafPositions[this.leafPositionsIndex] - this.timer.inc &&
+        this.time <= this.leafPositions[this.leafPositionsIndex] + this.timer.inc) {
+          
+          this.count += 1
+          console.log("time : ", this.time)
+          console.log("count :", this.count)
         
         const dir = Math.random() < 0.5 ? 1 : -1
         let leaf = new Stem(this.pos.x, height-this.currHeight, dir, this, true)
@@ -150,7 +165,12 @@ class Plant extends Growable {
 
       if(
         this.podPositionsIndex < this.podPositions.length && 
-        this.time % this.podPositions[this.podPositionsIndex] == 0) {
+        this.time >= this.podPositions[this.podPositionsIndex] - this.timer.inc &&
+        this.time <= this.podPositions[this.podPositionsIndex] + this.timer.inc) {
+
+          this.count += 1
+          console.log("time : ", this.time)
+          console.log("count :", this.count)
 
         const dir = Math.random() < 0.5 ? 1 : -1
         let pod = new Stem(this.pos.x, height-this.currHeight, dir, this, false)
@@ -164,10 +184,7 @@ class Plant extends Growable {
     }
 
     // Make the stems grow in length and angle
-    this.growChildren()
-    this.stems.forEach(stem => stem.grow())
-
-    
+    this.growChildren()  
 
 
     // Set internode distance for leaf stems (below the threshold) 

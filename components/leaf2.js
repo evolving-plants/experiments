@@ -30,8 +30,7 @@ class Leaf2 extends Growable {
   }
 
   grow() {
-    this.growMe()
-
+    
     if(this.time > this.timer.bp) {
       this.growChildren()
     }

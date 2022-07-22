@@ -9,6 +9,16 @@ class Flower extends Growable {
     this.dropping = false
     // Adjust the direction and speed of petal dropping here
     this.dropVector = createVector(random(0, 20), random(0, 20))
+
+    this.seedpod = new SeedPod(
+      this.pos.x,
+      this.pos.y, 
+      this.angle < 0 ? -1 : 1,
+      abs(this.angle),
+      this.plant,
+      this.pos
+    )
+    this.children = [this.seedpod]
   }
 
   update(pos, angle) {
@@ -20,13 +30,15 @@ class Flower extends Growable {
       this.wincrement -= this.wincrement < 0.3 ? 0.0 : 0.5;
       this.drop()
     }
+
+    this.seedpod.update(this.pos, this.angle)
   }
 
   grow() {
-    this.growMe()
-
+   
     if(this.time > 50) {
       this.growChildren()
+
     }
     else if(this.time > 0){
       this.lincrement += 1 * this.timer.inc
@@ -42,13 +54,14 @@ class Flower extends Growable {
     // Grow flower
     // if(this.lincrement < 50) {
     // } 
+
   }
 
-  // draw() {
-  //   this.drawBack()
-  //   this.drawStamen()
-  //   this.drawFront()
-  // }
+  draw() {
+    this.drawBack()
+    this.seedpod.draw()
+    this.drawFront()
+  }
 
   drawBack() {
     // Draw back flower petals

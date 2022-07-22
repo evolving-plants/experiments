@@ -39,7 +39,6 @@ class Seed extends Growable {
   }
 
   grow() {
-    this.growMe()
 
     if(this.time > 550) {
       this.growChildren()

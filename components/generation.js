@@ -15,7 +15,6 @@ class Generation extends Growable {
       xpos = xpos + random(-sep/2, sep/2)
       // let xpos = (width*(i+1)/this.nPlants - width/6) + random(-20, 20)
       let newPlant = new Plant(xpos, height)
-      newPlant.init() 
       this.plants.push(newPlant)
       this.children.push(newPlant)
     }
@@ -27,12 +26,14 @@ class Generation extends Growable {
     // Directs the growing and dropping of seeds of each plant
     for(let i = 0; i < this.plants.length; i++) {
       let p = this.plants[i]
-      p.grow()
       if(p.selected == true) {
         p.dropSeeds()
       }
-      p.draw() 
     }
+  }
+
+  draw() {
+    this.children.forEach(child => child.draw())
   }
   
 
