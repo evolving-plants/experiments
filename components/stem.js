@@ -81,13 +81,14 @@ class Stem extends Growable {
     // Leaves will all have the same final stem length(leafstemlen)
     // Buds, flowers, seedpods will have shorter lengths towards the top of the stem
    
+    // console.log(this.time)
       if(this.leaf != null) {
         // The final stem length for all leaves is set here 
         this.maxAngleR = 5 + this.pos0.y*.05
 
         if(this.time > this.timer.bp) {
           this.growChildren()
-        } 
+        }  
         else {
           this.len += this.timer.inc
           // this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.growthRate : 0.0

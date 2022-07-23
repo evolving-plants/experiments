@@ -22,25 +22,25 @@ class Cloud {
       
       // It's time to become cloudier
       if (this.timer == 1) {
-        moreclouds = true 
+        this.moreclouds = true 
       }
       // It's time to become overcast
       if (this.timer == 2) {
-        overcome = true 
+        this.overcome = true 
       }
       // Decrease the rain
       if (this.timer == 4) {
-        lessrain = true
+        this.lessrain = true
       }
       // Its time to stop raining and stop being overcast
       // and have less clouds
       if (this.timer == 5) {
-        moreclouds = false 
-        clearing = true
-        raining = false
+        this.moreclouds = false 
+        this.clearing = true
+        this.raining = false
       }
       // There is some displacement when the cloud re-enters
-      if (clearing == false) {
+      if (this.clearing == false) {
         this.pos.x = this.pos.x - 750 - this.disp
         this.pos.y = this.pos.y + 100
         if (this.pos.y > 150) {

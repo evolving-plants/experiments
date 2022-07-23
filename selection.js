@@ -2,17 +2,13 @@
 let globalTime = 0
 
 // Change nPlants here to set the number of plants in the population
-const gen0 = new Generation(1) 
+const gen0 = new Generation(4) 
 let circles = []
 
 let newSeasonButton
 
-// let back = new Back()
+let back = new Back()
 
-// function preload() {
-//   back.load() 
-
-// }
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight)
@@ -32,10 +28,17 @@ function setup() {
 
 function draw() {
   
-  gen0.setSpeed(1)
-  
+  gen0.setSpeed(200)
+
   // back.draw()
- background(110,130,240)
+  
+  // if(frameCount % 100 == 0) {
+  //   back.draw()
+  // } 
+  // else {
+    background(110,130,240)
+  // }
+
   // randomSeed(10)
   strokeWeight(1);
   fill(10, 240, 10)
