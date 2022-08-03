@@ -10,6 +10,9 @@ class Plant extends Growable {
       // Count the height of the growing plant with this.currHeight
     this.currHeight = 0
       // Create the stems array for making new stems 
+
+    this.allChildren = []
+
     this.stems = []
     this.selected = false
     this.growing = true
@@ -103,8 +106,8 @@ class Plant extends Growable {
   }
 
   draw() {
-    fill('red')
-    circle(this.pos.x, height-this.thresh, 20)
+    // fill('red')
+    // circle(this.pos.x, height-this.thresh, 20)
 
 
     // Draw a circle to show that the plant is selected 
@@ -181,7 +184,7 @@ class Plant extends Growable {
         this.podPositionsIndex += 1
 
       }
-    }
+    } 
 
     // Make the stems grow in length and angle
     this.growChildren()  
@@ -197,26 +200,9 @@ class Plant extends Growable {
 
     
   }
-  // for(let countSt = 1; countSt<this.numLeaves+this.numPods; countSt++) {
-  //   if (this.stems.length < this.numLeaves + this.numPods) {
-  //     // Add a stem for each leaf or bud/flower/seedpod 
-  //     console.log('countSt',  countSt)
-  //     let ny = height - this.pos0[countSt]
-  //     console.log('ny', ny)
-  //     console.log('currHeight, countSt, pos0[countSt]', this.currHeight, countSt, this.pos0[countSt])
-  //     if (this.currHeight > this.pos0[countSt]) {
-  //       if (countSt > this.numLeaves) {
-  //         this.isLeaf = false
-  //     }
-  //     let dir = (this.stems.length % 2 == 0) ? -1 : 1
-  //       this.stems.push(new Stem(this.pos.x, ny, dir, this, this.isLeaf)) 
-  //       console.log('STEMIES', this.stems)
-  //     }
-  //   }
-  // }
 
   select() {
-    if(this.growing == true) return
+    if(this.time <= this.plantHeight) return
     this.selected = true
     return this
   }
@@ -235,49 +221,3 @@ class Plant extends Growable {
     })
   }
 }
-
-// Add a leaf stem at the correct position on the stalk, until numleaves have been added 
-    // 
-// if (this.stems.length < this.numLeaves) {
-  // // if(this.currHeight < this.thresh) { // doesn't work.
-  //   // If timer is a multiple of interLeafDist (an integer) then this.inserting will be true, so a leaf stem should be added. 
-  //   this.inserting = (this.interLeafDist % this.leafTimer == 0)
-  //   if(this.inserting == true) {
-  //       // console.log('plantHeight, currHeight', this.plantHeight, this.currHeight)
-  //       // console.log('NUMLEAVES, leafTIMER, ILD, thresh', this.numLeaves, this.leafTimer, this.interLeafDist, this.thresh)
-  //       // console.log('numPods, IPD ', this.numPods, this.interPodDist)
-  //     let last = this.stems[this.stems.length-1]
-  //     let dir = (this.stems.length % 2 == 0) ? -1 : 1 
-  //     // ny is the position of the stem on the stalk 
-  //     let ny = last.pos.y - this.interLeafDist
-  //     const stem = new Stem(this.pos.x, ny, dir, this, this.isLeaf)
-  //     this.stems.push(stem)
-  //     this.children.push(stem) 
-  //       // console.log('ny =', ny)
-  //       // console.log("leaf this.stems", this.stems)
-  //       // console.log("LEAFTIMER ", this.leafTimer)
-  //     // The above adds a new stem to the end of the stem array
-  //   }
-
-  // } else {
-  //   // Adding stems (of buds,seedpods) above the threshold 
-  //   if((this.currHeight) >= this.thresh && this.stems.length < (this.numLeaves + this.numPods)) {
-  //   this.isLeaf = false
-  //   this.inserting = (this.podTimer % this.interPodDist == 0)
-  //   if(this.inserting == true) {
-  //     // console.log("PODTIMER ", this.podTimer)
-  //     let last = this.stems[this.stems.length-1]
-  //     let dir = (this.stems.length % 2 == 0) ? -1 : 1
-  //     let ny = last.pos.y - (this.interPodDist)
-  //     if (this.stems.length == this.numLeaves) {
-  //       ny = height - this.thresh
-  //     }
-  //     // Start growing below to allow for increasing bud stem positionon the stalk
-  //     // ny = ny - this.interPodDist
-  //     const stem = new Stem(this.pos.x, ny, dir, this, this.isLeaf)
-  //     this.stems.push(stem)
-  //     this.children.push(stem) 
-  //     // console.log("BUDS this.stems ", this.stems)
-  //   }
-  //   }
-  // }

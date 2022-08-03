@@ -5,6 +5,7 @@ class Generation extends Growable {
     this.nPlants = nPlants
     this.plants = []
     this.selectedPlants = []
+    this.droppedSeeds = []
   }
 
   init() {
@@ -38,15 +39,11 @@ class Generation extends Growable {
   
 
   newSeason() {
-    let droppedSeeds = []
-    let selectedPlants = this.plants.filter(plant => plant.selected == true)
+    let selectedPlants = this.plants.filter(plant => plant.selected === true)
     if(selectedPlants.length == 0) selectedPlants = this.plants
     selectedPlants.forEach(plant => {
-      plant.stems.forEach(stem => {
-        if(stem.seedpod != null) {
-          stem.seedpod.seeds.forEach(seed => droppedSeeds.push(seed))
-        }
-      })
+      let seeds = plant.allChildren.filter(child => child instanceof Seed)
+      this.droppedSeeds.push(...seeds)
     })
 
     // make new season
@@ -63,11 +60,12 @@ class Generation extends Growable {
     }
 
     this.newSeasonPlants.forEach(newPlant => {
-      this.setPositionNewPlant(droppedSeeds, newPlant)
+      this.setPositionNewPlant(this.droppedSeeds, newPlant)
     })
 
     this.plants = this.newSeasonPlants
-    this.plants.forEach(plant => plant.init())
+    this.children = this.newSeasonPlants
+   
 
   }
 
@@ -79,7 +77,7 @@ class Generation extends Growable {
     })
     let seed = droppedSeeds[0]
     let plant = seed.plant
-    newPlant.pos = seed.dropPoint
+    newPlant.pos = createVector(seed.dropPoint.x, height)
     this.setGenes(plant, newPlant)
   }
 
@@ -92,15 +90,15 @@ class Generation extends Growable {
     // Note that p5 random(1,1) returns a random number from -1 up to (but not including) 1, so floor(random(-1,1)) will almost always be 0 (but, rarely, -1) 
     let avgLeafLength = 0, avgLeafWid1 = 0, avgLeafWid2 = 0, avgLeafWid3 = 0
     oldPlant.stems.forEach(stem => {
-      if(stem.leaf2 != null) {
-        avgLeafLength += stem.leaf2.finLength
+      if(stem.leaf != null) {
+        avgLeafLength += stem.leaf.finLength
         // avgLeafWidth += stem.leaf.finWidth
-        avgLeafWid1 += stem.leaf2.finWid1
-        avgLeafWid2 += stem.leaf2.finWid2
-        avgLeafWid3 += stem.leaf2.finWid3
+        avgLeafWid1 += stem.leaf.finWid1
+        avgLeafWid2 += stem.leaf.finWid2
+        avgLeafWid3 += stem.leaf.finWid3
       }
     })
-    const numLeaves = oldPlant.stems.filter(stem => stem.leaf2 != null).length
+    const numLeaves = oldPlant.stems.filter(stem => stem.leaf != null).length
     avgLeafLength /= numLeaves
     avgLeafWid1 /= numLeaves
     avgLeafWid2 /= numLeaves

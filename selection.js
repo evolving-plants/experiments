@@ -2,7 +2,7 @@
 let globalTime = 0
 
 // Change nPlants here to set the number of plants in the population
-const gen0 = new Generation(4) 
+const gen0 = new Generation(1) 
 let circles = []
 
 let newSeasonButton
@@ -15,12 +15,7 @@ function setup() {
   angleMode(DEGREES)
 
   newSeasonButton = createButton('new season')
-  newSeasonButton.mousePressed(() => { 
-    // Check to make sure all the seeds have fallen to the ground ????  
-
-
-    gen0.newSeason()
-  })
+  newSeasonButton.mousePressed(() => gen0.newSeason())
 
   gen0.init()
   // back.init()
@@ -28,7 +23,7 @@ function setup() {
 
 function draw() {
   
-  gen0.setSpeed(200)
+  gen0.setSpeed(10)
 
   // back.draw()
   

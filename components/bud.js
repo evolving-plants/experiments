@@ -9,7 +9,7 @@ class Bud extends Growable {
     this.pos = createVector(x, y)
     this.angle = angle
     this.length = budlength
-    this.plant
+    this.plant = plant
     // The bud opens by incrementing bx & blen, moving the tip in a semicircle
     // When this.bx = 0, the bud does not open
     this.bx = 0;
@@ -17,9 +17,11 @@ class Bud extends Growable {
     this.flower = new Flower(
       this.pos.x, 
       this.pos.y,
-      this.angle
+      this.angle,
+      this.plant
     )
     this.children.push(this.flower)
+    this.plant.allChildren.push(this.flower)
   }
 
 // The bud is at the end of the stem, at the same angle as the stem

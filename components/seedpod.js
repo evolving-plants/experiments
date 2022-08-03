@@ -19,13 +19,17 @@ class SeedPod extends Growable {
     this.seedSeparation = .001
     // this.seediam = this.plant.genes.seediam + random(-1,1)
     this.seediam = 5
-    this.scale = createVector(0.5, 0.3)
-    this.growing = true  // NOTE: needs to be false
+
+
+    this.plantR = 30
+    this.plantG = 240
+    this.plantB = 10
 
     for(let i = 0; i < this.nSeeds; i++) {
       const seed = new Seed(0, 0, this.plant,this.seediam)
       this.seeds.push(seed)
       this.children.push(seed)
+      this.plant.allChildren.push(seed)
     }
     this.updateSeedPositions()
   }
@@ -54,25 +58,52 @@ class SeedPod extends Growable {
       console.log(this.seedSeparation) // 19.02099999999998
     }
 
-
-
-    // if(this.growing == true) {
-    //   this.scale.x += 0.001
-    //   this.scale.y += 0.001
-    // }
-    // if (this.scale.x >= 1.0 || this.scale.y >= 1.0) {
-    //   this.growing = false
-    // }
   }
 
   draw() {
     // Shows the seedpod with seeds 
-    this.seeds.forEach((seed, i) => {
-      seed.drawPod()
-    })
+    let sx = 0
+    let sy = 0
+    let sep = this.seedSeparation
+    for(let i = 0; i < this.nSeeds; i++) {
+      let seed = this.seeds[i]
+      sx = sx + sep * 1/(i+2) * this.dir
+      sy = sy - sep *(0.5 - 1/(i+2)) 
+      let posFromBase = createVector(sx, sy)
+      posFromBase = p5.Vector.add(this.pos, posFromBase)
+
+      posFromBase.y -= 10
+      posFromBase.x -= 5 * this.dir
+      //The above repositions the pod on the end of the stem
+
+      // Create a vector for the position of the pod end:
+      let posEnd = createVector(sx, sy)
+      
+      this.drawPod(posFromBase, posEnd)
+      
+    } 
+
     this.seeds.forEach((seed, i) => {
       seed.draw()
     })
+  }
+
+  drawPod(pos, posEnd) {
+    // Draw a seedpod
+    push()
+    translate(pos.x, pos.y)
+    stroke(this.plantR, this.plantG, this.plantB);
+    strokeWeight(3);
+    fill(this.plantR, this.plantG, this.plantB)
+    circle(0, 0, 5*2.2)
+
+    //Show the end of the seedpod
+    let nx = .2*posEnd.x
+    let ny = posEnd.y
+    strokeWeight(5);
+      bezier(0,0,  nx*1.2,ny*.05, nx*.5,ny*.5,  nx,ny)
+      bezier(0,0, -nx*1.2,ny*.05, -nx*.05,ny*.5,  nx,ny)
+    pop()
   }
 
   updateSeedPositions() {
@@ -84,18 +115,19 @@ class SeedPod extends Growable {
       let seed = this.seeds[i]
       sx = sx + sep * 1/(i+2) * this.dir
       sy = sy - sep *(0.5 - 1/(i+2)) 
-      let pos = createVector(sx, sy)
-      pos = p5.Vector.add(this.pos, pos)
+      let posFromBase = createVector(sx, sy)
+      posFromBase = p5.Vector.add(this.pos, posFromBase)
 
-      pos.y -= 10
-      pos.x -= 5 * this.dir
+      posFromBase.y -= 10
+      posFromBase.x -= 5 * this.dir
       //The above repositions the pod on the end of the stem
 
       // Create a vector for the position of the pod end:
       let posEnd = createVector(sx, sy)
       
-      seed.update(pos, posEnd)
-      // seed.grow()
+      
+      seed.update(posFromBase, posEnd)
+      
     } 
   }
 }

@@ -43,7 +43,7 @@ class Stem extends Growable {
       // Decide whether to put a leaf or bud/flower/seedpod on the stem 
       if (this.hasLeaf == true) {
       // Create a leaf
-        this.leaf = new Leaf2(
+        this.leaf = new Leaf(
           createVector(
             this.pos.x + cos(this.angle*this.dir) * this.len, 
           this.pos.x + cos(this.angle*this.dir) * this.len, 
@@ -59,20 +59,14 @@ class Stem extends Growable {
           abs(this.plant.genes.leafWid1) + random(-8, 8),
           abs(this.plant.genes.leafWid2) + random(-8, 8),
           abs(this.plant.genes.leafWid3) + random(-8, 8),
-          // 100, 
-          // 30, 
-          // 30, 
-          // 30,
-          // 0, 0, 0, 0,
           this.plant 
         ) 
         this.children.push(this.leaf)
+        this.plant.allChildren.push(this.leaf)
       } else {
-        // Create a bud/flower/seedpod
-        // this.seedpod = new SeedPod(this.pos.x, this.pos.y, this.dir, this.angle, this.plant, this.posEnd)
         this.bud = new Bud(this.pos.x, this.pos.y, this.angle*this.dir, 8, this.plant)
-        // this.flower = new Flower(this.pos.x, this.pos.y, this.angle*this.dir)
         this.children.push(this.bud)
+        this.plant.allChildren.push(this.leaf)
       }
     }
     
@@ -158,19 +152,7 @@ class Stem extends Growable {
         bezier(0,0, 10*this.dir,0, -16*this.dir,-8,  0, -this.len) 
       pop()
 
-      if(this.leaf != null) {
-        this.drawLeaf()
-      }
-      else {
-        this.drawPod()
-      }
+      this.children.forEach(child => child.draw())
     }
-  
-    drawPod() {
-      this.bud.draw()
-    }
-  
-    drawLeaf() {
-      this.leaf.draw()
-    }
+
   }  

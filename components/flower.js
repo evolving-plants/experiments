@@ -1,9 +1,10 @@
 class Flower extends Growable {
   // Making a flower at pos(x,y), growing & opening it
-  constructor(x, y, angle){
+  constructor(x, y, angle, plant){
     super()
     this.pos = createVector(x, y)
     this.angle = angle
+    this.plant = plant
     this.lincrement = 10;
     this.wincrement = 10;
     this.dropping = false
@@ -22,14 +23,16 @@ class Flower extends Growable {
   }
 
   update(pos, angle) {
-    if(this.dropping == false) {
-      this.pos = pos
-      this.angle = angle
-    } else {
-      // The petals dry up
-      this.wincrement -= this.wincrement < 0.3 ? 0.0 : 0.5;
+    
+    
+    if(this.time > 50) {
       this.drop()
     }
+    else if(this.time > 0){
+      this.pos = pos
+      this.angle = angle
+    }
+    
 
     this.seedpod.update(this.pos, this.angle)
   }
@@ -38,7 +41,6 @@ class Flower extends Growable {
    
     if(this.time > 50) {
       this.growChildren()
-
     }
     else if(this.time > 0){
       this.lincrement += 1 * this.timer.inc
@@ -174,6 +176,7 @@ class Flower extends Growable {
   // Drop the flower petals to the ground or off the canvas
   drop() {
     if(this.pos.y < height+10) {
+      console.log("dropppingggggggggggggggg")
       // The following adds a little flutter to the dropping petals
       this.pos.y += random(0,10)
       this.pos.x += random(-5,10)
