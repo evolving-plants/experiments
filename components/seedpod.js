@@ -21,9 +21,9 @@ class SeedPod extends Growable {
     this.seediam = 5
 
 
-    this.plantR = 30
-    this.plantG = 240
-    this.plantB = 10
+    this.podR = 50
+    this.podG = 200
+    this.podB = 20
 
     for(let i = 0; i < this.nSeeds; i++) {
       const seed = new Seed(0, 0, this.plant,this.seediam)
@@ -52,6 +52,12 @@ class SeedPod extends Growable {
       this.updateSeedPositions()
 
       this.plantR += (this.plantR < 230) ? .3 * this.timer.inc : 0.
+      
+      //change colour
+      this.podR += (this.podR < 230) ? 3 * this.timer.inc : 0.
+      this.podG += (this.podG < 230) ? 2 * this.timer.inc : 0.
+      this.podB += (this.podB < 150) ? 3 * this.timer.inc : 0.
+
       this.plantG -= (this.plantG > 205) ? .1 * this.timer.inc : 0.
       this.plantB += (this.plantB < 135) ? .1 * this.timer.inc : 0. 
     
@@ -97,9 +103,9 @@ class SeedPod extends Growable {
     // Draw a seedpod
     push()
     translate(pos.x, pos.y)
-    stroke(this.plantR, this.plantG, this.plantB)
+    stroke(this.podR, this.podG, this.podB)
     strokeWeight(3)
-    fill(this.plantR, this.plantG, this.plantB)
+    fill(this.podR, this.podG, this.podB)
     circle(0, 0, 5*2.2)
 
     //Show the end of the seedpod

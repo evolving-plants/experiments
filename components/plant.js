@@ -197,7 +197,7 @@ class Plant extends Growable {
     
         }
 
-    // Make the stems grow in length and angle
+    // Make the stems grow in length and angle 
     this.growChildren()  
 
 
