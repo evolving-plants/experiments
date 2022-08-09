@@ -51,6 +51,11 @@ class SeedPod extends Growable {
       // this.nSeeds += (floor(this.seedSeparation) % 35 == 0) ? 1 : 0
       this.updateSeedPositions()
 
+      this.plantR += (this.plantR < 230) ? .3 * this.timer.inc : 0.
+      this.plantG -= (this.plantG > 205) ? .1 * this.timer.inc : 0.
+      this.plantB += (this.plantB < 135) ? .1 * this.timer.inc : 0. 
+    
+
     }
 
     if(this.time == 550) {
@@ -92,8 +97,8 @@ class SeedPod extends Growable {
     // Draw a seedpod
     push()
     translate(pos.x, pos.y)
-    stroke(this.plantR, this.plantG, this.plantB);
-    strokeWeight(3);
+    stroke(this.plantR, this.plantG, this.plantB)
+    strokeWeight(3)
     fill(this.plantR, this.plantG, this.plantB)
     circle(0, 0, 5*2.2)
 

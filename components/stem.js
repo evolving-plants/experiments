@@ -35,6 +35,11 @@ class Stem extends Growable {
       this.maxAngleR = random(45, 50)
       this.heightR = random(0, 5)
       this.init()
+
+      this.plantR = 30
+      this.plantG = 240
+      this.plantB = 10
+  
     }
   
     init() {
@@ -124,7 +129,19 @@ class Stem extends Growable {
         // if(this.pos.y < (height - this.plant.currHeight + 5)) {
         //   this.pos.y = height - this.plant.currHeight + 5
         // } 
-      }
+      } else {
+        // the stems turn yellow brown
+        this.plantR += (this.plantR < 230) ? .15 * this.timer.inc : 0.
+        this.plantG -= (this.plantG > 205) ? .08 * this.timer.inc : 0.
+        this.plantB += (this.plantB < 135) ? .10 * this.timer.inc : 0.
+
+        // The stems wilt - this is not working yet ??????
+        this.maxstretch = -90
+        if(abs(this.pos0.y-this.pos.y) < this.maxStretch) {
+          this.pos.y -= this.growthRate * 3 
+        }
+      } 
+
   
     // Update position of end of stem
       let dx  = cos((90-this.angle)) * this.dir*this.len
@@ -133,7 +150,7 @@ class Stem extends Growable {
         this.pos.x + dx,
         this.pos.y + dy
       )
-      let angle = this.angle*this.dir
+      let angle = this.angle*this.dir 
   
       this.children.forEach(child => child.update(end, angle))
 
@@ -141,9 +158,11 @@ class Stem extends Growable {
     
     draw() {
       // Draw the stem 
-      stroke(30, 240, 10);
+      // stroke(30, 240, 10)
+      stroke(this.plantR,this.plantG, this.plantB)
       strokeWeight(5);
-      fill(50, 220, 20)
+      fill(this.plantR,this.plantG, this.plantB)
+      // fill(50, 220, 20)
       push()
       translate(this.pos.x, this.pos.y)
       rotate(this.angle*this.dir)

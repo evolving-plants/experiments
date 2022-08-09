@@ -28,6 +28,9 @@ class Plant extends Growable {
     // If isLeaf is true, a leaf will be put on the stem, otherwise a bud/flower/seed  
     this.isLeaf = true
 
+    this.plantR = 30
+    this.plantG = 240
+    this.plantB = 10
 
     this.count = 1
 
@@ -36,7 +39,7 @@ class Plant extends Growable {
       // The plant height should be at least 100 more than thresh 
       plantHeight: floor(random(500,600)),
       // Initial leaf dimensions
-      leafLength: random(180, 260),
+      leafLength: random(480, 560),
       leafWid1: random(-50, 50), // random(a-10, a+10)
       leafWid2: random(50, 70), 
       leafWid3: random(50, 70),
@@ -124,7 +127,8 @@ class Plant extends Growable {
       }
 
     // // Draw the stalk
-    stroke(30, 240, 10);
+    // stroke(30, 240, 10)
+    stroke(this.plantR,this.plantG, this.plantB)
     strokeWeight(11) // was 9
     // fill(50, 220, 20)
     noFill()
@@ -135,7 +139,8 @@ class Plant extends Growable {
     let cx = this.pos.x
     let cy = this.pos.y - this.currHeight
     strokeWeight(2)
-    fill(30, 240, 10)
+    fill(this.plantR,this.plantG, this.plantB)
+    // fill(30, 240, 10)
     bezier(cx,cy, cx+7,cy-5, cx+8,cy-12, cx,cy-20 )
     bezier(cx,cy, cx-7,cy-5, cx-8,cy-12, cx,cy-20 )
   }
@@ -184,7 +189,13 @@ class Plant extends Growable {
         this.podPositionsIndex += 1
 
       }
-    } 
+    } else { 
+         
+      this.plantR += (this.plantR < 230) ? .3 * this.timer.inc : 0.
+      this.plantG -= (this.plantG > 205) ? .1 * this.timer.inc : 0.
+      this.plantB += (this.plantB < 135) ? .1 * this.timer.inc : 0.
+    
+        }
 
     // Make the stems grow in length and angle
     this.growChildren()  

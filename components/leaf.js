@@ -18,6 +18,13 @@ class Leaf extends Growable {
     this.rib2 = 4
     this.rib3 = 6 
 
+    this.leafR = 50
+    this.leafG = 200
+    this.leafB = 20
+    this.ribsR = 30
+    this.ribsG = 240
+    this.ribsB = 10
+
     this.diff1 = this.finLength-this.length
     this.diff2 = this.finWid1-this.wid1
     this.diff3 = this.finWid2-this.wid2
@@ -65,9 +72,10 @@ class Leaf extends Growable {
   }
 
   draw() {
-    stroke(30, 240, 10);
     strokeWeight(2);
-    fill(50, 200, 20)
+    fill(this.leafR, this.leafG, this.leafB)
+    stroke(this.ribsR, this.ribsG, this.ribsB)
+    // fill(50, 200, 20)
   // The first vein will be at sepx*2
     let sepx = this.length / (this.numveins+2)
     let sep = (this.wid2) / this.rib2
@@ -158,8 +166,11 @@ class Leaf extends Growable {
   rotate(this.angle - 90)
   
   // Draw main rib
-    noStroke();
-    fill(90, 250, 10)
+    // noStroke();
+    //The following is for the ribs
+    fill(this.ribsR, this.ribsG, this.ribsB)
+    stroke(this.ribsR, this.ribsG, this.ribsB)
+    
     let lc = this.length
     let wc = this.wid2
     bezier( -sepx/2, 0,  lc*.3, wc*.1,  lc*.3,-wc*.25,   lc, 0)
@@ -190,16 +201,28 @@ class Leaf extends Growable {
         }
         if (y1 | 0) { 
           bezier(x1-1.5*sepx, 0,   x1-sepx*.8,0,  x1-sepx*.1, y1,   x1, y1)  
-          bezier(x1-1.5*sepx, 0,   x1-sepx,0,  x1-sepx, -y1,   x1-sepx, -y1)  
+          bezier(x1-1.5*sepx, 0,   x1-sepx,0,  x1-sepx, -y1,   x1-sepx, -y1)
         }
       }
-  pop()
+  pop() 
 }
 whither() {
   // Make the leaf dry up and whither away 
-  this.length -= (this.length > this.finLength*0.6) ? this.growthRate*.05 * this.timer.inc : 0.
-  this.wid1 -= (this.wid1 > this.finWid1*0.9)  ? this.growthRate*.040     * this.timer.inc : 0.
-  this.wid2 -= (this.wid2 > this.finWid2*0.8)  ? this.growthRate*.032     * this.timer.inc : 0.
-  this.wid3 -= (this.wid3 > this.finWid3*0.8)  ? this.growthRate*.030     * this.timer.inc : 0.
+  this.leafR += (this.leafR < 230) ? 3 * this.timer.inc : 0.
+  this.leafG += (this.leafG < 230) ? 2 * this.timer.inc : 0.
+  this.leafB += (this.leafB < 150) ? 3 * this.timer.inc : 0.
+
+  this.ribsR += (this.ribsR < 230) ? 3 * this.timer.inc : 0.
+  this.ribsG -= (this.ribsG > 205) ? 1 * this.timer.inc : 0.
+  this.ribsB += (this.ribsB < 135) ? 1 * this.timer.inc : 0.
+
+  // this.ribsR = 230
+  // this.ribsG = 205
+  // this.ribsB = 135
+
+  this.length -= (this.length > this.finLength*0.7) ? this.growthRate*.03 * this.timer.inc : 0.
+  this.wid1 -= (this.wid1 > this.finWid1*0.1)  ? this.growthRate*.01     * this.timer.inc : 0.
+  this.wid2 -= (this.wid2 > this.finWid2*0.2)  ? this.growthRate*.02     * this.timer.inc : 0.
+  this.wid3 -= (this.wid3 > this.finWid3*0.3)  ? this.growthRate*.03     * this.timer.inc : 0. 
 }
 }

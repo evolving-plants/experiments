@@ -12,7 +12,11 @@ class Bud extends Growable {
     this.plant = plant
     // The bud opens by incrementing bx & blen, moving the tip in a semicircle
     // When this.bx = 0, the bud does not open
-    this.bx = 0;
+    this.bx = 0 
+
+    this.plantR = 30
+    this.plantG = 240
+    this.plantB = 10
 
     this.flower = new Flower(
       this.pos.x, 
@@ -38,6 +42,10 @@ class Bud extends Growable {
     
     if(this.time > 150) {
       this.growChildren()
+      this.plantR += (this.plantR < 230) ? .3 * this.timer.inc : 0.
+      this.plantG -= (this.plantG > 205) ? .1 * this.timer.inc : 0.
+      this.plantB += (this.plantB < 135) ? .1 * this.timer.inc : 0.
+    
     } 
     else if (this.time > 90) {
       this.blen = sin(this.time*1.5 - 90/4) * this.length
@@ -66,8 +74,10 @@ class Bud extends Growable {
 
     
     // Draw bud
-    stroke(30, 240, 10);
-    fill(30, 240, 10);
+    // stroke(30, 240, 10)
+    stroke(this.plantR,this.plantG, this.plantB)
+    fill(this.plantR,this.plantG, this.plantB)
+    // fill(30, 240, 10)
     strokeWeight(1);
     push()    
       translate(this.pos.x, this.pos.y)

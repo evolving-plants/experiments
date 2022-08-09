@@ -6,7 +6,7 @@ class Generation extends Growable {
     this.plants = []
     this.selectedPlants = []
     this.droppedSeeds = []
-  }
+  } 
 
   init() {
     // Sets the initial position of each plant on the ground 

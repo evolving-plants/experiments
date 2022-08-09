@@ -18,12 +18,15 @@ function setup() {
   newSeasonButton.mousePressed(() => gen0.newSeason())
 
   gen0.init()
-  // back.init()
+  // back.init() 
+       // Define sky
+       sky = new NightSky() 
+  
 }
 
 function draw() {
   
-  gen0.setSpeed(10)
+  gen0.setSpeed(1)
 
   // back.draw()
   
@@ -32,6 +35,12 @@ function draw() {
   // } 
   // else {
     background(110,130,240)
+    // background(0)
+    // stroke('black') 
+    //  sky.show()
+
+    // fill(0)
+    // bezier(0, height,   -800, height-700,   width+550, height-200,   width, height)
   // }
 
   // randomSeed(10)
@@ -70,6 +79,6 @@ function mousePressed() {
 
       let currPlant = p.select()
       gen0.selectedPlants.push(currPlant)      
-    }
+    } 
   }
 }
