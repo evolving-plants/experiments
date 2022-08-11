@@ -2,10 +2,11 @@
 let globalTime = 0
 
 // Change nPlants here to set the number of plants in the population
-const gen0 = new Generation(1) 
+const gen0 = new Generation(4) 
 let circles = []
 
 let newSeasonButton
+let timeSlider 
 
 let back = new Back()
 
@@ -15,7 +16,11 @@ function setup() {
   angleMode(DEGREES)
 
   newSeasonButton = createButton('new season')
+  newSeasonButton.position(width-160, 10)
   newSeasonButton.mousePressed(() => gen0.newSeason())
+
+  timeSlider = createSlider(0, 10, 2)
+  timeSlider.position(90, 10)
 
   gen0.init()
   // back.init() 
@@ -26,7 +31,7 @@ function setup() {
 
 function draw() {
   
-  gen0.setSpeed(1)
+  gen0.setSpeed(timeSlider.value())
 
   // back.draw()
   
