@@ -1,35 +1,73 @@
-class Flower{
+class Flower extends Growable {
   // Making a flower at pos(x,y), growing & opening it
-  constructor(pos, angle){
-    this.pos = pos
+  constructor(x, y, angle, plant){
+    super()
+    this.pos = createVector(x, y)
     this.angle = angle
+    this.plant = plant
     this.lincrement = 10;
     this.wincrement = 10;
     this.dropping = false
     // Adjust the direction and speed of petal dropping here
     this.dropVector = createVector(random(0, 20), random(0, 20))
+
+    this.seedpod = new SeedPod(
+      this.pos.x,
+      this.pos.y, 
+      this.angle < 0 ? -1 : 1,
+      abs(this.angle),
+      this.plant,
+      this.pos
+    )
+    this.children = [this.seedpod]
   }
 
   update(pos, angle) {
-    if(this.dropping == false) {
+    
+    
+    if(this.time > 200) {
+      this.drop()
+      this.seedpod.update(this.lastpos, this.lastangle)
+    }
+    else if(this.time > 0){
       this.pos = pos
       this.angle = angle
-    } else {
-      // The petals dry up
-      this.wincrement -= this.wincrement < 0.3 ? 0.0 : 0.5;
-      this.drop()
+      this.lastpos = createVector(this.pos.x, this.pos.y)
+      this.lastangle = angle
+      this.seedpod.update(this.pos, this.angle)
     }
+    
+
   }
 
   grow() {
-    // Grow flower
-    if(this.lincrement < 50) {
-      this.lincrement += 1;
-      this.wincrement += 1;      
-    } 
+   
+    if(this.time > 50) {
+      this.growChildren()
+    }
+    else if(this.time > 0){
+      this.lincrement += 1 * this.timer.inc
+      this.wincrement += 1 * this.timer.inc
+
+    }
+    if (this.time == 50) {
+      console.log("flower growing ends: params")
+      console.log(this.lincrement) // 60
+      console.log(this.wincrement) // 60
+
+
+    }
+
   }
 
-  showBack() {
+  draw() {
+    this.drawBack()
+    this.seedpod.draw()
+    this.drawFront()
+
+  }
+
+  drawBack() {
     // Draw back flower petals
     stroke(250, 200, 0);
     strokeWeight(2);
@@ -64,26 +102,26 @@ class Flower{
         rotate(this.angle)
         scale(0.3);
         rotate(-10);
-        this.showStamen(-190);
+        this.drawStamen(-190);
       pop()
       push();
         translate(this.pos.x, this.pos.y)
         rotate(this.angle)
         scale(0.3);
         rotate(-18);
-        this.showStamen(-170);
+        this.drawStamen(-170);
       pop();
       push();
         translate(this.pos.x, this.pos.y)
         rotate(this.angle)
         scale(0.3);
         rotate(-26);
-        this.showStamen(-120);
+        this.drawStamen(-120);
       pop();
     }
   }
 
-  showFront() {
+  drawFront() {
     // Draw front flower petals
     stroke(250, 200, 0);
     strokeWeight(2);
@@ -118,21 +156,21 @@ class Flower{
         rotate(this.angle)
         scale(0.3);
         rotate(10);
-        this.showStamen(190);
+        this.drawStamen(190);
       pop()
       push();
         translate(this.pos.x, this.pos.y)
         rotate(this.angle)
         scale(0.3);
         rotate(18);
-        this.showStamen(170);
+        this.drawStamen(170);
       pop();
       push();
         translate(this.pos.x, this.pos.y)
         rotate(this.angle)
         scale(0.3);
         rotate(26);
-        this.showStamen(120);
+        this.drawStamen(120);
       pop();
     }
   }
@@ -146,7 +184,7 @@ class Flower{
       this.pos.add(this.dropVector)
     }  
   }
-  showStamen(stalen) {
+  drawStamen(stalen) {
     // Draw a stamen in the flower beginning at (0,0) of length abs(stalen)
     // If stalen < 0, rotate the anther counterclockwise
     this.stalen = stalen
@@ -160,7 +198,9 @@ class Flower{
          push()
           translate(0, -yd)
           rotate(120 * this.stalen/yd)
-          ellipse(0+random(-3,3), 0+random(-3,3), 36, 14)
+          if(this.time < 200) {
+            ellipse(0+random(-3,3), 0+random(-3,3), 36, 14)
+          }
          pop()
       // }
     // pop()

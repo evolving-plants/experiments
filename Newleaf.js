@@ -13,10 +13,6 @@ function setup() {
 }
 function draw() {
   background(120,130,190);
-  // let m = millis();
-
-  // Start the clock
-  time += 1;
 
   // Draw the main vein
 

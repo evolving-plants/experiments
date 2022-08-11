@@ -1,16 +1,15 @@
+
+let globalTime = 0
+
 // Change nPlants here to set the number of plants in the population
 const gen0 = new Generation(4) 
 let circles = []
 
 let newSeasonButton
-let isDropping = false
+let timeSlider 
 
 let back = new Back()
 
-function preload() {
-  // back.load() 
-
-}
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight)
@@ -18,27 +17,52 @@ function setup() {
 
   newSeasonButton = createButton('new season')
   newSeasonButton.position(width-160, 10)
-  newSeasonButton.mousePressed(() => {
-    // Check to make sure all the seeds have fallen to the ground ????
+
+  newSeasonButton.mousePressed(() => gen0.newSeason())
 
 
-    gen0.newSeason()
-  })
+  timeSlider = createSlider(0, 10, 2)
+  timeSlider.position(90, 10)
 
   gen0.init()
-  // back.init()
+
+  // back.init() 
+       // Define sky
+       sky = new NightSky() 
+  
+
 }
 
 function draw() {
+  
+  gen0.setSpeed(timeSlider.value())
+
   // back.draw()
- background(85,110,200)
+  
+  // if(frameCount % 100 == 0) {
+  //   back.draw()
+  // } 
+  // else {
+    background(110,130,240)
+    // background(0)
+    // stroke('black') 
+    //  sky.show()
+
+    // fill(0)
+    // bezier(0, height,   -800, height-700,   width+550, height-200,   width, height)
+  // }
+
   // randomSeed(10)
+  strokeWeight(1);
+  fill(10, 240, 10)
+  // text("("+mouseX+", "+mouseY+", )", mouseX, mouseY);
 
   gen0.grow()
+  gen0.draw()
   circles.forEach(c => {
     fill(255, 0, 0)
-    stroke(255, 0, 0)
-    circle(c.x, c.y, 20)
+    stroke(255, 0, 0) 
+    circle(c.x, c.y, 20) 
 
 
   })
@@ -60,10 +84,10 @@ function mousePressed() {
       mouseY > 10 && mouseY < height-10)
     {
       // as soon as plant is selected ???? or when new season is pressed????
-    // but only if the seedpods are all fully developed   ?????
+    // or only if the seedpods are all fully developed   ??
 
       let currPlant = p.select()
       gen0.selectedPlants.push(currPlant)      
-    }
+    } 
   }
 }
