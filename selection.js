@@ -2,45 +2,55 @@
 let globalTime = 0
 
 // Change nPlants here to set the number of plants in the population
-const gen0 = new Generation(1) 
-let circles = []
+const gen0 = new Generation(3) 
+let circles = [] 
 
 let newSeasonButton
 
-let back = new Back()
+let slider
 
+let back = new Back()
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight)
   angleMode(DEGREES)
 
   newSeasonButton = createButton('new season')
-  newSeasonButton.mousePressed(() => gen0.newSeason())
+  newSeasonButton.mousePressed(() => gen0.newSeason()) 
 
-  gen0.init()
+  slider = createSlider(1, 50, 5);
+  slider.position(10, 30);
+  slider.style('width', '80px');
+
+  gen0.init() 
   // back.init() 
        // Define sky
-       sky = new NightSky() 
-  
-}
+       sky = new NightSky()
+} 
 
-function draw() {
-  
-  gen0.setSpeed(1)
+function draw() { 
+  back.draw()
 
+  // Set the speed here
+  fill(255,0,0)
+  let val = slider.value()
+  gen0.setSpeed(val)
+
+  textSize(28)
+  fill(255,0,0)
+  text(' TIME', 10, 30)
+
+  // if(frameCount % 100 == 0) { 
   // back.draw()
-  
-  // if(frameCount % 100 == 0) {
-  //   back.draw()
   // } 
   // else {
-    background(110,130,240)
-    // background(0)
-    // stroke('black') 
-    //  sky.show()
+  //   background(110,130,240)
+  //   background(0)
+  //   stroke('black') 
+  //   sky.show() 
 
-    // fill(0)
-    // bezier(0, height,   -800, height-700,   width+550, height-200,   width, height)
+  //   fill(0)
+  //   bezier(0, height,   -800, height-700,   width+550, height-200,   width, height)
   // }
 
   // randomSeed(10)

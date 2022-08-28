@@ -9,7 +9,7 @@ class Flower extends Growable {
     this.wincrement = 10;
     this.dropping = false
     // Adjust the direction and speed of petal dropping here
-    this.dropVector = createVector(random(0, 20), random(0, 20))
+    this.dropVector = createVector(random(0, 20), random(0, 20)) 
 
     this.seedpod = new SeedPod(
       this.pos.x,
@@ -24,9 +24,8 @@ class Flower extends Growable {
 
   update(pos, angle) {
     
-    
     if(this.time > 50) {
-      this.drop()
+      // this.drop()
     }
     else if(this.time > 0){
       this.pos = pos
