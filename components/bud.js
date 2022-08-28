@@ -66,12 +66,12 @@ class Bud extends Growable {
 
   draw() {
 // the following line seems to be irrelevant ??????????
-    if(this.time > .90) {
+    // if(this.time > .90) {
       // this.flower.drawBack()
       // this.seedpod.draw()
       // this.flower.drawFront()
       this.flower.draw()
-    } 
+    // } 
 
     // Draw bud
     stroke(this.plantR,this.plantG, this.plantB)
