@@ -42,6 +42,44 @@
       top: 14px;
       left: 20px;
     }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    #selection-info {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 16rem;
+      height: 100%;
+      overflow-y: scroll;
+      z-index: 100;
+
+      font-family: 'Courier New', Courier, monospace;
+      font-size: small;
+    }
+
+    .plant-info {
+      display: block;
+      width: 100%;
+    }
+
+    .plant-info button {
+      display: inline-block;
+      padding: 4px;
+    }
+
+    .plant-info h2 {
+      display: inline-block;
+      padding: 0px 4px;
+    }
+
+    .plant-info .hidden {
+      display: none;
+    }
   </style>
 
 </head>
@@ -50,6 +88,10 @@
   <script src="selection.js"></script>
 
   <label for="time">Time:</label>
+
+  <section id="selection-info">
+    <h2>selection info</h2>
+  </section>
 </body>
 
 </html>

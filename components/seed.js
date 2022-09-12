@@ -15,9 +15,9 @@ class Seed extends Growable {
     // The seed diameter is incremented by this.r
     this.r = 0.01
 
-    this.plantR = 30
-    this.plantG = 240
-    this.plantB = 10
+    this.seedR = 130
+    this.seedG = 210
+    this.seedB = 20
 
     // Create the random points just above the ground to drop the seeds to
     this.dropPoint = createVector(
@@ -47,10 +47,10 @@ class Seed extends Growable {
       this.r += (this.r < this.seediam) ? 0.01 * this.timer.inc : 0.0
           
       // Turn pale yellow at end of growth
-      if(this.r > this.seediam*.9) {
-        this.plantR += (this.plantR < 245) ? 2 :0
-        this.plantG += (this.plantG < 240) ? 1 :0
-        this.plantB -= (this.plantB > 190) ? 3 :0
+      if(this.r > this.seediam*.4) {
+        this.seedR += (this.seedR < 180) ? 2* this.timer.inc  :0
+        this.seedG -= (this.seedG > 120) ? 2* this.timer.inc  :0
+        // this.seedB -= (this.seedB > 10) ? 2* this.timer.inc  :0
       }
     }
 
@@ -66,7 +66,7 @@ class Seed extends Growable {
     // Draw a seed
     push()
     translate(this.pos.x, this.pos.y)
-    stroke(210, 140, 10)
+    stroke(this.seedR, this.seedG, this.seedB)
     strokeWeight(2)
     fill(250, 220, 20)
     circle(0, 0, this.r)

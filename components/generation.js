@@ -92,7 +92,6 @@ class Generation extends Growable {
     oldPlant.stems.forEach(stem => {
       if(stem.leaf != null) {
         avgLeafLength += stem.leaf.finLength
-        // avgLeafWidth += stem.leaf.finWidth
         avgLeafWid1 += stem.leaf.finWid1
         avgLeafWid2 += stem.leaf.finWid2
         avgLeafWid3 += stem.leaf.finWid3
@@ -113,8 +112,8 @@ class Generation extends Growable {
 
      // Make new plant height genes
      let newPlantHeight = oldPlant.genes.plantHeight + floor(random(-30, 30))
-     // Don't let the plant be too tall
-     if (newPlantHeight < 100) {
+     // Don't let the plant be too tall - this is not working ?????????
+     if (newPlantHeight < 100) { 
       newPlantHeight = 100 
     }
 
@@ -169,7 +168,7 @@ class Generation extends Growable {
       leafWid2: abs(avgLeafWid2),
       leafWid3: abs(avgLeafWid3),
       numLeaves: abs(newNumLeaves),
-      thresh: newThresh,
+      thresh: newThresh, 
       numPods: newPods,
       numSeeds: newSeeds,
       seediam: newSeediam

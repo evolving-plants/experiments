@@ -49,7 +49,7 @@ class Plant extends Growable {
       thresh: floor(random (100, 300)),
       numPods: floor(random (2,6)),
       numSeeds: floor(random (5,7)),
-      seediam: random (8,12) 
+      seediam: random (8,12)
     }    
 
     this.init()
@@ -61,18 +61,18 @@ class Plant extends Growable {
     this.numLeaves = this.genes.numLeaves
     this.numPods = this.genes.numPods
     this.numSeeds = this.genes.numSeeds
-    // this.seediam = this.genes.seediam
+    this.seediam = this.genes.seediam
     // ?????? to do or not to do ?????????
 
     // Create the first stem on the stalk
-    const stem = new Stem(this.pos.x, this.pos.y, -1, this, this.isLeaf)
+    // Put the first stem on a random side
+    this.dir = Math.random() < 0.5 ? 1 : -1
+    const stem = new Stem(this.pos.x, this.pos.y, this.dir, this, this.isLeaf)
     this.stems.push(stem)
-    this.children.push(stem)
+    this.children.push(stem) 
 
 
-    
-    
-
+  
     // arr of time points 
     // leaves - 0 ~ this.thresh 
     this.leafPositions = [0]
@@ -105,12 +105,12 @@ class Plant extends Growable {
     console.log("Leaf positions: ", this.leafPositions)
     console.log("Pod positions: ", this.podPositions)
     
-
+ 
   }
 
   draw() {
-    // fill('red')
-    // circle(this.pos.x, height-this.thresh, 20)
+    fill('blue')
+    circle(this.pos.x, height-this.thresh, 20)
 
 
     // Draw a circle to show that the plant is selected 
@@ -156,32 +156,43 @@ class Plant extends Growable {
       if(
         this.leafPositionsIndex < this.leafPositions.length && 
         this.time >= this.leafPositions[this.leafPositionsIndex] - this.timer.inc &&
-        this.time <= this.leafPositions[this.leafPositionsIndex] + this.timer.inc) {
+        this.time <= this.leafPositions[this.leafPositionsIndex] + this.timer.inc) { 
           
           this.count += 1
           console.log("time : ", this.time)
           console.log("count :", this.count)
         
-        const dir = Math.random() < 0.5 ? 1 : -1
-        let leaf = new Stem(this.pos.x, height-this.currHeight, dir, this, true)
+           // Put the leaves on alternate sides usually
+        const ranDir = Math.random() < 0.2 ? 1 : -1
+        this.dir = this.dir * ranDir 
+        
+        let leaf = new Stem(this.pos.x, height-this.currHeight, this.dir, this, true)
+
+        // const dir = Math.random() < 0.5 ? 1 : -1
+        // let leaf = new Stem(this.pos.x, height-this.currHeight, dir, this, true) 
 
         this.stems.push(leaf)
-        this.children.push(leaf)
+        this.children.push(leaf) 
 
         this.leafPositionsIndex += 1
-      } 
+      }
 
       if(
         this.podPositionsIndex < this.podPositions.length && 
         this.time >= this.podPositions[this.podPositionsIndex] - this.timer.inc &&
-        this.time <= this.podPositions[this.podPositionsIndex] + this.timer.inc) {
+        this.time <= this.podPositions[this.podPositionsIndex] + this.timer.inc) { 
 
           this.count += 1
-          console.log("time : ", this.time)
+          console.log("time : ", this.time) 
           console.log("count :", this.count)
 
-        const dir = Math.random() < 0.5 ? 1 : -1
-        let pod = new Stem(this.pos.x, height-this.currHeight, dir, this, false)
+             // Put the pods on alternate sides usually
+        const ranDir = Math.random() < 0.1 ? 1 : -1
+        this.dir = this.dir * ranDir 
+        let pod = new Stem(this.pos.x, height-this.currHeight, this.dir, this, false)
+          
+        // const dir = Math.random() < 0.5 ? 1 : -1
+        // let pod = new Stem(this.pos.x, height-this.currHeight, dir, this, false)
 
         this.stems.push(pod)
         this.children.push(pod)

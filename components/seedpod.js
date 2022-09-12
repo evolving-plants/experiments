@@ -11,14 +11,14 @@ class SeedPod extends Growable {
     this.angle = this.dir * angle
       // Define the number of seeds in a seedpod (this.nSeeds)
     this.nSeeds = 7
-    // this.nSeeds = this.plant.genes.numSeeds + floor(random(-1.4,1.4))
+    this.nSeeds = this.plant.genes.numSeeds + floor(random(-1.4,1.4))
     // Check ????? - every pod on same plant should have numSeeds +- 1 seeds
     if (this.nSeeds < 3) {this.nSeeds = 3}
     if (this.nSeeds > 14) {this.nSeeds = 14}
       // Define the initial separation distance between seeds
     this.seedSeparation = .001
-    // this.seediam = this.plant.genes.seediam + random(-1,1)
-    this.seediam = 5
+    this.seediam = this.plant.genes.seediam + random(-1,1)
+    // this.seediam = 5
 
 
     this.podR = 50
@@ -44,6 +44,10 @@ class SeedPod extends Growable {
     this.growChildren()
 
     if(this.time > 550){  // 550
+      this.podR += (this.podR < 230) ? 3 * this.timer.inc : 0.
+      this.podG += (this.podG < 230) ? 2 * this.timer.inc : 0.
+      this.podB += (this.podB < 150) ? 3 * this.timer.inc : 0.
+    
     }
     else {
       // makes separation between seeds increase
@@ -51,17 +55,11 @@ class SeedPod extends Growable {
       // this.nSeeds += (floor(this.seedSeparation) % 35 == 0) ? 1 : 0
       this.updateSeedPositions()
 
-      this.plantR += (this.plantR < 230) ? .3 * this.timer.inc : 0.
-      
       //change colour
-      this.podR += (this.podR < 230) ? 3 * this.timer.inc : 0.
-      this.podG += (this.podG < 230) ? 2 * this.timer.inc : 0.
-      this.podB += (this.podB < 150) ? 3 * this.timer.inc : 0.
-
-      this.plantG -= (this.plantG > 205) ? .1 * this.timer.inc : 0.
-      this.plantB += (this.plantB < 135) ? .1 * this.timer.inc : 0. 
+      // this.podR += (this.podR < 230) ? 3 * this.timer.inc : 0.
+      // this.podG += (this.podG < 230) ? 2 * this.timer.inc : 0.
+      // this.podB += (this.podB < 150) ? 3 * this.timer.inc : 0.
     
-
     }
 
     if(this.time == 550) {
@@ -137,8 +135,8 @@ class SeedPod extends Growable {
       let posEnd = createVector(sx, sy)
       
       
-      seed.update(posFromBase, posEnd)
-      
+      seed.update(posFromBase, posEnd) 
+    
     } 
   }
 }
