@@ -29,7 +29,6 @@ class Flower extends Growable {
     if(this.time > 200) {
       this.drop()
       this.seedpod.update(this.lastpos, this.lastangle)
-
     }
     else if(this.time > 0){
       this.pos = pos

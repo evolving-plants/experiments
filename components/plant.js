@@ -109,12 +109,12 @@ class Plant extends Growable {
   }
 
   draw() {
-    fill('blue')
-    circle(this.pos.x, height-this.thresh, 20)
+    // fill('blue')
+    // circle(this.pos.x, height-this.thresh, 20)
 
 
     // Draw a circle to show that the plant is selected 
-    if(this.selected) {
+  if(this.selected) {
       stroke('red')
       strokeWeight(3)
       noFill()

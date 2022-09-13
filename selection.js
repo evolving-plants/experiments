@@ -3,9 +3,8 @@ let globalTime = 0
 
 // Change nPlants here to set the number of plants in the population
 
-const gen0 = new Generation(4) 
-let circles = []
-
+const gen0 = new Generation(3) 
+let circles = [] 
 
 let newSeasonButton
 let timeSlider 
@@ -35,7 +34,6 @@ function setup() {
   timeSlider.position(90, 10)
 
   gen0.init()
-
   // back.init() 
        // Define sky
        sky = new NightSky()
@@ -43,7 +41,7 @@ function setup() {
 
 
 function draw() {
-  background(255)
+  background(110,130,240)
   gen0.setSpeed(timeSlider.value())
 
   // if(frameCount % 100 == 0) { 
@@ -94,8 +92,10 @@ function mousePressed() {
     // or only if the seedpods are all fully developed   ??
 
       let currPlant = p.select()
-      displayPlantInfo(`plant-${i}`, currPlant.genes)
-      gen0.selectedPlants.push(currPlant)      
+      if(currPlant) {
+        displayPlantInfo(`plant-${i}`, currPlant.genes)
+        gen0.selectedPlants.push(currPlant)      
+      }
     } 
   }
 }
