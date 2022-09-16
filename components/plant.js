@@ -3,7 +3,7 @@ class Plant extends Growable {
   // Drops seeds
   // Also draws the red selection circle
  
-  constructor(x, y) {
+  constructor(x, y, genes=null) {
     super()
       // Create vector for the initial position on the stalk
     this.pos = createVector(x, y)
@@ -32,37 +32,35 @@ class Plant extends Growable {
     this.plantG = 240
     this.plantB = 10
 
-    this.count = 1
+    this.count = 1 
 
-    this.genes = {
-      // Set the initial genes for each plant at the start of the simulation 
-      // The plant height should be at least 100 more than thresh 
-      plantHeight: floor(random(500,600)),
-      // Initial leaf dimensions
-      leafLength: random(480, 560),
-      leafWid1: random(-50, 50), // random(a-10, a+10)
-      leafWid2: random(50, 70), 
-      leafWid3: random(50, 70),
-      // Set the number of leaves for each plant
-      numLeaves: floor(random(3, 6)), // was (2,4) 
-      // Set the threshold height (below thresh will be leaves, above will be seedpods)
-      thresh: floor(random (100, 300)),
-      numPods: floor(random (2,6)),
-      numSeeds: floor(random (5,7)),
-      seediam: random (8,12)
-    }    
-
+    if(genes != null) {
+      this.setGenes(genes)
+    } 
+    else {
+      let randomGenes = {
+        // Set the initial genes for each plant at the start of the simulation 
+        // The plant height should be at least 100 more than thresh 
+        plantHeight: floor(random(500,600)),
+        // Initial leaf dimensions
+        leafLength: random(480, 560),
+        leafWid1: random(-50, 50), // random(a-10, a+10)
+        leafWid2: random(50, 70), 
+        leafWid3: random(50, 70),
+        // Set the number of leaves for each plant
+        numLeaves: floor(random(3, 6)), // was (2,4) 
+        // Set the threshold height (below thresh will be leaves, above will be seedpods)
+        thresh: floor(random (100, 300)),
+        numPods: floor(random (2,6)),
+        numSeeds: floor(random (5,7)),
+        seediam: random (8,12)
+      }   
+      this.setGenes(randomGenes)
+    }
     this.init()
   } 
 
   init() {
-    this.plantHeight = this.genes.plantHeight
-    this.thresh = this.genes.thresh
-    this.numLeaves = this.genes.numLeaves
-    this.numPods = this.genes.numPods
-    this.numSeeds = this.genes.numSeeds
-    this.seediam = this.genes.seediam
-    // ?????? to do or not to do ?????????
 
     // Create the first stem on the stalk
     // Put the first stem on a random side
@@ -70,7 +68,6 @@ class Plant extends Growable {
     const stem = new Stem(this.pos.x, this.pos.y, this.dir, this, this.isLeaf)
     this.stems.push(stem)
     this.children.push(stem) 
-
 
   
     // arr of time points 
@@ -229,6 +226,14 @@ class Plant extends Growable {
     return this
   }
 
+  toggleSelect() {
+    // check if plantheight is still growing
+    if(this.time <= this.plantHeight) return
+
+    this.selected = this.selected === true ? false : true
+    return this
+  }
+
   // Dropping seeds after the plant is selected
   dropSeeds() {
     this.stems.forEach(stem => {
@@ -241,5 +246,21 @@ class Plant extends Growable {
         })
       }
     })
+  }
+
+
+  
+  setGenes(genes) {
+    this.genes = genes
+    this.initFromGenes()
+  }
+
+  initFromGenes() {
+    this.plantHeight = this.genes.plantHeight
+    this.thresh = this.genes.thresh
+    this.numLeaves = this.genes.numLeaves
+    this.numPods = this.genes.numPods
+    this.numSeeds = this.genes.numSeeds
+    this.seediam = this.genes.seediam
   }
 }

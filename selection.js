@@ -91,10 +91,13 @@ function mousePressed() {
       // as soon as plant is selected ???? or when new season is pressed????
     // or only if the seedpods are all fully developed   ??
 
-      let currPlant = p.select()
-      if(currPlant) {
+      let currPlant = p.toggleSelect()
+      if(currPlant.selected) {
         displayPlantInfo(`plant-${i}`, currPlant.genes)
-        gen0.selectedPlants.push(currPlant)      
+        // gen0.selectedPlants.push(currPlant)      
+      } 
+      else {
+        hidePlantInfo(`plant-${i}`)
       }
     } 
   }
@@ -104,13 +107,14 @@ function displayPlantInfo(name, genes) {
   let infoSection = document.querySelector('#selection-info')
 
   let plantInfoSection = document.createElement('main')
+  plantInfoSection.id = `plant-${name}`
   plantInfoSection.classList.add('plant-info')
   let plantName = document.createElement('h2')
   plantName.innerText = name
   let collapseButton = document.createElement('button') 
   collapseButton.innerText = '-'
   let infoDiv = document.createElement('div')
-  infoDiv.id = `plant-${name}`
+  // infoDiv.id = `plant-${name}`
   collapseButton.onclick = () => {
     infoDiv.classList.toggle('hidden')
     collapseButton.innerText = collapseButton.innerText == '-' ? '+' : '-'
@@ -128,4 +132,9 @@ function displayPlantInfo(name, genes) {
   plantInfoSection.appendChild(infoDiv)
   infoSection.appendChild(plantInfoSection)
 
+}
+
+function hidePlantInfo(name) {
+  const plantInfoSection = document.querySelector(`#plant-${name}`)
+  plantInfoSection.remove()
 }

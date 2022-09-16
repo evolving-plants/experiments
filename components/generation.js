@@ -39,8 +39,10 @@ class Generation extends Growable {
   
 
   newSeason() {
+    // select all plants if no plant is selected
     let selectedPlants = this.plants.filter(plant => plant.selected === true)
     if(selectedPlants.length == 0) selectedPlants = this.plants
+  
     selectedPlants.forEach(plant => {
       let seeds = plant.allChildren.filter(child => child instanceof Seed)
       this.droppedSeeds.push(...seeds)
@@ -48,20 +50,20 @@ class Generation extends Growable {
 
     // make new season
     this.newSeasonPlants = []
-    // Define plant positions in the new season
-        // This is not being used ?????
-        let sep = width / (this.nPlants * 2)
+  
+    let sep = width/(this.nPlants*2)
     for(let i = 0; i < this.nPlants; i++) {
-      let xpos = sep * (((i+1)*2)-1)
+      let xpos = sep * (((i+1) * 2)-1)
       xpos = xpos + random(-sep/2, sep/2)
-      // let xpos = (width*(i+1)/this.nPlants - width/6) + random(-20, 20)
-      let newPlant = new Plant(xpos, height)
-      this.newSeasonPlants.push(newPlant) 
-    }
 
-    this.newSeasonPlants.forEach(newPlant => {
-      this.setPositionNewPlant(this.droppedSeeds, newPlant)
-    })
+      let seed = this.selectSeed(this.droppedSeeds, xpos)
+      let oldPlant = seed.plant
+
+      let newGenes = this.getGenes(oldPlant)
+      let newPlant = new Plant(seed.dropPoint.x, height, newGenes)
+
+      this.newSeasonPlants.push(newPlant)
+    }
 
     this.plants = this.newSeasonPlants
     this.children = this.newSeasonPlants
@@ -69,19 +71,18 @@ class Generation extends Growable {
 
   }
 
-  setPositionNewPlant(droppedSeeds, newPlant) {
+  selectSeed(droppedSeeds, randx) {
     // This is being used instead of the above ????
     droppedSeeds.sort((a, b) => {
-      let dist = Math.abs(a.dropPoint.x - newPlant.pos.x) - Math.abs(b.dropPoint.x - newPlant.pos.x)
+      let dist = Math.abs(a.dropPoint.x - randx) - Math.abs(b.dropPoint.x - randx)
       return dist
     })
     let seed = droppedSeeds[0]
-    let plant = seed.plant
-    newPlant.pos = createVector(seed.dropPoint.x, height)
-    this.setGenes(plant, newPlant)
+    return seed
+    
   }
 
-  setGenes(oldPlant, newPlant) {
+  getGenes(oldPlant) {
     // console.log(newPlant.genes)
 
     // making new leaf length and width genes
@@ -161,7 +162,7 @@ class Generation extends Growable {
     // let newInterNodeDist = oldPlant.genes.thresh / newNumLeaves + random(-7, 7) 
     // newInterNodeDist = floor(newInterNodeDist)
     
-    newPlant.genes = {
+    let newGenes = {
       plantHeight: abs(newPlantHeight),
       leafLength: abs(avgLeafLength), 
       leafWid1: abs(avgLeafWid1),
@@ -173,7 +174,8 @@ class Generation extends Growable {
       numSeeds: newSeeds,
       seediam: newSeediam
     }
-    // console.log(newPlant.genes) 
+    
+    return newGenes
   }
 
 
