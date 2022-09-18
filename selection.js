@@ -3,7 +3,7 @@ let globalTime = 0
 
 // Change nPlants here to set the number of plants in the population
 
-const gen0 = new Generation(3) 
+const gen0 = new Generation(4) 
 let circles = [] 
 
 let newSeasonButton
@@ -33,7 +33,7 @@ function setup() {
   timeSlider = createSlider(0, 10, 2)
   timeSlider.position(90, 10)
 
-  gen0.init()
+  gen0.init() 
   // back.init() 
        // Define sky
        sky = new NightSky()
@@ -76,9 +76,7 @@ function draw() {
 
 
 function mousePressed() {
-    // Do not allow selection if DROP SEEDS has already been pressed
-    // if (seeddroppressed == false) {
-
+   
   // Allow any number of plants to be selected
   // Select plant i if the mouse is pressed near plant i
   for(let i = 0; i < gen0.plants.length; i++) {
@@ -88,8 +86,7 @@ function mousePressed() {
     if(mouseX > leftLimit && mouseX < rightLimit && 
       mouseY > 10 && mouseY < height-10)
     {
-      // as soon as plant is selected ???? or when new season is pressed????
-    // or only if the seedpods are all fully developed   ??
+      // draw circle as soon as plant is selected, but selection is possible only if plant has reached its final height
 
       let currPlant = p.toggleSelect()
       if(currPlant.selected) {

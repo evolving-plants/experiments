@@ -9,17 +9,16 @@ class SeedPod extends Growable {
     this.posEnd = posEnd
     this.dir = dir
     this.angle = this.dir * angle
-      // Define the number of seeds in a seedpod (this.nSeeds)
+    // Define the number of seeds in a seedpod (this.nSeeds)
     this.nSeeds = 7
     this.nSeeds = this.plant.genes.numSeeds + floor(random(-1.4,1.4))
-    // Check ????? - every pod on same plant should have numSeeds +- 1 seeds
+    // Every pod on same plant should have numSeeds +- 1 seeds
     if (this.nSeeds < 3) {this.nSeeds = 3}
     if (this.nSeeds > 14) {this.nSeeds = 14}
       // Define the initial separation distance between seeds
     this.seedSeparation = .001
     this.seediam = this.plant.genes.seediam + random(-1,1)
     // this.seediam = 5
-
 
     this.podR = 50
     this.podG = 200
@@ -44,6 +43,7 @@ class SeedPod extends Growable {
     this.growChildren()
 
     if(this.time > 550){  // 550
+      //change colour
       this.podR += (this.podR < 230) ? 3 * this.timer.inc : 0.
       this.podG += (this.podG < 230) ? 2 * this.timer.inc : 0.
       this.podB += (this.podB < 150) ? 3 * this.timer.inc : 0.
@@ -55,18 +55,12 @@ class SeedPod extends Growable {
       // this.nSeeds += (floor(this.seedSeparation) % 35 == 0) ? 1 : 0
       this.updateSeedPositions()
 
-      //change colour
-      // this.podR += (this.podR < 230) ? 3 * this.timer.inc : 0.
-      // this.podG += (this.podG < 230) ? 2 * this.timer.inc : 0.
-      // this.podB += (this.podB < 150) ? 3 * this.timer.inc : 0.
-    
     }
 
     if(this.time == 550) {
       console.log("seedpod growind end: params")
       console.log(this.seedSeparation) // 19.02099999999998
     }
-
   }
 
   draw() {
@@ -81,7 +75,7 @@ class SeedPod extends Growable {
       let posFromBase = createVector(sx, sy)
       posFromBase = p5.Vector.add(this.pos, posFromBase)
 
-      posFromBase.y -= 10
+      posFromBase.y -= 5  // was 10
       posFromBase.x -= 5 * this.dir
       //The above repositions the pod on the end of the stem
 
@@ -127,13 +121,12 @@ class SeedPod extends Growable {
       let posFromBase = createVector(sx, sy)
       posFromBase = p5.Vector.add(this.pos, posFromBase)
 
-      posFromBase.y -= 10
+      posFromBase.y -= 5
       posFromBase.x -= 5 * this.dir
-      //The above repositions the pod on the end of the stem
+      //The above repositions the seed on the end of the stem
 
       // Create a vector for the position of the pod end:
       let posEnd = createVector(sx, sy)
-      
       
       seed.update(posFromBase, posEnd) 
     

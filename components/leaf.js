@@ -63,7 +63,7 @@ class Leaf extends Growable {
  
     if(this.time == this.timer.bp) { 
       console.log("leaf growing end: params")
-      console.log(this.length) // 100
+      console.log("Leaf Length",this.length) // 100
       console.log(this.wid1) // 30.3
       console.log(this.wid2) // 30.3
       console.log(this.wid3) // 30.3

@@ -5,7 +5,7 @@ class Stem extends Growable {
   // The initial position of the stem on the stalk is this.pos0
   // // The position of the stem on the stalk goes up as the stalk stretches, until a maximum of thresh*.3 from pos0
   // The end of the stem is at the vector end[]. 
-  // The stems of leaves (petioles) will all have final lengths of leafstemlen
+  // The leaf stems (petioles) will all have the same final length
   // The angle between stem and stalk is this.angle, 
   // // which begins at 0 and ends at this.maxAngleR 
   constructor(x, y, dir, plant, hasLeaf) {
@@ -22,20 +22,12 @@ class Stem extends Growable {
       this.dir = dir 
        // Start growing the stem from an angle of 0.1 
       this.angle = 0.1
-      // Set the final length of leaf stems here
-      this.leafstemlen = 50
       
-      // randomness of the stem growth rates, angles, & heightRate on a plant
-      // this.lenr = random(0, )
-      // The following is not used ????????????
-      this.growthRate = 0.10
-      // the position of the first leaf stem on the stalk is distR 
-      // this.distR will limit the increase of stem on stalk
-      // this.distR = 0
-      // this.maxStretch = 0
-      // The following no longer works - but we do want some randomness of the angle - put it back ?????????
-      this.maxAngleR = random(45, 50)
-      // this.heightR = random(0, 5)
+      // //this.distR will limit the increase of stem on stalk
+      // //this.distR = 0
+      // //this.maxStretch = 0 
+      this.maxAngleR = random(25, 60)
+      // this.heightR = random(0, 5) 
       this.init()
 
       this.plantR = 30
@@ -54,14 +46,13 @@ class Stem extends Growable {
         this.leaf = new Leaf(
           createVector(
             this.pos.x + cos(this.angle*this.dir) * this.len, 
-          this.pos.x + cos(this.angle*this.dir) * this.len, 
             this.pos.x + cos(this.angle*this.dir) * this.len, 
-          this.pos.x + cos(this.angle*this.dir) * this.len, 
+            this.pos.x + cos(this.angle*this.dir) * this.len, 
+            this.pos.x + cos(this.angle*this.dir) * this.len, 
             this.pos.x + cos(this.angle*this.dir) * this.len, 
             this.pos.y + sin(this.angle*this.dir) * this.len
           ), 
           this.angle*this.dir,
-          // this.dir is doing nothing in the above ????????
           // Find the random different sizes of leaves on this plant 
           // leaf length was + random(-6,6) 
           abs(this.plant.genes.leafLength) + random(-10, 10),
@@ -73,7 +64,7 @@ class Stem extends Growable {
         this.children.push(this.leaf)
         this.plant.allChildren.push(this.leaf)
 
-        // Put a bud
+        // Put a bud 
       } else {
         this.bud = new Bud(this.pos.x, this.pos.y, this.angle*this.dir, 8, this.plant) 
         this.children.push(this.bud)
@@ -84,20 +75,20 @@ class Stem extends Growable {
 
     grow() {
     // The stem keeps growing until it reaches final stem length 
-    // Leaves will all have the same final stem length (leafstemlen)
-    // Buds, flowers, seedpods will have shorter lengths towards the top of the stem
+    // All bud stems will have the same final length
+    // All leaf stems will have the same final length =.6 bud stem
    
-    // console.log(this.time)
       if(this.leaf != null) {
 
         // The leaves start growing as soon as their stems appear:
         this.growChildren()
 
         if(this.time <= this.timer.bp) {
-          // The following sets the final length and angle of the leaf stem
-          this.len += this.timer.inc * .6
-          // this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.growthRate : 0.0
-          this.angle += this.timer.inc/2
+          // The following sets the final length and angle of the leafstems
+          // Increase 0.6 for longer stemlength 
+          this.len += this.timer.inc * .6 
+          this.angle += (abs(this.angle) < this.maxAngleR) ? this.timer.inc*.6: 0.0  
+          // this.angle += this.timer.inc/2
         } 
 
       } else {
@@ -105,16 +96,9 @@ class Stem extends Growable {
         this.growChildren()
         if(this.time <= this.timer.bp) {
 
-        // if(this.time > this.timer.bp) {
-        // this.growChildren()
-        // } 
-        // else {
-
-          // this.len += 10*this.growthRate
           this.len += this.timer.inc
-          this.angle += this.timer.inc/2
-          // this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.growthRate : 0.0
-
+          this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.timer.inc*.4 : 0.0 
+          // this.angle += this.timer.inc/2
         }
         
         // if(this.len < 0 + this.pos.y*0.2) {

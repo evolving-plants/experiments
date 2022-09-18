@@ -35,7 +35,7 @@ class Bud extends Growable {
   }
  
   grow() {
-    // Let the flower appear at this time 
+    // Let the flower appear at this time
     if(this.time > 107) {
       this.growChildren()
     }
@@ -44,7 +44,7 @@ class Bud extends Growable {
       this.plantR += (this.plantR < 230) ? .3 * this.timer.inc : 0.
       this.plantG -= (this.plantG > 205) ? .1 * this.timer.inc : 0.
       this.plantB += (this.plantB < 135) ? .1 * this.timer.inc : 0.
-    
+      this.bx -= (this.bx > .1) ? .004 * this.timer.inc : 0.
     } 
     // Check if it is time for the bud to open
     else if (this.time > 90) {
@@ -61,11 +61,9 @@ class Bud extends Growable {
       console.log(this.blen) // -3.8268343236508966 
       console.log(this.bx) // 4.5
     }
-  
   }
 
   draw() {
-// the following line seems to be irrelevant ??????????
     // if(this.time > .90) {
       // this.flower.drawBack()
       // this.seedpod.draw()
@@ -73,7 +71,7 @@ class Bud extends Growable {
       this.flower.draw()
     // } 
 
-    // Draw bud
+    // Draw bud 
     stroke(this.plantR,this.plantG, this.plantB)
     fill(this.plantR,this.plantG, this.plantB)
     // stroke(30, 240, 10)
@@ -83,9 +81,11 @@ class Bud extends Growable {
       translate(this.pos.x, this.pos.y)
       rotate(this.angle)
       // The bud width is defined here
+      // was bezier(0,0, -wid+1.2,-10, -wid*2, -20,  this.bx*5,-this.blen*5.5)
       let wid = this.blen
       bezier(0, 0,   -wid+1.2, -10,  -wid*2, -20,    this.bx*5, -this.blen*5.5)
       bezier(0, 0,    wid+1.2, -10,   wid*2, -20,   -this.bx*5, -this.blen*5.5)
+      circle(0,-1,7)
     pop()
 
   }
@@ -94,7 +94,7 @@ class Bud extends Growable {
     // The bud opens 
     // The tip y coordinate decreases from +(bud length) to -(bud length),
     // The tip x coordinate increases until crossing the x-axis, then decreases
-    
+  
     if (this.blen > 0) {
       this.bx += .15 * this.timer.inc 
     } else {

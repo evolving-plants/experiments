@@ -67,7 +67,7 @@ class Seed extends Growable {
     push()
     translate(this.pos.x, this.pos.y)
     stroke(this.seedR, this.seedG, this.seedB)
-    strokeWeight(2)
+    strokeWeight(1)
     fill(250, 220, 20)
     circle(0, 0, this.r)
     pop()

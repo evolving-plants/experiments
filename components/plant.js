@@ -30,7 +30,7 @@ class Plant extends Growable {
 
     this.plantR = 30
     this.plantG = 240
-    this.plantB = 10
+    this.plantB = 10 
 
     this.count = 1 
 
@@ -53,7 +53,7 @@ class Plant extends Growable {
         thresh: floor(random (100, 300)),
         numPods: floor(random (2,6)),
         numSeeds: floor(random (5,7)),
-        seediam: random (8,12)
+        seediam: random (4,6)
       }   
       this.setGenes(randomGenes)
     }
@@ -106,8 +106,8 @@ class Plant extends Growable {
   }
 
   draw() {
-    // fill('blue')
-    // circle(this.pos.x, height-this.thresh, 20)
+    fill('blue')
+    circle(this.pos.x, height-this.thresh, 20)
 
 
     // Draw a circle to show that the plant is selected 
