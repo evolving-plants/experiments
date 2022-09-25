@@ -4,7 +4,7 @@ The lifecycle is shown, from germination to growth of leaves, buds, flowers, and
 The seedpods eventually drop their seeds, the old plants whither away, and a new population grows.
 Users can select which plants the seeds for the new generation will be from.
 This will model the process of evolution of the population by artificial selection (selective breeding).
-If users do not make selections, the population will anyway evolve through natural selection.
+If users do not make selections, the population will anyway evolve through natural selection (this is yet to be done).
 Various events will be simulated in which certain plants will be destroyed, 
 leaving other plants to produce seeds for the next generation.
 ## TODO
