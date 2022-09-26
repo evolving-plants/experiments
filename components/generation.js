@@ -138,7 +138,7 @@ class Generation extends Growable {
      }
 
       // Make new number of seeds in each pod for each plant 
-      let newSeeds = oldPlant.genes.numSeeds + floor(random(-1.2, 1.2))
+      let newSeeds = oldPlant.genes.numSeeds + floor(random(-1.1, 1.1))
       if (newSeeds < 3) {
         newSeeds = 3
       }

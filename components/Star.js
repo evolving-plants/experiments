@@ -6,7 +6,7 @@ class Star {
     
   show() {
     strokeWeight(3)
-    fill(255)
+    // fill(255)
     push()
       translate(this.pos.x, this.pos.y)
       noStroke()

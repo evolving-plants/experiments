@@ -3,8 +3,10 @@ let globalTime = 0
 
 // Change nPlants here to set the number of plants in the population
 
-const gen0 = new Generation(4) 
+const gen0 = new Generation(6) 
 let circles = [] 
+
+let hills = new Hills()
 
 let newSeasonButton
 let timeSlider 
@@ -23,15 +25,15 @@ function setup() {
   newSeasonButton.mousePressed(() => {
     gen0.newSeason()
     
-    // display new season info
+    // display new season info 
     document.querySelector('#selection-info').innerHTML = ''
     
-    // gen0.children.forEach((child, index) => displayPlantInfo(`plant-${index}`, child.genes))
+    // gen0.children.forEach((child, index) => displayPlantInfo(`plant-${index}`, child.genes)) 
 
   })
 
   timeSlider = createSlider(0, 10, 2)
-  timeSlider.position(90, 10)
+  timeSlider.position(90, 10) 
 
   gen0.init() 
   // back.init() 
@@ -41,35 +43,27 @@ function setup() {
 
 
 function draw() {
-  background(110,130,240)
+  background(120,160,230)
+
+
   gen0.setSpeed(timeSlider.value())
 
-  // if(frameCount % 100 == 0) { 
-  // back.draw()
-  // } 
-  // else {
-  //   background(110,130,240)
-  //   background(0)
-  //   stroke('black') 
-  //   sky.show() 
-
-  //   fill(0)
-  //   bezier(0, height,   -800, height-700,   width+550, height-200,   width, height)
-  // }
-
-  // randomSeed(10)
-  strokeWeight(1);
-  fill(10, 240, 10)
-  // text("("+mouseX+", "+mouseY+", )", mouseX, mouseY);
-
+  if (timeSlider.value() == 0) {
+  back.draw()
+  } else {
+  // Draw the hills
+  fill(100,190,200) 
+  noStroke()
+  hills.draw()
+  }
+ 
   gen0.grow()
   gen0.draw()
+
   circles.forEach(c => {
     fill(255, 0, 0)
     stroke(255, 0, 0) 
     circle(c.x, c.y, 20) 
-
-
   })
   
 }
