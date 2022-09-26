@@ -30,7 +30,7 @@ class Plant extends Growable {
 
     this.plantR = 30
     this.plantG = 240
-    this.plantB = 10 
+    this.plantB = 10
 
     this.count = 1 
 
@@ -43,7 +43,7 @@ class Plant extends Growable {
         // The plant height should be at least 100 more than thresh 
         plantHeight: floor(random(500,600)),
         // Initial leaf dimensions
-        leafLength: random(480, 560),
+        leafLength: random(110, 180),
         leafWid1: random(-50, 50), // random(a-10, a+10)
         leafWid2: random(50, 70), 
         leafWid3: random(50, 70),

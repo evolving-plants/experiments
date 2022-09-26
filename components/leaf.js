@@ -43,9 +43,9 @@ class Leaf extends Growable {
       this.whither()
     }
     // Check for when the leaves should stop growing
-    else if (this.time > this.timer.bp/2 && this.time <= this.timer.bp) {
-      this.growChildren()
-    }
+    // else if (this.time > this.timer.bp/2 && this.time <= this.timer.bp) {
+    //   this.growChildren()
+    // }
     else {
       // Adjust the growth rate of the leaves here 
       // this.length += this.diff1/this.timer.bp
@@ -54,7 +54,7 @@ class Leaf extends Growable {
       // this.wid2 += this.diff3/abs(this.timer.bp-50)
       // this.wid3 += this.diff4/abs(this.timer.bp-10)
 
-      this.length += (this.length < this.finLength) ? this.growthRate*.03 * this.timer.inc : 0.
+      this.length += (this.length < this.finLength) ? this.timer.inc : 0.
       this.wid1 += (this.wid1 < this.finWid1)  ? this.growthRate*.005     * this.timer.inc : 0. 
       this.wid2 += (this.wid2 < this.finWid2)  ? this.growthRate*.01     * this.timer.inc : 0.
       this.wid3 += (this.wid3 < this.finWid3)  ? this.growthRate*.01     * this.timer.inc : 0.
