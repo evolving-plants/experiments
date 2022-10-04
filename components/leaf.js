@@ -54,10 +54,11 @@ class Leaf extends Growable {
       // this.wid2 += this.diff3/abs(this.timer.bp-50)
       // this.wid3 += this.diff4/abs(this.timer.bp-10)
 
+      // Following parameteres were: .005, .01, .01
       this.length += (this.length < this.finLength) ? this.timer.inc : 0.
-      this.wid1 += (this.wid1 < this.finWid1)  ? this.growthRate*.005     * this.timer.inc : 0. 
-      this.wid2 += (this.wid2 < this.finWid2)  ? this.growthRate*.01     * this.timer.inc : 0.
-      this.wid3 += (this.wid3 < this.finWid3)  ? this.growthRate*.01     * this.timer.inc : 0.
+      this.wid1 += (this.wid1 < this.finWid1)  ? this.growthRate*.05     * this.timer.inc : 0. 
+      this.wid2 += (this.wid2 < this.finWid2)  ? this.growthRate*.1     * this.timer.inc : 0.
+      this.wid3 += (this.wid3 < this.finWid3)  ? this.growthRate*.1     * this.timer.inc : 0.
  
     }
  
@@ -77,7 +78,7 @@ class Leaf extends Growable {
     fill(this.leafR, this.leafG, this.leafB)
     stroke(this.ribsR, this.ribsG, this.ribsB)
     // fill(50, 200, 20)
-  // The first vein will be at sepx*2
+  // The first vein will be at sepx*2 
     let sepx = this.length / (this.numveins+2)
     let sep = (this.wid2) / this.rib2
   // the above works with rib2 - but should it be numveins????

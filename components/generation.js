@@ -103,17 +103,18 @@ class Generation extends Growable {
     avgLeafWid1 /= numLeaves
     avgLeafWid2 /= numLeaves
     avgLeafWid3 /= numLeaves
-    avgLeafLength += random(-27, 27) // originally 29
-    avgLeafWid1 += random(-25, 25)   // rest originally 23
-    avgLeafWid2 += random(-25, 25)
-    avgLeafWid3 += random(-25, 25)
-    if (avgLeafWid3 > avgLeafWid2*1.2) { avgLeafWid3 = avgLeafWid3*.9 }
+    avgLeafLength += random(-25, 25) // originally 29 
+    avgLeafWid1 += random(-20, 20)   // rest originally 23 
+    avgLeafWid2 += random(-20, 20)
+    avgLeafWid3 += random(-20, 20)
+    if (avgLeafWid3 > avgLeafWid2*1.2) { avgLeafWid3 = avgLeafWid3*.9 }          
     if (avgLeafWid3 < avgLeafWid2*1.2) { avgLeafWid3 = avgLeafWid3*1.1 }
-    // The above adjusts relations between wid2 and wid3 to prevent overly strange shapes
+    // The above adjusts relations between wid2 and wid3 to prevent overly strange shapes - was 1.2. .9;  1.2,1.1 
+    // also tried 2.2, 1.8;  1.1, 1.0 
 
      // Make new plant height genes
      let newPlantHeight = oldPlant.genes.plantHeight + floor(random(-25, 25))
-     // Don't let the plant be too short
+     // Don't let the plant be too short 
      if (newPlantHeight < 100) { 
       newPlantHeight = 100 
     }
@@ -124,11 +125,11 @@ class Generation extends Growable {
      if(newNumLeaves > 16) { newNumLeaves = 16 }
 
     // Make new threshold for each plant
-    let newThresh = floor(oldPlant.genes.thresh + random(-7, 7))
+    let newThresh = floor(oldPlant.genes.thresh + random(-20, 20)) // was -7,7
     if (newThresh < 30) {
       newThresh = 30
     }
-     // Make new number of seedpods for each plant   
+     // Make new number of seedpods for each plant 
      let newPods = oldPlant.genes.numPods + floor(random(-3, 3))
      if (newPods < 2) {
        newPods = 2
@@ -137,7 +138,7 @@ class Generation extends Growable {
        newPods = 12
      }
 
-      // Make new number of seeds in each pod for each plant 
+      // Make new number of seeds in each pod for each plant
       let newSeeds = oldPlant.genes.numSeeds + floor(random(-1.1, 1.1))
       if (newSeeds < 3) {
         newSeeds = 3

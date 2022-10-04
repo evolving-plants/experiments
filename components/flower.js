@@ -51,13 +51,13 @@ class Flower extends Growable {
       this.wincrement += 1 * this.timer.inc
 
     }
-    if (this.time == 50) {
-      console.log("flower growing ends: params")
-      console.log(this.lincrement) // 60
-      console.log(this.wincrement) // 60
+    // if (this.time == 50) {
+    //   console.log("flower growing ends: params")
+    //   console.log(this.lincrement) // 60
+    //   console.log(this.wincrement) // 60
 
 
-    }
+    // }
 
   }
 

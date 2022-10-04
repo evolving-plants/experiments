@@ -1,20 +1,19 @@
 class Seed extends Growable {
-  // Makes a seed at the given position determined in seedpod
+  // Makes a seed at the position determined in seedpod
   // Makes the seed grow to a max of seediam
-  // Draws a seedpod
-  // Drops the seed
+  // Drops selected seeds (after they are fully grown)
   constructor(x, y, plant, seediam) {
     super()
     this.seediam = seediam
     this.plant = plant
     // The position of a seed is pos (in pod or dropping)
-    //The seed position in the seedpod is podPos (after seed dropped)
 
     this.pos = createVector(x, y)
 
     // The seed diameter is incremented by this.r
     this.r = 0.01
 
+    // Initially, the seed coat is green (130,210,20)
     this.seedR = 130
     this.seedG = 210
     this.seedB = 20
@@ -28,8 +27,8 @@ class Seed extends Growable {
 
   update(pos) {
     this.pos = pos
-
   }
+
 
   grow() {
 
@@ -46,19 +45,18 @@ class Seed extends Growable {
       // Increase the seed diameter until it reaches the maximum (this.seediam)
       this.r += (this.r < this.seediam) ? 0.01 * this.timer.inc : 0.0
           
-      // Turn pale yellow at end of growth
+      // Seed coat turns dark brown (150,100,20) at end of growth
       if(this.r > this.seediam*.4) {
-        this.seedR += (this.seedR < 180) ? 2* this.timer.inc  :0
-        this.seedG -= (this.seedG > 120) ? 2* this.timer.inc  :0
+        this.seedR += (this.seedR < 150) ? 2* this.timer.inc  :0
+        this.seedG -= (this.seedG > 100) ? 2* this.timer.inc  :0
         // this.seedB -= (this.seedB > 10) ? 2* this.timer.inc  :0
       }
     }
 
-
-    if(this.time == 550) {
-      console.log("seed growing end: params")
-      console.log(this.r) // 5.009999999999938
-    }
+    // if(this.time == 550) {
+    //   console.log("seed growing end: params")
+    //   console.log(this.r) // 5.009999999999938 
+    // }
     
   }
 

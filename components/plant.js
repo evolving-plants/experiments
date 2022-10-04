@@ -1,7 +1,7 @@
 class Plant extends Growable {
   // Makes plant: draws the stalk, calls stem for leaves and for buds/flowers/seedpods
-  // Drops seeds
-  // Also draws the red selection circle
+  // Draws red circle when selected
+  // Directs seed dropping
  
   constructor(x, y, genes=null) {
     super()
@@ -9,16 +9,17 @@ class Plant extends Growable {
     this.pos = createVector(x, y)
       // Count the height of the growing plant with this.currHeight
     this.currHeight = 0
-      // Create the stems array for making new stems 
 
     this.allChildren = []
 
+    // Create the stems array for making new stems 
     this.stems = []
+
     this.selected = false
     this.growing = true
     this.interLeafDist = 0
     this.interPodDist = 0
-    // the rate of stalk growth is set by growthRate (& heightR to randomise) 
+    // the rate of stalk growth is set by growthRate (& heightR to randomise)
     this.heightR = random(15,25)
     this.growthRate = 0.07   
     this.inserting = false
@@ -42,18 +43,18 @@ class Plant extends Growable {
         // Set the initial genes for each plant at the start of the simulation 
         // The plant height should be at least 100 more than thresh 
         plantHeight: floor(random(500,600)),
-        // Initial leaf dimensions
+        // Initial leaf dimensions - was 110,180;  -50,50;  50,70;  50,70
         leafLength: random(110, 180),
-        leafWid1: random(-50, 50), // random(a-10, a+10)
-        leafWid2: random(50, 70), 
-        leafWid3: random(50, 70),
-        // Set the number of leaves for each plant
+        leafWid1: random(-30, 30), // random(a-10, a+10)
+        leafWid2: random(30, 70), 
+        leafWid3: random(30, 70),
+        // Set the number of leaves for each plant 
         numLeaves: floor(random(3, 6)), // was (2,4) 
-        // Set the threshold height (below thresh will be leaves, above will be seedpods)
+        // Set the threshold height (below thresh will be leaves, above will be seedpods) 
         thresh: floor(random (100, 300)),
         numPods: floor(random (2,6)),
         numSeeds: floor(random (5,7)),
-        seediam: random (4,6)
+        seediam: random (4,6) 
       }   
       this.setGenes(randomGenes)
     }
@@ -107,7 +108,7 @@ class Plant extends Growable {
 
   draw() {
     fill('blue')
-    circle(this.pos.x, height-this.thresh, 20)
+    // circle(this.pos.x, height-this.thresh, 20)
 
 
     // Draw a circle to show that the plant is selected 
@@ -115,7 +116,7 @@ class Plant extends Growable {
       stroke('red')
       strokeWeight(3)
       noFill()
-      circle(this.pos.x, height-this.currHeight, 200)
+      circle(this.pos.x, height-this.currHeight, 200) 
     }
        // Draw the stems
        for(let i = 0; i < this.stems.length; i++) {

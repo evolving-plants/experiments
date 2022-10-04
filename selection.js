@@ -3,14 +3,14 @@ let globalTime = 0
 
 // Change nPlants here to set the number of plants in the population
 
-const gen0 = new Generation(6) 
-let circles = [] 
+const gen0 = new Generation(7) 
+// let circles = [] // This is not needed ???????
 
 let hills = new Hills()
 
 let newSeasonButton
-let timeSlider 
 
+let timeSlider 
 let slider
 
 let back = new Back()
@@ -20,7 +20,6 @@ function setup() {
   angleMode(DEGREES)
 
   newSeasonButton = createButton('new season')
-
   newSeasonButton.position(width-160, 10)
   newSeasonButton.mousePressed(() => {
     gen0.newSeason()
@@ -45,14 +44,14 @@ function setup() {
 function draw() {
   background(120,160,230)
 
-
   gen0.setSpeed(timeSlider.value())
 
   if (timeSlider.value() == 0) {
-  back.draw()
+    back.transition()
+    back.draw()
   } else {
-  // Draw the hills
-  fill(100,190,200) 
+  // Draw the hills in a static daytime colour 
+  fill(100,190,200)  
   noStroke()
   hills.draw()
   }
@@ -60,11 +59,11 @@ function draw() {
   gen0.grow()
   gen0.draw()
 
-  circles.forEach(c => {
-    fill(255, 0, 0)
-    stroke(255, 0, 0) 
-    circle(c.x, c.y, 20) 
-  })
+  // circles.forEach(c => {
+  //   fill(255, 120, 250)
+  //   stroke(255, 0, 0) 
+  //   circle(c.x, c.y, 2000) 
+  // })
   
 }
 
