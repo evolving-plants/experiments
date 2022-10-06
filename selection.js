@@ -1,23 +1,20 @@
 
 let globalTime = 0
 
-// Change nPlants here to set the number of plants in the population
-
-const gen0 = new Generation(7) 
+const gen0 = new Generation(4) 
 // let circles = [] // This is not needed ???????
-
-let hills = new Hills()
 
 let newSeasonButton
 
 let timeSlider 
 let slider
 
-let back = new Back()
-
 function setup() {
   createCanvas(window.innerWidth-220, window.innerHeight)
   angleMode(DEGREES)
+
+   hills = new Hills()
+   back = new Back()
 
   newSeasonButton = createButton('new season')
   newSeasonButton.position(width-160, 10)
@@ -36,8 +33,7 @@ function setup() {
 
   gen0.init() 
   // back.init() 
-       // Define sky
-       sky = new NightSky()
+
 } 
 
 
