@@ -79,7 +79,7 @@ class Back {
       this.sky.turn()
       this.sky.show() 
       // rotate the stars back to 0 to begin a new night
-      if (this.time <= 9 && this.night == false) {
+      if (this.time <= 9.5 && this.night == false) {
         this.sky.begin()
       }
     }
