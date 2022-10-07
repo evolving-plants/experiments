@@ -1,126 +1,132 @@
 class StormBackground {
   constructor() {
-    this.clouds = [];
-    this.rain = [];
-    this.cloudysky
-    this.lightning = [];
-    this.lightx = 200;
-    this.lighty = 0;
-    this.lightw = 10;
-    this.numclouds = 10;
-    this.changeR = 140;
-    this.changeG = 150;
-    this.changeB = 230;
+    this.clouds = []
+    this.moreClouds = []
+    this.rain = []
+    this.cloudtimer = 0
+    this.lightning = []
+    this.lightx = 200
+    this.lighty = 0
+    this.lightw = 10
+    this.numclouds = 8
+    this.changeR = 140
+    this.changeG = 150
+    this.changeB = 230
     this.moreclouds = false
     this.overcome = false
     this.lightnin = false
     this.raining = false
     this.clearing = false
-    this.lessrain = false
+    this.lessrain = false 
+    this.cloudysky
+
+      // Define each cloud in a random position
+      for (let i = 0; i < this.numclouds; i++) {
+        let x = random(-900,-100);
+        let y = random(-10,300);
+        this.clouds[i] = new Cloud(x, y)
+      }
+       // Define more clouds a random positions
+       for (let i = 0; i < this.numclouds; i++) {
+        let x = random(-900,-100);
+        let y = random(-10,300);
+        this.moreClouds[i] = new Cloud(x, y)
+      }
+       // Define a cloudy sky
+       this.cloudysky = new Overcast()
+    
+       // Define rain
+       for(let i = 0; i < 300; i++) {
+        this.rain[i] = new Rain();
+      }
+        
+      // Define a bolt of lightning
+      for (let i = 0; i < 10; i++) {
+        this.lightx += 10 * random(-8,8);
+        this.lightw = random (1,10);
+      this.lightning[i] = new Lightning(this.lightx, this.lighty, this.lightw, this.raining, this.lightnin); 
+      }
   }
 
-  init() {
-    // Define the starting position of each cloud
-    for (let i = 0; i < this.numclouds; i++) {
-      let x = random(-900,-100);
-      let y = random(-60,160);
-      this.clouds[i] = new Cloud(x, y);
-    }
-    
-    // Define rain
-      for(let i = 0; i < 300; i++) {
-      this.rain[i] = new Rain();
-    }
-    
-    // Define a cloudy sky
-    this.cloudysky = new Overcast();
-    
-    // Define a bolt of lightning
-    for (let i = 0; i < 10; i++) {
-      this.lightx += 10 * random(-8,8);
-      this.lightw = random (1,10);
-    this.lightning[i] = new Lightning(this.lightx, this.lighty, this.lightw); 
-    }
+  move() {
+    this.cloudtimer += .5
+    // console.log("CLOUD TIMER", this.cloudtimer)
   }
 
   draw() {
-     // Set background changes
+    // Set background changes
     //Getting stormy
-    if(this.overcome == true && this.raining == false) {
+    if (this.cloudtimer > 200 && this.cloudtimer < 390) {
       this.changeR -= .04;
       this.changeG -= .04;
       this.changeB -= .07;
     }
       // Grey sky while raining
-    if(this.raining == true) {
+      if (this.cloudtimer > 400 && this.cloudtimer < 600) {
       this.changeR = 160;
       this.changeG = 165;
       this.changeB = 180;
     }
       // Sky clearing up
-    if (this.clearing == true) {
+      if (this.cloudtimer > 400) {
       if (this.changeR > 141) {
       this.changeR -= .04;
       this.changeG -= .04;
       this.changeB += .08;
       }
     }
-      background(this.changeR, this.changeG, this.changeB);
+      background(this.changeR, this.changeG, this.changeB)
+
+       // Draw the hills in a static daytime colour 
+    fill(100,190,200,200)  
+    noStroke()
+    hills.draw()
     
     // Lightning
-    if(this.raining == false && this.lightnin == true && this.clearing == false) {
-      for(let bolt of lightning) {
-        bolt.make();
-      }     
+    if(this.cloudtimer >= 390 && this.cloudtimer <= 400) {
+      for(let bolt of this.lightning) {
+        bolt.make()
+      }    
     }
-    
-      // Move overcast clouds in or out
-    if(this.overcome == true || this.clearing == true) {
-      this.cloudysky.move() 
+     
+     // It's time to become overcast
+     if (this.cloudtimer >= 200) {
+       this.cloudysky.moveIn()
+       this.cloudysky.show()
+      }
+      // It's time to clear up
+     if (this.cloudtimer >= 600) {
+      this.cloudysky.moveOut()
       this.cloudysky.show()
-    } else {
-    // Display overcast clouds whenever it is raining
-    if (this.raining == true)
-    this.cloudysky.show()
-    }
-    
+     }
+
     // Rain
-    if (this.raining == true) {
-      // // Rain signals overcast clouds to stop moving
-      // overcome = false
-      if (this.lessrain == false) {
-        for(let drop of rain) {
-          drop.show();
-          drop.move();
-        } 
-      } else {
-        for(let i = 0; i < 50; i++) {
-          this.rain[i].show();
-          this.rain[i].move();
-        }
+    if (this.cloudtimer >= 400 && this.cloudtimer <= 700) {
+      for (let drops of this.rain) {
+        drops.show()
+        drops.move()
       }
     }
-    // Add more clouds
-    if(this.moreclouds == true) {
-      for (let i = 6; i < this.numclouds; i++) { 
-        this.clouds[i].show();
-        this.clouds[i].move();
+    // Make double rain at the beginning
+    if (this.cloudtimer >= 400 && this.cloudtimer <= 600) {
+      for (let drops of this.rain) {
+        drops.show()
+        drops.move()
+      }
+    }
+
+    // It's time to become cloudier - add moreClouds
+    if (this.cloudtimer >= 100 && this.cloudtimer <= 400) {
+      for (let cloud of this.moreClouds) { 
+        cloud.show()
+        cloud.move()
       }
     }
 
     // Scattered clouds will appear throughout
-    for (let i = 0; i < 6; i++) { 
-      this.clouds[i].show();
-      this.clouds[i].move();
-    }
-      // The following is for clouds to reappear after clearing up
-    if (this.changeR > 140 && this.changeB > 214) {
-      this.clearing = false
-      this.lightnin = false
-      for (let i = 10; i < 14; i++) { 
-        this.clouds[i].show();
-        this.clouds[i].move();
-      }
+    for (let cloud of this.clouds) { 
+      cloud.show()
+      cloud.move()
     }
   }
 }

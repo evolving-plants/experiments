@@ -1,10 +1,10 @@
 class Back { 
-  constructor() {
+  constructor(starBright) {
     this.startColour = 120;
     this.speedAnimate = 1
     this.night = true
     this.time = 12
-    this.starBright = 0
+    this.starBright = starBright
     this.skyR = 120
     this.angle = 0
 
@@ -12,7 +12,7 @@ class Back {
     this.sky = new NightSky()
   }
   
-  transition() {
+  transition(starBright) {
   // The daytime sky colour: (120,160,230) 
   // The daytime hills colour: (100,190,200) 
   // this.time increases from 0 and 12, and is then reset back to 0

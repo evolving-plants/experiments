@@ -1,67 +1,39 @@
 class Cloud {
-  // Make a cloud at pos.x, pos.y that consists of 40 droplets
+  // Make a cloud at pos.x, pos.y that consists of 30 droplets
   constructor(x, y) {
     this.pos = createVector(x, y)
-    this.droplets = [];
+    this.droplets = []
+    this.cloudtimer = 0
     // Define the position and radius of each droplet
-    for (let i = 0; i < 40; i++) {
-      this.x = random(-120,0);
-      this.y = random(0,60);
+    for (let i = 0; i < 30; i++) {
+      this.x = random(-120,0)
+      this.y = random(0,60)
       this.r = random(60,140)
-      this.disp = random(20,100)
-      this.timer = 0
+      this.disp = random(0,100)
       this.droplets[i] = new Droplet(this.x, this.y, this.r, 170, 100);
     }
   }
-  // The clouds move in & re-enter from left after leaving at right
-  // They keep changing shape due to the jiggling and displacement
+  
   move() {
-    this.pos.x += .5
-    if (this.pos.x > 760) {
-      this.timer ++
-      
-      // It's time to become cloudier
-      if (this.timer == 1) {
-        this.moreclouds = true 
-      }
-      // It's time to become overcast
-      if (this.timer == 2) {
-        this.overcome = true 
-      }
-      // Decrease the rain
-      if (this.timer == 4) {
-        this.lessrain = true
-      }
-      // Its time to stop raining and stop being overcast
-      // and have less clouds
-      if (this.timer == 5) {
-        this.moreclouds = false 
-        this.clearing = true
-        this.raining = false
-      }
-      // There is some displacement when the cloud re-enters
-      if (this.clearing == false) {
-        this.pos.x = this.pos.x - 750 - this.disp
-        this.pos.y = this.pos.y + 100
-        if (this.pos.y > 150) {
-          this.pos.y = this.pos.y - 150
-        }
-      // Maybe the following is not needed? 
-        if (this.pos.y < -20) {
-          // console.log(this.pos.y)
-          this.pos.y = this.pos.y + 100
-        }
-      } else {
-        return
-      }
+  // The clouds move from left to right
+  // They keep changing shape due to the jiggling and displacement
+
+    // Move in +x direction
+    this.pos.x += 2
+   
+    // Re-enter on left after exiting on the right, with some displacement
+    if (this.pos.x > width + 200) {
+      this.pos.x = this.pos.x - 2*width -this.disp
+      this.pos.y = this.disp * 3
     }
   }
+
   show() {
     push();
-      translate(this.pos.x, this.pos.y); 
-      for(let i = 0; i < this.droplets.length; i++) {
-        this.droplets[i].jiggle()
-        this.droplets[i].show()
+      translate(this.pos.x, this.pos.y) 
+      for(let droplet of this.droplets) {
+        droplet.jiggle()
+        droplet.show()
       }
     pop();     
   }

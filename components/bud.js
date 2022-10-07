@@ -28,7 +28,7 @@ class Bud extends Growable {
 
 // The bud is at the end of the stem, at the same angle as the stem
 // The position is updated as the stem grows
-  update(pos, angle) {
+  update(pos, angle) { 
     this.pos = pos
     this.angle = angle
     this.flower.update(pos, angle)
@@ -56,11 +56,11 @@ class Bud extends Growable {
       
     }
 
-    if(this.time == 150) {
-      console.log("bud growing ends: params")
-      console.log(this.blen) // -3.8268343236508966 
-      console.log(this.bx) // 4.5
-    }
+    // if(this.time == 150) {
+    //   console.log("bud growing ends: params")
+    //   console.log(this.blen) // -3.8268343236508966 
+    //   console.log(this.bx) // 4.5
+    // }
   }
 
   draw() {

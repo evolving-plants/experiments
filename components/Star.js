@@ -31,7 +31,7 @@ class Star {
           let ry = random(-2,2) 
           line (22+this.size+ry, 21+ this.size, 30+this.size, 31+this.size+ry)
         }   
-      pop ()
+      pop () 
     
     }
   }

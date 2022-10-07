@@ -1,9 +1,11 @@
 class Lightning {
-  constructor(x, y, w) {
+  constructor(x, y, w, raining, lightnin) {
     this.x = x;
     this.y = y;
     this.w = w;
-    this.timer = 0;
+    this.raining = raining
+    this.lightnin = lightnin
+    this.boltCounter = 0;
   }
   make() {
     background(0);
@@ -20,12 +22,11 @@ class Lightning {
         }
       }     
      endShape();
-    // lightnin = true
     // After passing 10 times, lightnin will signal that it's time to stop lightning and start raining
-      this.timer ++
-      if (this.timer == 10) {
-      lightnin = false 
-      raining = true
+      this.boltCounter ++
+      if (this.boltCounter == 10) {
+      this.lightnin = false 
+      this.raining = true
       }
   }
 }

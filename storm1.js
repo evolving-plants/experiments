@@ -32,7 +32,7 @@ function setup() {
   }
   
   // Define a cloudy sky
-  cloudysky = new Overcast();
+  cloudysky = new Overcast(x, y, clearing, lightnin, overcome)
   
   // Define a bolt of lightning
   for (let i = 0; i < 10; i++) {

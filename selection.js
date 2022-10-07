@@ -8,13 +8,15 @@ let newSeasonButton
 
 let timeSlider 
 let slider
+let starBright = 0
 
 function setup() {
   createCanvas(window.innerWidth-220, window.innerHeight)
   angleMode(DEGREES)
 
    hills = new Hills()
-   back = new Back()
+   back = new Back(starBright)
+   storm = new StormBackground()
 
   newSeasonButton = createButton('new season')
   newSeasonButton.position(width-160, 10)
@@ -43,17 +45,25 @@ function draw() {
   gen0.setSpeed(timeSlider.value())
 
   if (timeSlider.value() == 0) {
-    back.transition()
-    back.draw()
-  } else {
+    // back.transition()
+    // back.draw()
+    storm.move()
+    storm.draw()
+
+  } else{
+    
   // Draw the hills in a static daytime colour 
-  fill(100,190,200)  
+  fill(100,190,200,200)  
   noStroke()
   hills.draw()
   }
- 
+
   gen0.grow()
   gen0.draw()
+  if (timeSlider.value() == 0) {
+    fill (0,0,0,starBright)
+  rect (0,0,width,height)
+  }
 
   // circles.forEach(c => {
   //   fill(255, 120, 250)

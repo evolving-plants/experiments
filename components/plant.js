@@ -17,8 +17,8 @@ class Plant extends Growable {
 
     this.selected = false
     this.growing = true
-    this.interLeafDist = 0
-    this.interPodDist = 0
+    // this.interLeafDist = 0
+    // this.interPodDist = 0
     // the rate of stalk growth is set by growthRate (& heightR to randomise)
     this.heightR = random(15,25)
     this.growthRate = 0.07   
@@ -33,7 +33,7 @@ class Plant extends Growable {
     this.plantG = 240
     this.plantB = 10
 
-    this.count = 1 
+    this.count = 1
 
     if(genes != null) {
       this.setGenes(genes)
@@ -97,11 +97,11 @@ class Plant extends Growable {
     this.podPositions = this.podPositions.map(value => Math.floor(value / sum * (this.plantHeight-this.thresh))+this.thresh)
     // this.podPositions.sort((a, b) => a - b)
 
-    console.log(this.thresh)
-    console.log(this.plantHeight-this.thresh)
+    // console.log(this.thresh)
+    // console.log(this.plantHeight-this.thresh)
 
-    console.log("Leaf positions: ", this.leafPositions)
-    console.log("Pod positions: ", this.podPositions)
+    // console.log("Leaf positions: ", this.leafPositions)
+    // console.log("Pod positions: ", this.podPositions)
     
  
   }
@@ -157,8 +157,8 @@ class Plant extends Growable {
         this.time <= this.leafPositions[this.leafPositionsIndex] + this.timer.inc) { 
           
           this.count += 1
-          console.log("time : ", this.time)
-          console.log("count :", this.count)
+          // console.log("time : ", this.time)
+          // console.log("count :", this.count)
         
            // Put the leaves on alternate sides usually
         const ranDir = Math.random() < 0.2 ? 1 : -1
@@ -181,8 +181,8 @@ class Plant extends Growable {
         this.time <= this.podPositions[this.podPositionsIndex] + this.timer.inc) { 
 
           this.count += 1
-          console.log("time : ", this.time) 
-          console.log("count :", this.count)
+          // console.log("time : ", this.time) 
+          // console.log("count :", this.count)
 
              // Put the pods on alternate sides usually
         const ranDir = Math.random() < 0.1 ? 1 : -1
@@ -214,9 +214,9 @@ class Plant extends Growable {
     // The number of nodes between leaves is numLeaves-1 
     // Add one extra node at the top of buds for stretching
     // Add a spacer of (this.thresh*.3) between leaves and pods, just under thresh
-    this.interLeafDist = floor((this.thresh) / (this.numLeaves+1))
+    // this.interLeafDist = floor((this.thresh) / (this.numLeaves+1))
     // Set internode distance for bud/flower/seedpod stems (above the threshold) 
-    this.interPodDist = floor((this.plantHeight - this.thresh) / this.numPods)
+    // this.interPodDist = floor((this.plantHeight - this.thresh) / this.numPods)
 
     
   }
