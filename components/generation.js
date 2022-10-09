@@ -72,7 +72,7 @@ class Generation extends Growable {
   }
 
   selectSeed(droppedSeeds, randx) {
-    // This is being used instead of the above ????
+
     droppedSeeds.sort((a, b) => {
       let dist = Math.abs(a.dropPoint.x - randx) - Math.abs(b.dropPoint.x - randx)
       return dist
@@ -83,7 +83,7 @@ class Generation extends Growable {
   }
 
   getGenes(oldPlant) {
-    // console.log(newPlant.genes) 
+    // console.log(newPlant.genes)
 
     // making new leaf length and width genes
     // Find average leaf length and widths for each parent plant, 
@@ -115,7 +115,7 @@ class Generation extends Growable {
      // Make new plant height genes
      let newPlantHeight = oldPlant.genes.plantHeight + floor(random(-21, 21))
      console.log ('oldPlant.genes.plantHeight', oldPlant.genes.plantHeight)
-     // Don't let the plant be too short
+     // Don't let the plant be too short 
      if (newPlantHeight < 100) { 
       newPlantHeight = 100 
     }

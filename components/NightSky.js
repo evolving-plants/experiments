@@ -22,7 +22,10 @@ class NightSky {
   show() {
     fill (255)
     push ()
+    translate (width/2, 10)
+      // the earth rotates, relative to the stars
       rotate(this.angle)
+      translate (-width/2, -10)
       for(let star of this.stars) {
         star.show() 
      }  

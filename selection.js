@@ -45,10 +45,10 @@ function draw() {
   gen0.setSpeed(timeSlider.value())
 
   if (timeSlider.value() == 0) {
-    // back.transition()
-    // back.draw()
-    storm.move()
-    storm.draw()
+    back.transition()
+    back.draw()
+    // storm.move()
+    // storm.draw()
 
   } else{
     
@@ -60,17 +60,11 @@ function draw() {
 
   gen0.grow()
   gen0.draw()
+
   if (timeSlider.value() == 0) {
     fill (0,0,0,starBright)
-  rect (0,0,width,height)
+    rect (0,0,width,height)
   }
-
-  // circles.forEach(c => {
-  //   fill(255, 120, 250)
-  //   stroke(255, 0, 0) 
-  //   circle(c.x, c.y, 2000) 
-  // })
-  
 }
 
 

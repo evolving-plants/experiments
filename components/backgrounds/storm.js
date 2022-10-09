@@ -22,13 +22,13 @@ class StormBackground {
 
       // Define each cloud in a random position
       for (let i = 0; i < this.numclouds; i++) {
-        let x = random(-900,-100);
+        let x = random(-width-100,-100);
         let y = random(-10,300);
         this.clouds[i] = new Cloud(x, y)
       }
-       // Define more clouds a random positions
+       // Define more clouds at random positions
        for (let i = 0; i < this.numclouds; i++) {
-        let x = random(-900,-100);
+        let x = random(-width-100,-100);
         let y = random(-10,300);
         this.moreClouds[i] = new Cloud(x, y)
       }
@@ -56,10 +56,10 @@ class StormBackground {
   draw() {
     // Set background changes
     //Getting stormy
-    if (this.cloudtimer > 200 && this.cloudtimer < 390) {
-      this.changeR -= .04;
-      this.changeG -= .04;
-      this.changeB -= .07;
+    if (this.cloudtimer > 260 && this.cloudtimer < 400) {
+      this.changeR -= .3;
+      this.changeG -= .3;
+      this.changeB -= .6;
     }
       // Grey sky while raining
       if (this.cloudtimer > 400 && this.cloudtimer < 600) {
@@ -83,7 +83,7 @@ class StormBackground {
     hills.draw()
     
     // Lightning
-    if(this.cloudtimer >= 390 && this.cloudtimer <= 400) {
+    if(this.cloudtimer >= 392 && this.cloudtimer <= 400) {
       for(let bolt of this.lightning) {
         bolt.make()
       }    
