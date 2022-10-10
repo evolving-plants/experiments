@@ -43,6 +43,7 @@ class Plant extends Growable {
         // Set the initial genes for each plant at the start of the simulation 
         // The plant height should be at least 100 more than thresh 
         plantHeight: floor(random(500,600)),
+        stemLength: floor(random(100, 150)),
         // Initial leaf dimensions - was 110,180;  -50,50;  50,70;  50,70
         leafLength: random(110, 180),
         leafWid1: random(-30, 30), // random(a-10, a+10)

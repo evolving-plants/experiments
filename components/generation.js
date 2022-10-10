@@ -115,12 +115,14 @@ class Generation extends Growable {
     // also tried 2.2, 1.8;  1.1, 1.0 
 
      // Make new plant height genes
-     let newPlantHeight = oldPlant.genes.plantHeight + floor(random(-21, 21))
+     let newPlantHeight = oldPlant.genes.plantHeight + floor(random(-100, 100))
      console.log ('oldPlant.genes.plantHeight', oldPlant.genes.plantHeight)
      // Don't let the plant be too short 
      if (newPlantHeight < 100) { 
       newPlantHeight = 100 
     }
+
+    let newStemLength = oldPlant.genes.stemLength + floor(random(-10, 10))
 
      // making new numLeaves genes 
      let newNumLeaves = oldPlant.genes.numLeaves + floor(random(-3, 3))
@@ -160,6 +162,7 @@ class Generation extends Growable {
     
     let newGenes = {
       plantHeight: abs(newPlantHeight),
+      stemLength: abs(newStemLength),
       leafLength: abs(avgLeafLength), 
       leafWid1: abs(avgLeafWid1),
       leafWid2: abs(avgLeafWid2),
