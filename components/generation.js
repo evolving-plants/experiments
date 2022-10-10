@@ -65,9 +65,11 @@ class Generation extends Growable {
       this.newSeasonPlants.push(newPlant)
     }
 
+    // reset parameters for new generation
     this.plants = this.newSeasonPlants
     this.children = this.newSeasonPlants
-   
+    this.droppedSeeds = []   
+    this.selectedPlants = []
 
   }
 

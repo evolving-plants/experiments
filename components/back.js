@@ -48,7 +48,7 @@ class Back {
       this.night = !this.night 
       this.time = 0
     }
-    console.log ('NIGHT?', this.night, 'this.skyR', this.skyR, "starBright", this.starBright)
+    // console.log ('NIGHT?', this.night, 'this.skyR', this.skyR, "starBright", this.starBright)
   }
 
   draw() {
