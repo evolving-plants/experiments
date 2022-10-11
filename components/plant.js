@@ -53,8 +53,8 @@ class Plant extends Growable {
         numLeaves: floor(random(3, 6)), // was (2,4) 
         // Set the threshold height (below thresh will be leaves, above will be seedpods) 
         thresh: floor(random (100, 300)),
-        numPods: floor(random (2,6)),
-        numSeeds: floor(random (5,7)),
+        numPods: floor(random (3,6)),
+        numSeeds: floor(random (6,8)),
         seediam: random (4,6) 
       }   
       this.setGenes(randomGenes)
@@ -109,7 +109,7 @@ class Plant extends Growable {
 
   draw() {
     fill('blue')
-    // circle(this.pos.x, height-this.thresh, 20)
+    circle(this.pos.x, height-this.thresh, 20)
 
 
     // Draw a circle to show that the plant is selected 

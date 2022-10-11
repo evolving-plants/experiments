@@ -10,11 +10,11 @@ class SeedPod extends Growable {
     this.dir = dir
     this.angle = this.dir * angle
     // Define the number of seeds in a seedpod (this.nSeeds)
-    this.nSeeds = this.plant.genes.numSeeds + floor(random(-1.4,1.4))
-    // Every pod on same plant should have numSeeds +- 1 seeds
+    this.nSeeds = this.plant.genes.numSeeds + floor(random(-2,2)) //(-1.4,1.4))
+    // Every pod on same plant should have numSeeds +- 2 seeds
     if (this.nSeeds < 3) {this.nSeeds = 3}
     if (this.nSeeds > 14) {this.nSeeds = 14}
-      // Define the initial separation distance between seeds
+      // Define the initial separation distance between seeds 
     this.seedSeparation = .001
     this.seediam = this.plant.genes.seediam + random(-1,1)
 

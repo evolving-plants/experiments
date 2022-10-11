@@ -19,7 +19,7 @@ class Stem extends Growable {
       // Start growing the stem from a length of 0
       this.len = 0 
       this.finalLen = this.plant.genes.stemLength
-      // Whether the stem is on the right or left is determined by this.dir
+      // Whether the stem is on the right or left is determined by this.dir 
       this.dir = dir 
        // Start growing the stem from an angle of 0.1 
       this.angle = 0.1
