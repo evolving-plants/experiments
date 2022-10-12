@@ -73,7 +73,7 @@ class Seed extends Growable {
 
   // Drop the seeds to the point just above the ground
   drop() {
-    if(this.pos.y < height-10) {
+    if(this.pos.y < height-250) {
       this.pos.add(this.dropVector)
     }
   }

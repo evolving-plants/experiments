@@ -18,8 +18,7 @@ class Stem extends Growable {
       this.posEnd = createVector(x,y)
       // Start growing the stem from a length of 0
       this.len = 0 
-      this.finalLen = this.plant.genes.stemLength
-      // Whether the stem is on the right or left is determined by this.dir 
+      // Whether the stem is on the right or left is determined by this.dir
       this.dir = dir 
        // Start growing the stem from an angle of 0.1 
       this.angle = 0.1
@@ -84,7 +83,7 @@ class Stem extends Growable {
         // The leaves start growing as soon as their stems appear:
         this.growChildren()
 
-        if(this.time <= this.finalLen) {
+        if(this.time <= this.timer.bp) {
           // The following sets the final length and angle of the leafstems
           // Increase 0.6 for longer stemlength 
           this.len += this.timer.inc * .6 
@@ -95,7 +94,7 @@ class Stem extends Growable {
       } else {
         // The buds start growing as soon as their stems appear:
         this.growChildren()
-        if(this.time <= this.finalLen) {
+        if(this.time <= this.timer.bp) {
 
           this.len += this.timer.inc
           this.angle += (abs(this.angle) < this.maxAngleR) ? 1*this.timer.inc*.4 : 0.0 
@@ -160,7 +159,7 @@ class Stem extends Growable {
       push()
       translate(this.pos.x, this.pos.y)
       rotate(this.angle*this.dir)
-      // line(0, 0, 0, -this.len)
+      // line(0, 0, 0, -this.len) 
       // Change the following to adjust the curvature of the stems
         bezier(0,0, 10*this.dir,0, -16*this.dir,-8,  0, -this.len) 
       pop()

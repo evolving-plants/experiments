@@ -2,7 +2,7 @@
 let globalTime = 0
 
 const gen0 = new Generation(4) 
-// let circles = [] // This is not needed ???????
+let circles = [] // This is not needed ???????
 
 let newSeasonButton
 
@@ -56,6 +56,8 @@ function draw() {
   fill(100,190,200,200)  
   noStroke()
   hills.draw()
+  fill(200,130,100)
+  rect (0,height-250,width,height)
   }
 
   gen0.grow()

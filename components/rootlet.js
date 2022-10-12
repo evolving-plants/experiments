@@ -1,5 +1,6 @@
 class Rootlet extends Growable {
   constructor(x,y,dir){
+    super()
     this.x = x
     this.y = y
     this.dir = dir 

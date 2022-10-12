@@ -4,12 +4,20 @@ class Root extends Growable {
      // Rootlets will branch off of the main axis at x = 0
      // The length and width of the main root will be selectable
    
-     constructor(x, y) {
+     constructor(x, y, plant) {
+      super()
       this.pos = createVector(x, y)
+      this.plant = plant
+      
+      this.rootLength = 150
+      this.rootWidth = 10
   
-      // later turn the following into selectable variables:
-      this.rootLength = random (100,200)
-      this.rootWidth = random (6,20)
+      // The nselectable variables:
+      // this.rootLength = this.plant.genes.rootLength
+      // this.rootWidth = this.plant.genes.rootWidth
+      // this.rootLength = random (100,200)
+      // this.rootWidth = random (6,20)
+
       this.rgrow = [] 
       this.rootlet = []
   
@@ -72,7 +80,7 @@ class Root extends Growable {
        
       // Each segment of the main root grows
       if (this.rGro < this.rootLength) {
-        this.rGro += 0.3                
+        this.rGro += 0.5                
       }
        
       if (this.rgrow[0] <= this.bezPos[0]) {
@@ -133,7 +141,7 @@ class Root extends Growable {
           bezier(this.rootCurve[1]*.8,this.beg2,  xend*.8 - 5,this.beg2,  xend,yend,  xend,yend)
         }  
       
-        // Draw the rootlet as soon as the main root reaches the rootlet position
+        // Draw the rootlet as soon as the main root reaches the rootlet position 
         for(let i=0; i< this.rootletNum; i++) {
           let x = xend
           if(this.rGro >= this.rootletPos[i]-10) {
@@ -143,4 +151,3 @@ class Root extends Growable {
       pop ()
      }
     }  
-  

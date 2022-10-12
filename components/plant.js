@@ -15,6 +15,9 @@ class Plant extends Growable {
     // Create the stems array for making new stems 
     this.stems = []
 
+    //Create the roots array
+    this.roots = []
+
     this.selected = false
     this.growing = true
     // this.interLeafDist = 0
@@ -42,8 +45,7 @@ class Plant extends Growable {
       let randomGenes = {
         // Set the initial genes for each plant at the start of the simulation 
         // The plant height should be at least 100 more than thresh 
-        plantHeight: floor(random(500,600)),
-        stemLength: floor(random(100, 150)),
+        plantHeight: floor(random(300,400)),
         // Initial leaf dimensions - was 110,180;  -50,50;  50,70;  50,70
         leafLength: random(110, 180),
         leafWid1: random(-30, 30), // random(a-10, a+10)
@@ -52,10 +54,12 @@ class Plant extends Growable {
         // Set the number of leaves for each plant 
         numLeaves: floor(random(3, 6)), // was (2,4) 
         // Set the threshold height (below thresh will be leaves, above will be seedpods) 
-        thresh: floor(random (100, 300)),
-        numPods: floor(random (3,6)),
-        numSeeds: floor(random (6,8)),
-        seediam: random (4,6) 
+        thresh: floor(random (100, 150)),
+        numPods: floor(random (2,6)),
+        numSeeds: floor(random (5,7)),
+        seediam: random (4,6), 
+        rootLength: random (100,200),
+        rootWidth: random (6,20)
       }   
       this.setGenes(randomGenes)
     }
@@ -70,6 +74,11 @@ class Plant extends Growable {
     const stem = new Stem(this.pos.x, this.pos.y, this.dir, this, this.isLeaf)
     this.stems.push(stem)
     this.children.push(stem) 
+
+    // Create the roots
+    const root = new Root(this.pos.x, this.pos.y)
+    this.roots.push(root)
+    this.children.push(root) 
 
   
     // arr of time points 
@@ -109,7 +118,7 @@ class Plant extends Growable {
 
   draw() {
     fill('blue')
-    circle(this.pos.x, height-this.thresh, 20)
+    circle(this.pos.x, height-250-this.thresh, 20)
 
 
     // Draw a circle to show that the plant is selected 
@@ -117,7 +126,7 @@ class Plant extends Growable {
       stroke('red')
       strokeWeight(3)
       noFill()
-      circle(this.pos.x, height-this.currHeight, 200) 
+      circle(this.pos.x, height-250-this.currHeight, 200) 
     }
        // Draw the stems
        for(let i = 0; i < this.stems.length; i++) {
@@ -139,9 +148,16 @@ class Plant extends Growable {
     let cy = this.pos.y - this.currHeight
     strokeWeight(2)
     fill(this.plantR,this.plantG, this.plantB)
-    // fill(30, 240, 10)
+    // fill(30, 240, 10) 
     bezier(cx,cy, cx+7,cy-5, cx+8,cy-12, cx,cy-20 )
     bezier(cx,cy, cx-7,cy-5, cx-8,cy-12, cx,cy-20 )
+
+    // Draw the roots
+    for (let root of this.roots) {
+    // root.grown()
+    root.grow()
+    root.draw()
+    }
   }
 
   grow() {
@@ -165,10 +181,10 @@ class Plant extends Growable {
         const ranDir = Math.random() < 0.2 ? 1 : -1
         this.dir = this.dir * ranDir 
         
-        let leaf = new Stem(this.pos.x, height-this.currHeight, this.dir, this, true)
+        let leaf = new Stem(this.pos.x, height-250-this.currHeight, this.dir, this, true)
 
         // const dir = Math.random() < 0.5 ? 1 : -1
-        // let leaf = new Stem(this.pos.x, height-this.currHeight, dir, this, true) 
+        // let leaf = new Stem(this.pos.x, height-250-this.currHeight, dir, this, true) 
 
         this.stems.push(leaf)
         this.children.push(leaf) 
@@ -188,7 +204,7 @@ class Plant extends Growable {
              // Put the pods on alternate sides usually
         const ranDir = Math.random() < 0.1 ? 1 : -1
         this.dir = this.dir * ranDir 
-        let pod = new Stem(this.pos.x, height-this.currHeight, this.dir, this, false)
+        let pod = new Stem(this.pos.x, height-250-this.currHeight, this.dir, this, false)
           
         // const dir = Math.random() < 0.5 ? 1 : -1
         // let pod = new Stem(this.pos.x, height-this.currHeight, dir, this, false)
@@ -210,16 +226,6 @@ class Plant extends Growable {
     // Make the stems grow in length and angle 
     this.growChildren()  
 
-
-    // Set internode distance for leaf stems (below the threshold) 
-    // The number of nodes between leaves is numLeaves-1 
-    // Add one extra node at the top of buds for stretching
-    // Add a spacer of (this.thresh*.3) between leaves and pods, just under thresh
-    // this.interLeafDist = floor((this.thresh) / (this.numLeaves+1))
-    // Set internode distance for bud/flower/seedpod stems (above the threshold) 
-    // this.interPodDist = floor((this.plantHeight - this.thresh) / this.numPods)
-
-    
   }
 
   select() {
@@ -264,5 +270,7 @@ class Plant extends Growable {
     this.numPods = this.genes.numPods
     this.numSeeds = this.genes.numSeeds
     this.seediam = this.genes.seediam
+    this.rootLength = this.genes.rootLength
+    this.rootWidth = this.genes.rootWidth
   }
 }

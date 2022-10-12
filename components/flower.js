@@ -181,7 +181,7 @@ class Flower extends Growable {
 
   // Drop the flower petals to the ground or off the canvas
   drop() {
-    if(this.pos.y < height+10) {
+    if(this.pos.y < height-270) {
       // The following adds a little flutter to the dropping petals
       this.pos.y += random(0,10)
       this.pos.x += random(-5,10)

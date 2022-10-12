@@ -16,7 +16,7 @@ class Generation extends Growable {
       let xpos = sep * (((i+1)*2)-1)
       xpos = xpos + random(-sep*.4, sep*.4)
       // let xpos = (width*(i+1)/this.nPlants - width/6) + random(-20, 20) 
-      let newPlant = new Plant(xpos, height)
+      let newPlant = new Plant(xpos, height-250)
       this.plants.push(newPlant)
       this.children.push(newPlant) 
     }
@@ -61,7 +61,7 @@ class Generation extends Growable {
       let oldPlant = seed.plant
 
       let newGenes = this.getGenes(oldPlant)
-      let newPlant = new Plant(seed.dropPoint.x+random(30,50), height, newGenes)
+      let newPlant = new Plant(seed.dropPoint.x+random(30,50), height-250, newGenes)
 
       this.newSeasonPlants.push(newPlant)
     }
@@ -126,6 +126,30 @@ class Generation extends Growable {
     if (newPlantHeight > height-50) { 
       newPlantHeight = height-50 
     }
+
+     // Make new root length genes
+     let newRootLength = oldPlant.genes.rootLength + floor(random(-20, 20))
+     console.log ('oldPlant.genes.rootLength', oldPlant.genes.rootLength)
+     // Don't let the roots be too short 
+     if (newRootLength < 30) { 
+      newRootLength = 30 
+    }
+    // Don't let the roots be too long 
+    if (newRootLength > height-30) { 
+      newRootLength = height-30 
+    }
+
+    // Make new root width genes
+    let newRootWidth = oldPlant.genes.rootWidth + floor(random(-2, 2))
+    console.log ('oldPlant.genes.rootWidth', oldPlant.genes.rootWidth)
+    // Don't let the roots be too thin 
+    if (newRootWidth < 6) { 
+     newRootWidth = 6 
+   }
+   // Don't let the roots be too fat 
+   if (newRootWidth > 100) { 
+     newRootWidth = 100 
+   }
 
     let newStemLength = oldPlant.genes.stemLength + floor(random(-8, 8))
 

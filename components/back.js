@@ -89,5 +89,7 @@ class Back {
     fill(124-this.skyR*.2,250-this.skyR*.5,248-this.skyR*.4)
     noStroke() 
     hills.draw()
+    fill(200,130,100)
+    rect (0,height-250,width,height)
   } 
 }
