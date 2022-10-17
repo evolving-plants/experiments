@@ -9,14 +9,9 @@ class Root extends Growable {
       this.pos = createVector(x, y)
       this.plant = plant
       
-      this.rootLength = 150
-      this.rootWidth = 10
-  
       // The nselectable variables:
-      // this.rootLength = this.plant.genes.rootLength
-      // this.rootWidth = this.plant.genes.rootWidth
-      // this.rootLength = random (100,200)
-      // this.rootWidth = random (6,20)
+      this.rootLength = this.plant.genes.rootLength
+      this.rootWidth = this.plant.genes.rootWidth
 
       this.rgrow = [] 
       this.rootlet = []

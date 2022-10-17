@@ -16,7 +16,7 @@ class Leaf extends Growable {
     this.numveins = 7
     this.rib1 = 2
     this.rib2 = 4
-    this.rib3 = 6 
+    this.rib3 = 6  
 
     this.leafR = 50
     this.leafG = 200
@@ -48,7 +48,7 @@ class Leaf extends Growable {
     // }
     else {
       // Adjust the growth rate of the leaves here 
-      // this.length += this.diff1/this.timer.bp
+      // this.length += this.diff1/this.timer.bp 
       
       // this.wid1 += this.diff2/abs(this.timer.bp-50) 
       // this.wid2 += this.diff3/abs(this.timer.bp-50)
@@ -56,9 +56,9 @@ class Leaf extends Growable {
 
       // Following parameteres were: .005, .01, .01
       this.length += (this.length < this.finLength) ? this.timer.inc : 0.
-      this.wid1 += (this.wid1 < this.finWid1)  ? this.growthRate*.05     * this.timer.inc : 0. 
-      this.wid2 += (this.wid2 < this.finWid2)  ? this.growthRate*.1     * this.timer.inc : 0.
-      this.wid3 += (this.wid3 < this.finWid3)  ? this.growthRate*.1     * this.timer.inc : 0.
+      this.wid1 += (this.wid1 < this.finWid1)  ? this.growthRate*.04 * this.timer.inc : 0. 
+      this.wid2 += (this.wid2 < this.finWid2)  ? this.growthRate*.06 * this.timer.inc : 0.
+      this.wid3 += (this.wid3 < this.finWid3)  ? this.growthRate*.03 * this.timer.inc : 0.
  
     }
  

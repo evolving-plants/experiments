@@ -11,7 +11,7 @@ let slider
 let starBright = 0
 
 function setup() {
-  createCanvas(window.innerWidth-220, window.innerHeight)
+  createCanvas(window.innerWidth, window.innerHeight)
   angleMode(DEGREES)
 
    hills = new Hills()
@@ -23,8 +23,8 @@ function setup() {
   newSeasonButton.mousePressed(() => {
     gen0.newSeason()
     
-    // display new season info 
-    document.querySelector('#selection-info').innerHTML = ''
+    // display new season info by uncommenting the following line
+    // document.querySelector('#selection-info').innerHTML = ''
     
     // gen0.children.forEach((child, index) => displayPlantInfo(`plant-${index}`, child.genes)) 
 
@@ -84,13 +84,13 @@ function mousePressed() {
       // draw circle as soon as plant is selected, but selection is possible only if plant has reached its final height
 
       let currPlant = p.toggleSelect()
-      if(currPlant.selected) {
-        displayPlantInfo(`plant-${i}`, currPlant.genes)
-        // gen0.selectedPlants.push(currPlant)      
-      } 
-      else {
-        hidePlantInfo(`plant-${i}`)
-      }
+      // if(currPlant.selected) {
+      //   displayPlantInfo(`plant-${i}`, currPlant.genes)
+      //   // gen0.selectedPlants.push(currPlant)      
+      // } 
+      // else {
+      //   hidePlantInfo(`plant-${i}`)
+      // }
     } 
   }
 }

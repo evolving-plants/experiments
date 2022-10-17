@@ -4,7 +4,7 @@ class Seed extends Growable {
   // Drops selected seeds (after they are fully grown)
   constructor(x, y, plant, seediam) {
     super()
-    this.seediam = seediam
+    this.seediam = seediam // dont really need
     this.plant = plant
     // The position of a seed is pos (in pod or dropping)
 
@@ -21,7 +21,7 @@ class Seed extends Growable {
     // Create the random points just above the ground to drop the seeds to
     this.dropPoint = createVector(
       random(0, width),
-      height-10
+      height-250
     )
   }
 

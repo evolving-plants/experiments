@@ -47,12 +47,13 @@ class Plant extends Growable {
         // The plant height should be at least 100 more than thresh 
         plantHeight: floor(random(300,400)),
         // Initial leaf dimensions - was 110,180;  -50,50;  50,70;  50,70
+        stemLength: floor(random(100, 150)),
         leafLength: random(110, 180),
         leafWid1: random(-30, 30), // random(a-10, a+10)
         leafWid2: random(30, 70), 
         leafWid3: random(30, 70),
         // Set the number of leaves for each plant 
-        numLeaves: floor(random(3, 6)), // was (2,4) 
+        numLeaves: floor(random(4, 6)), // was (2,4) 
         // Set the threshold height (below thresh will be leaves, above will be seedpods) 
         thresh: floor(random (100, 150)),
         numPods: floor(random (2,6)),
@@ -76,7 +77,7 @@ class Plant extends Growable {
     this.children.push(stem) 
 
     // Create the roots
-    const root = new Root(this.pos.x, this.pos.y)
+    const root = new Root(this.pos.x, this.pos.y, this)
     this.roots.push(root)
     this.children.push(root) 
 
@@ -117,8 +118,8 @@ class Plant extends Growable {
   }
 
   draw() {
-    fill('blue')
-    circle(this.pos.x, height-250-this.thresh, 20)
+    // fill('blue')
+    // circle(this.pos.x, height-250-this.thresh, 20)
 
 
     // Draw a circle to show that the plant is selected 

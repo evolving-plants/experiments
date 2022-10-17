@@ -161,7 +161,8 @@ class Stem extends Growable {
       rotate(this.angle*this.dir)
       // line(0, 0, 0, -this.len) 
       // Change the following to adjust the curvature of the stems
-        bezier(0,0, 10*this.dir,0, -16*this.dir,-8,  0, -this.len) 
+      strokeWeight(4)
+        bezier(0,0, -16,-this.len*.4,  10,-this.len*.7,  0,-this.len) 
       pop()
 
       this.children.forEach(child => child.draw())

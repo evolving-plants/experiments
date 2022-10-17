@@ -57,11 +57,12 @@ class Generation extends Growable {
       let xpos = sep * (((i+1) * 2)-1)
       // xpos = xpos + random(-sep*.4, sep*.4)
 
-      let seed = this.selectSeed(this.droppedSeeds, xpos)
-      let oldPlant = seed.plant
+      let selectedSeed = this.selectSeed(this.droppedSeeds, xpos)
+      this.droppedSeeds = this.droppedSeeds.filter(seed => seed.dropPoint.x != selectedSeed.dropPoint.x)
+      let oldPlant = selectedSeed.plant
 
       let newGenes = this.getGenes(oldPlant)
-      let newPlant = new Plant(seed.dropPoint.x+random(30,50), height-250, newGenes)
+      let newPlant = new Plant(selectedSeed.dropPoint.x, height-250, newGenes)
 
       this.newSeasonPlants.push(newPlant)
     }
@@ -91,7 +92,7 @@ class Generation extends Growable {
     // making new leaf length and width genes
     // Find average leaf length and widths for each parent plant, 
     // then select each new average (random from a range) for new plant 
-    // Note that p5 random(1,1) returns a random number from -1 up to (but not including) 1, so floor(random(-1,1)) will almost always be 0 (but, rarely, -1) 
+    // Note that p5 random(1,1) returns a random number from -1 up to (but not including) 1, so floor(random(-1,1)) will almost always be 0 (but, rarely, -1)
     let avgLeafLength = 0, avgLeafWid1 = 0, avgLeafWid2 = 0, avgLeafWid3 = 0
     oldPlant.stems.forEach(stem => {
       if(stem.leaf != null) {
@@ -107,7 +108,7 @@ class Generation extends Growable {
     avgLeafWid2 /= numLeaves
     avgLeafWid3 /= numLeaves
     avgLeafLength += random(-25, 25) // originally 29 
-    avgLeafWid1 += random(-20, 20)   // rest originally 23  
+    avgLeafWid1 += random(-20, 20)   // rest originally 23 
     avgLeafWid2 += random(-20, 20)
     avgLeafWid3 += random(-20, 20)
     if (avgLeafWid3 > avgLeafWid2*1.2) { avgLeafWid3 = avgLeafWid3*.9 }          
@@ -117,7 +118,7 @@ class Generation extends Growable {
 
      // Make new plant height genes
      let newPlantHeight = oldPlant.genes.plantHeight + floor(random(-50, 50))
-     console.log ('oldPlant.genes.plantHeight', oldPlant.genes.plantHeight)
+    //  console.log ('oldPlant.genes.plantHeight', oldPlant.genes.plantHeight)
      // Don't let the plant be too short 
      if (newPlantHeight < 100) { 
       newPlantHeight = 100 
@@ -129,7 +130,7 @@ class Generation extends Growable {
 
      // Make new root length genes
      let newRootLength = oldPlant.genes.rootLength + floor(random(-20, 20))
-     console.log ('oldPlant.genes.rootLength', oldPlant.genes.rootLength)
+    //  console.log ('oldPlant.genes.rootLength', oldPlant.genes.rootLength)
      // Don't let the roots be too short 
      if (newRootLength < 30) { 
       newRootLength = 30 
@@ -141,7 +142,7 @@ class Generation extends Growable {
 
     // Make new root width genes
     let newRootWidth = oldPlant.genes.rootWidth + floor(random(-2, 2))
-    console.log ('oldPlant.genes.rootWidth', oldPlant.genes.rootWidth)
+    // console.log ('oldPlant.genes.rootWidth', oldPlant.genes.rootWidth)
     // Don't let the roots be too thin 
     if (newRootWidth < 6) { 
      newRootWidth = 6 
@@ -174,8 +175,8 @@ class Generation extends Growable {
 
       // Make new number of seeds in each pod for each plant
       let newSeeds = oldPlant.genes.numSeeds + floor(random(-1.1, 1.1))
-      if (newSeeds < 3) {
-        newSeeds = floor(random(3,4))
+      if (newSeeds < 4) {
+        newSeeds = floor(random(4,5))
       }
       if (newSeeds > 14) {
         newSeeds = 14
@@ -200,7 +201,9 @@ class Generation extends Growable {
       thresh: newThresh, 
       numPods: newPods,
       numSeeds: newSeeds,
-      seediam: newSeediam 
+      seediam: newSeediam,
+      rootLength: newRootLength,
+      rootWidth: newRootWidth
     }
     
     return newGenes
