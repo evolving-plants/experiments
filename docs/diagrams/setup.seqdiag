@@ -14,7 +14,7 @@ sketch->generation:new generation
 sketch->generation:init
 generation->plant:new plant
 plant->plant:init
-plant->stem:new steam
+plant->stem:new stem
 stem->stem:init
 stem->leaf:[hasLeaf = true] new leaf
 stem->bud:[hasLeaf = false] new bud
