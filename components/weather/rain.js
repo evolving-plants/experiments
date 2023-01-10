@@ -18,8 +18,8 @@ class Rain {
   move() {
     this.speed = this.const * random(5, 20);
     this.y = this.y + this.speed;  
-    if (this.y > height *.75) {
-      this.y = random(0, -height *.75);
+    if (this.y > height) {
+      this.y = random(0, -height);
     }
 }
 }

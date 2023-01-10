@@ -1,5 +1,6 @@
 class Droplet {
-  // Jiggles a water droplet around within the sizx by sizy rectangle.
+  // Jiggles a water droplet around within a sizx by sizy rectangle.
+  // The rectangle is to the left of the y-axis.
   // The droplet size is constrained within limits proportional to its size.
   // And the droplet is shown.
       constructor(x, y, r, sizx,sizy) {

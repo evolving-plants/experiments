@@ -6,13 +6,12 @@ class Timer {
   }
 
   setInc(inc) {
-    this.inc = inc
+    // this.bp *= inc/this.inc
 
-      // this.bp *= inc/this.inc
+    this.inc = inc
   }
 
   count() {
-    // Increment the time
     this.time += this.inc
   }
 
