@@ -208,6 +208,7 @@ class Plant extends Growable {
       this.plantR += (this.plantR < 230) ? .3 * this.timer.inc : 0.
       this.plantG -= (this.plantG > 205) ? .1 * this.timer.inc : 0.
       this.plantB += (this.plantB < 135) ? .1 * this.timer.inc : 0.
+      this.selected = true
 
     }
 
@@ -256,8 +257,8 @@ class Plant extends Growable {
     if (this.selected && (timeSlider.value() != 0)) {
     // if (this.selected && (!stormy && !bulldozer)) {
       // if(this.selected)) {
-      stroke('red')
-      strokeWeight(3)
+      stroke('transparent')
+      strokeWeight(0.5)
       noFill()
       circle(this.pos.x, this.groundLevel - this.currHeight, 200)
     }
