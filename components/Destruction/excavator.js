@@ -25,7 +25,8 @@ class Excavator extends Growable{
      this.wheels = new Wheels(50,0)
 
       // Define person 
-      this.person = new Person((width)/20,-(height*.8)/20)
+      this.variety = random (-.3,.3)
+      this.person = new Person((width)/20,-(height*.8)/20, this.variety)
 
        // Define clumps of earth that will be deposited ahead of the excavator
     this.clumps = []

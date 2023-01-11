@@ -254,10 +254,13 @@ whither() {
   // turn on newSeason Switch when the leaves are withered
   if(this.length <= this.finLength*0.7) { 
 
+    // Change stormFreq and bullFreq in order to make storms and bulldozers more or less frequent
+    let stormFreq = 0.2
+    let bullFreq = 0.85
     // Check for a flood
     // This is being done for each plant
     let chance = random()
-    if (chance < 0.2 && !bulldozer) {
+    if (chance < stormFreq && !bulldozer) {
     // if (this.generationCounter % 6 == 0 && !bulldozer) {
       stormy = true
       console.log ("stormy")
@@ -265,7 +268,7 @@ whither() {
     }
 
      // Check for a bulldozer
-     if (chance > 0.85 && !stormy) {
+     if (chance > bullFreq && !stormy) {
       bulldozer = true
       console.log ("bulldozer")
       timeSlider.value(0)
