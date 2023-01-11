@@ -39,12 +39,11 @@ class Seed extends Growable {
       
       // Dropping seeds after the plant is selected occurs here
       // console.log (" Is it TRUE?")
-      if(this.plant.selected === true) {
+      // if(this.plant.selected === true) {
         // console.log (" Yes, it's TRUE!")
         this.dropVector = p5.Vector.sub(this.dropPoint, this.pos).normalize().mult(10) 
         this.drop()
-      }
-
+      // }
     } 
     else {
       // Increase the seed diameter until it reaches the maximum (this.seediam)
